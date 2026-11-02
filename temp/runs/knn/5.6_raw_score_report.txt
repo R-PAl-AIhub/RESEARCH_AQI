@@ -1,0 +1,21 @@
+raw features: 47 of 50   dropped: ['BP', 'stuck_pm25', 'stuck_pm10']
+
+raw covariance per group ['winter', 'summer_premonsoon', 'sw_monsoon', 'post_monsoon'] (plain mean + covariance of train, limit 100000):
+                   n_points  condition
+group                                 
+winter              26755.0  20913.193
+summer_premonsoon   27263.0   8264.312
+sw_monsoon          36620.0   8950.744
+post_monsoon        18684.0  26367.738
+
+s_raw ranked against 109322 train hours of the same season; reported on the even (check) weeks of calibration: 7503 samples
+share of check-week samples and correlation of s_raw with s_embed:
+          pearson  spearman  s_raw larger  s_embed larger  s_embed > 0.98  s_raw > 0.98  fused > 0.98
+model                                                                                                
+gru         0.353     0.384         0.708           0.292           0.027         0.026         0.047
+lstm        0.340     0.370         0.703           0.297           0.030         0.026         0.049
+cnn         0.227     0.235         0.627           0.373           0.028         0.026         0.050
+cnn_lstm    0.368     0.398         0.728           0.272           0.023         0.026         0.042
+tft         0.226     0.233         0.635           0.365           0.007         0.026         0.033
+
+saved: /mnt/d/RATUL/COMPUTER PROGRAMMING AND CODING/RESEARCH/PROJECT_2/artifacts/runs/knn/forecasters/raw_shapes.npz

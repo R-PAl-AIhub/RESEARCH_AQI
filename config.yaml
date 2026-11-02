@@ -1,0 +1,319 @@
+# AQI Reliability Layer — project settings.
+# Paths are relative to the project root (the folder holding this file).
+
+# --- paths ---
+raw_dir: Kolkata              # raw CPCB Excel files, <station>/*.xlsx — never modified
+processed_dir: data/processed
+artifacts_dir: artifacts
+figures_dir: figures
+temp_dir: temp                # every step's printed check + intermediate tables, for inspection (not in git)
+era5_dir: data/raw/era5       # step 2.6: one ERA5 NetCDF file per month (not in git)
+stations_file: data/stations.csv  # step 2.7: station, latitude, longitude (in git)
+samples_dir: artifacts/samples    # step 3.3: scaler, sample arrays, feature names (not in git)
+forecasts_dir: artifacts/forecasters  # Part 4: <model>/point/ and <model>/quantile/ (not in git)
+
+# --- output file names ---
+cpcb_hourly_file: cpcb_hourly.csv       # step 2.2, in processed_dir: all stations on an hourly grid
+availability_file: availability.csv     # step 2.3, in figures_dir: % hours present per station/year/variable
+availability_plot_file: availability_targets.png   # step 2.3, in figures_dir: hours with a value per target/station/year
+availability_all_plot_file: availability_all.png   # step 2.3, in figures_dir: the same for every kept variable (not XYLENE, MP-Xylene)
+availability_all_file: availability_all_hours.csv  # step 2.3, in figures_dir: hours with a value per variable/station/year
+missing_table_file: missing_table.csv             # step 2.3, in figures_dir: missing hours (count, %) per variable and year, all stations
+missing_table_plot_file: missing_table.png        # step 2.3, in figures_dir: the same as a table picture
+missing_station_file: missing_table_station.csv   # step 2.3, in figures_dir: the same per station
+
+flat_runs_file: flat_runs.csv           # step 2.4, in figures_dir: every stuck run found (values kept)
+flag_counts_file: flag_counts.csv       # step 2.4, in figures_dir: stuck / spike hours per station, year, variable
+flag_plot_file: flag_check.png          # step 2.4, in figures_dir: chart of the table above
+cpcb_clean_file: cpcb_clean.csv         # step 2.4-2.5 (PROJECT_2), in processed_dir: out-of-range values emptied
+range_counts_file: range_counts.csv     # in figures_dir: in-range / out-of-range values per station, year, variable
+range_plot_file: range_check.png        # in figures_dir: chart of the table above
+merged_file: merged.csv                 # step 2.7, in processed_dir: cpcb_clean + era5_u10, era5_v10, era5_ws only (NOT USED: step 2.7 removed 2026-10-16, Part 3 reads cpcb_clean)
+features_file: features.csv             # step 3.2, in processed_dir: filled inputs + lags + cyclic time
+model_table_file: model_table.csv       # step 3.3, in processed_dir: station, time + the 38 model input columns (empty -> 0), to view
+
+# --- features (step 3.2) ---
+features:
+  lag_variables: ["PM2.5", "PM10"]
+  lags: [1, 3, 6, 12, 24]     # hours back
+  rolling_hours: [3, 6, 12, 24]  # windows over the PAST hours only: t-2..t, t-5..t, t-11..t and t-23..t
+  rolling_stats: [mean, std]  # rolling mean (recent level) and rolling standard deviation (recent jumpiness)
+  rolling_variables: ["PM2.5", "PM10"]  # -> PM2.5_mean12h, PM2.5_std12h, PM2.5_mean24h, PM2.5_std24h (same for PM10)
+  seasons:                    # month -> season label (Indian seasons)
+    12: winter                # Winter: December to February
+    1: winter
+    2: winter
+    3: summer_premonsoon      # Summer (Pre-monsoon): March to May
+    4: summer_premonsoon
+    5: summer_premonsoon
+    6: sw_monsoon             # Southwest Monsoon (Rainy): June to September
+    7: sw_monsoon
+    8: sw_monsoon
+    9: sw_monsoon
+    10: post_monsoon          # Post-monsoon (North-east Monsoon / Autumn): October and November
+    11: post_monsoon
+
+# --- model samples (step 3.3) ---
+samples:
+  input_hours: 48             # hours of features in one sample's input
+  max_missing_input: 0.10     # drop a sample if more than this share of its input cells is missing
+  # log(1 + x) is applied to these variables, their lags and rolling means (a column belongs to a
+  # variable if it is the variable or starts with "<variable>_"); no "was missing" 0/1 inputs (removed 2026-10-27)
+  log_variables: ["PM2.5", "PM10", "NO", "NO2", "NOX", "NH3", "SO2", "CO", "OZONE", "BENZENE", "TOLUENE"]
+
+# --- forecasters (Part 4, PROJECT_2: 5 models, each ends in the d-sized "embedding" layer) ---
+model:                        # training settings shared by EVERY forecaster (fair comparison)
+  dropout: 0.2                # share of inputs switched off at random during training (fights overfitting)
+  learning_rate: 0.0005       # PROJECT: 0.001 gave best epoch 2, then validation loss rose
+  batch_size: 256
+  max_epochs: 50
+  patience: 5                 # early stopping: stop after this many epochs without a better validation loss
+  validation_share: 0.10      # NOT USED since option C: validation = the val split (Jan-Apr 2025, splits section)
+forecasters:                  # layer sizes per model; outputs always read ONLY the embedding layer
+  names: [gru, lstm, cnn, cnn_lstm, tft]
+  gru: {units: [64, 64]}      # one GRU layer per entry
+  lstm: {units: [64, 64]}     # one LSTM layer per entry
+  cnn: {filters: [64, 64], kernel_size: 3}     # one causal Conv1D layer per entry, max-pool 2 after each
+  cnn_lstm: {filters: [64], kernel_size: 3, lstm_units: [64]}
+  tft: {hidden: 32, heads: 4} # full Temporal Fusion Transformer: static station, known future calendar, variable selection, LSTM encoder-decoder, interpretable attention
+forecast_compare:             # Part 4 tables and charts, in figures_dir; calibration (2024) only, never test
+  errors_file: forecast_errors.csv        # RMSE / MSE / MAE per model, target, horizon
+  quantile_file: forecast_quantile.csv    # quantile models: median RMSE + share inside the band
+  errors_plot: forecast_errors.png
+  loss_plot: forecast_loss.png
+  coverage_plot: forecast_coverage.png
+  band_plot: forecast_band_{target}.png   # one file per target: rows = models, columns = horizons (+ one per model in figures/<model>/)
+  station_year_file: errors_station_year.csv        # in figures_dir/<model>/: median RMSE per station and split (train, validation, calibration)
+  station_year_plot: forecast_errors_station_year_{target}.png   # in figures_dir/<model>/
+  band_station: "Jadavpur, Kolkata - WBPCB"
+  band_start: "2025-05-05"    # a Monday inside calibration (option C); was 2024-01-08, now train
+  band_days: 14
+metrics:                      # teacher update 2026-11-02: accuracy of the published forecast (quantile median) on every split
+  splits: [train, validation, calibration, test]   # test is reported only (freeze rule): nothing is chosen from it
+  file: metrics_table.csv             # in figures_dir: RMSE, MAE, R² per method, model, split, target and horizon
+  summary_file: metrics_summary.csv   # in figures_dir: the same, mean over the 5 horizons
+  table_plot: metrics_table_{target}.png   # in figures_dir: the summary as a table picture, one per target
+  r2_plot: forecast_r2.png            # in figures_dir/runs/<run>/: R² by horizon on calibration (replaces the RMSE chart)
+  not_best: [deletion, bfill]         # never bolded as "best": deletion is scored on fewer windows, bfill uses future values
+all_charts:                   # teacher update 2026-11-02: one-look heatmaps, every run x model x horizon (in figures_dir)
+  r2_plot: eval_r2_all_{target}.png            # R² of the published forecast, 4 splits x 5 horizons
+  rmse_plot: eval_rmse_all_{target}.png        # RMSE, 4 splits x 5 horizons (shaded within each split)
+  coverage_plot: eval_coverage_all_{target}.png   # test coverage: split conformal vs CQR + adaptive, normal vs smoggiest 5%
+coverage:                     # teacher update 2026-11-02: coverage per station, year, model and imputation run (report only)
+  published_file: coverage_published.csv          # in figures_dir: step 7.1 90% range (CQR + adaptive, every test hour) per station, horizon
+  published_summary_file: coverage_published_summary.csv   # the same, mean over the horizons (the cells of the picture)
+  band_file: coverage_band.csv                    # in figures_dir: the model's own 90% low–high band per station, year, horizon
+  band_summary_file: coverage_band_summary.csv    # the same, mean over the horizons
+  published_plot: coverage_published_{target}.png # in figures_dir: rows = run x model, columns = stations (+ all)
+  band_plot: coverage_band_{target}.png           # in figures_dir: rows = run x model, columns = year x station (+ all)
+  shade_points: 15            # colour scale: ±15 percentage points around the 90% aim (red = too narrow, blue = too wide)
+shap:                         # teacher update 2026-11-02: which inputs drive the published forecast (explanation only, chooses nothing)
+  check_run: ffill            # the direct expected-gradients code is checked against the shap library on this pair
+  check_model: gru
+  batch_size: 500             # GPU batch of the gradient passes (speed only, same result)
+  direct_batch: 400           # points per batch of the direct (TFT) gradients: 2 windows x nsamples (800 runs out of GPU memory)
+  background: 300             # random train windows = the "average input" SHAP compares against
+  explain: 500                # random calibration windows explained
+  nsamples: 200               # expected-gradients draws per explained window (shap.GradientExplainer)
+  horizons: [1, 3, 6, 12, 24] # horizons explained, for each target (all of them, 2026-11-02)
+  top: 12                     # features shown per chart
+  file: shap_importance.csv   # in figures_dir/runs/<run>/<model>/: mean |SHAP| (µg/m³) per feature, target and horizon
+  all_file: shap_importance_all.csv   # in figures_dir: the same for every run x model
+  share_all_plot: shap_share_all.png  # in figures_dir: share per input group, every run x model, +1 h and +24 h
+  importance_plot: shap_importance.png
+  beeswarm_plot: shap_beeswarm_{target}.png
+  correlation_plot: shap_correlation.png
+  share_plot: shap_share.png  # share of the total SHAP effect: per input group and horizon, and all 50 inputs ranked
+modern:                       # teacher update 2026-11-02: cleaner charts (report only, nothing is chosen from them)
+  run: ffill                  # set by the loop: every run and model is drawn; run charts in figures_dir/runs/<run>/,
+  model: gru                  # model charts in figures_dir/runs/<run>/<model>/, "in figures_dir" ones once
+  scatter_plot: modern_scatter.png          # predicted vs real, test, density hexbins
+  box_plot: modern_error_boxes.png          # size of the error per model, test
+  imputation_plot: modern_imputation.png    # in figures_dir: calibration RMSE per imputation run (common hours)
+  coverage_plot: modern_coverage.png        # normal vs smoggiest-5% coverage, test (dumbbells)
+  station_plot: modern_station_coverage.png # coverage per station, test
+  flags_plot: modern_flags.png              # Green / Yellow / Red share per model, test
+  week_plot: modern_week.png                # forecast, band and real values over a few smoggy test days
+  week_station: "Jadavpur, Kolkata - WBPCB"
+  week_start: "2025-11-03"                  # a Monday in the smoggy test months
+  week_days: 10
+  availability_plot: modern_availability.png   # in figures_dir: % of hours with a PM2.5 value, station x month
+current_model_file: current_model.txt   # in artifacts_dir: the forecaster later steps read (chosen after Part 4)
+
+# --- Worker B (Part 5, PROJECT_2) ---
+# clusters = the 4 seasons of features.seasons (no k-means: step 5.1 skipped); no Simes (step 5.4 skipped).
+# Run for every forecaster in forecasters.names; outputs in forecasts_dir/<model>/worker_b/.
+worker_b:
+  group_by: season            # 4 seasons: shapes (5.2, 5.6) and ranks of s_embed and s_raw come from train 2023-24 (2026-10-27)
+  max_condition: 100000       # plain mean + covariance of train (MCD and Ledoit-Wolf removed 2026-10-27); stop if above this
+                              # (was 1000; per season the plain covariance reaches ~2,200 embedding, ~23,000 raw)
+  raw_drop_columns: ["BP", "stuck_pm25", "stuck_pm10"]   # step 5.6: BP = RBU sensor offset in 2024; stuck_ = 0 almost always
+  green_max: 0.80             # step 5.6b: fused score s <= this -> Green (step 5.5 smoothing removed 2026-10-27)
+  yellow_max: 0.98            # step 5.6b: s above this -> Red (no Simes cap in PROJECT_2)
+  shapes_file: embed_shapes.npz   # step 5.2, in forecasts_dir/<model>/worker_b/: mu + covariance per season
+  raw_shapes_file: raw_shapes.npz # step 5.6, in forecasts_dir/: raw-feature mu + covariance per season (same for every model)
+  labels_file: worker_b_calibration.csv  # step 5.6b, in forecasts_dir/<model>/worker_b/
+  s_embed_file: s_embed.csv       # step 5.3, in forecasts_dir/<model>/worker_b/: embedding, distance from train, p, s_embed
+  timeline_station: "Jadavpur, Kolkata - WBPCB"   # charts: station shown on the score timeline
+  plots:                      # in figures_dir
+    distance: worker_b_5.2_distance.png
+    raw: worker_b_5.6_raw_vs_embed.png
+    labels: worker_b_5.6b_label_shares.png
+    timeline: worker_b_5.6b_timeline.png
+    distance_station: worker_b_5.2_distance_station_year.png     # per model: per station, 2023 vs 2024
+    labels_station: worker_b_5.6b_labels_station_year.png        # per model: per station, 2024 vs 2025
+    scores_year: worker_b_5.6b_scores_{year}.png                 # per model and year: daily scores per station
+evaluation:                   # step 7.2: fixed before any result was looked at
+  extreme_top_share: 0.05     # "extreme" = top 5% of the observed value of that target (PM2.5 or PM10) and horizon in test 2025
+  bootstrap_repeats: 1000     # block bootstrap, whole days (all stations together) as blocks; seed = seed above
+  table1_file: stratified_table1.csv      # in figures_dir/<model>/: normal vs extreme, both targets
+  table2_file: stratified_table2.csv      # in figures_dir/<model>/: per season (= cluster), both targets
+  table3_file: stratified_table3.csv      # in figures_dir/<model>/: per station, both targets
+  station_plot_file: stratified_station_{target}.png     # in figures_dir/<model>/, one per target
+  coverage_plot_file: stratified_coverage_{target}.png   # in figures_dir/<model>/, one per target
+  compare_plot_file: stratified_compare_{target}.png     # in figures_dir: all models side by side, one per target
+  flags_file: decisions_test.csv          # step 7.1, in forecasts_dir/<model>/: flag + base / Yellow ranges per sample
+  bands: 5                    # step 7.3: bands of observed PM2.5 with equal sample counts
+  large_error_quantile: 0.90  # step 7.3: "large error" = above this quantile of calibration |actual - median|
+  min_large_errors: 30        # step 7.3: skip a band with fewer large errors than this
+  matched_band_file: matched_band.csv     # in figures_dir/<model_tag>/
+  ladder_file: ladder.csv     # step 7.4, in figures_dir/<model_tag>/: five detectors of large errors
+  calendar_months: [12, 1, 2] # step 7.4: calendar rule = 1 in these months, else 0
+decision:                     # step 7.1 (GATE approved 2026-10-08): fixed before anything ran on test
+  yellow_level_factor: 0.5    # Yellow range = same cluster's scores at 0.5 x working level (95% when base is 90%)
+worker_c:
+  group_by: all               # ONE group: the May-Aug calibration has no winter or post-monsoon hours
+  gamma: 0.001                # step 6.4: step size of the adaptive level (bigger = reacts faster, more jumpy)
+  gamma_candidates: [0, 0.001, 0.002, 0.005, 0.01, 0.02, 0.05]   # step 6.4 search: walked on the check weeks of calibration
+  gamma_tie: 0.005           # gamma search: coverage gaps within 0.5 percentage points of the closest count as a tie -> narrower wins
+  gamma_file: gamma_compare.csv       # in figures_dir: coverage + width per gamma (per run, and all runs together)
+  gamma_plot_file: gamma_compare.png  # the same as a chart
+  adaptive_toy_file: adaptive_toy.png   # step 6.4, in figures_dir: running coverage with / without the update
+raw_shapes_file: raw_shapes.npz       # step 5.6, in artifacts/<tag>/: raw-feature centre + covariance per cluster
+compare_plot:                     # step 6.1 charts: quantile GRU band vs split conformal range (calibration only)
+  start: "2024-01-08"             # Monday of ISO week 2 = a check (even) week, winter
+  days: 7
+  band_file: compare_band_h{h}.png  # in figures_dir, one file per horizon
+  summary_file: compare_summary.png
+methods_plot:                     # step 6.3 charts: GRU band vs split conformal vs Mondrian CQR (calibration only)
+  weeks: ["2024-01-08", "2024-08-05"]   # Mondays of two check (even) weeks: winter, monsoon
+  days: 7
+  band_file: methods_band_{week}_h{h}.png   # in figures_dir
+  summary_file: methods_summary.png
+
+# --- imputation (step 3.2, 2026-10-26): how empty INPUT cells are filled; targets are never filled ---
+# One full run (3.2 -> 7.2) per method: set AQI_IMPUTATION=<method>; outputs go to <folder>/runs/<method>/.
+imputation:
+  method: ffill               # used only when AQI_IMPUTATION is not set (then top-level folders)
+  methods: [deletion, median, ffill, bfill, knn, mice]
+  # deletion = nothing filled, any window with an empty input cell is dropped (max empty share 0)
+  # median   = train median of the column, per station
+  # ffill    = last earlier value of the station, no time limit
+  # bfill    = next later value of the station, no time limit (USES FUTURE VALUES: reported, never picked)
+  # knn      = mean of the k most similar train hours (other columns at the same hour, scaled on train)
+  # mice     = iterative imputation (each column predicted from the others), fitted on train
+  leaks_future: [bfill]
+  knn_neighbors: 5
+  knn_donors: 20000           # train hours sampled (seed) as KNN donors, so the run stays short
+  mice_iterations: 10
+  runs_folder: runs           # subfolder of processed_dir, artifacts_dir, figures_dir and temp_dir
+  compare_file: imputation_compare.csv       # in figures_dir: one row per method x model (calibration, Worker B, test)
+  compare_plot_file: imputation_compare.png  # in figures_dir: methods side by side
+  deletion_file: deletion_hours.csv          # deletion run, in its figures_dir: hours deleted per station and year (+ total)
+  deletion_plot_file: deletion_hours.png     # the same as a table picture
+
+# --- clean table (step 2.5) ---
+clean:
+  drop_columns:               # removed from cpcb_clean.parquet
+    - XYLENE                  # always empty
+    - MP-Xylene               # always empty
+    - row_present             # report-only column (steps 2.2-2.3), removed from cpcb_clean on request 2026-10-15
+    # kept on request 2026-10-15 (they hold values): BENZENE, TOLUENE, RF, CO
+  longest_gaps: 3             # how many of the longest PM2.5 gaps to print per station
+
+# --- ERA5 weather download (step 2.6) ---
+era5:
+  dataset: reanalysis-era5-single-levels
+  area: [23.25, 87.75, 22.0, 89.0]      # North, West, South, East; multiples of 0.25 = on the ERA5 grid
+  variables:
+    - 10m_u_component_of_wind
+    - 10m_v_component_of_wind
+    - 2m_temperature
+    - 2m_dewpoint_temperature
+    - surface_pressure
+    - boundary_layer_height
+    - total_precipitation
+
+# --- bad-reading flags (step 2.4) ---
+flags:
+  # names are in quotes on purpose: YAML reads a bare NO as false (yes/no)
+  # Rule: CPCB first. Every number CPCB states is used as is; where CPCB states none, the
+  # source CPCB itself points to (US EPA, sec 4.1.16) or WMO is used.
+  # CPCB = CAAQM Technical Specifications: analyser ranges + LDL (sec 5, 6), met sensor ranges (sec 8.1),
+  #   units + ppb factors at 25 °C (Annexure C)  https://erc.mp.gov.in/Documents/doc/Guidelines/CAAQMS_Specs_new.pdf
+  # CPCB = Protocol for Data Transmission (IT Division, 2015): same unit table, BP in mmHg
+  #   https://airquality.cpcb.gov.in/ccr_docs/Protocol_CAAQM.pdf
+  # EPA 2016 (SO2, O3, NO2, CO lower limits)
+  #   https://www.epa.gov/sites/default/files/2017-02/documents/negative_values_reporting_to_aqs_10_6_16.pdf
+  # EPA 2011 (accept down to -detection limit: NO, NOX, NH3 lower limits with CPCB LDL 1 ppb)
+  #   https://19january2017snapshot.epa.gov/aqs/aqs-addendum-negative-values_.html
+  # NC DEQ / EPA (PM lower limit -10 µg/m³)
+  #   https://www.deq.nc.gov/about/divisions/air-quality/air-quality-monitoring/special-studies/duplin-county-air-monitoring-study-data-releases
+  # WMO 2004 (BP only: CPCB gives a unit but no range)
+  #   https://old.wmo.int/extranet/pages/prog/www/IMOP/meetings/Surface/ET-STMT1_Geneva2004/Doc6.1(2).pdf
+  range:                      # [low, high]; flag if value < low or > high; null = no limit on that side
+    "NO": [-1.23, 2460]       # µg/m³: low -1 ppb (EPA 2011, CPCB LDL); high CPCB range 2000 ppb x 1.23
+    "NO2": [-9.4, 3760]       # µg/m³: low EPA -5 ppb; high CPCB range 2000 ppb x 1.88
+    "NOX": [-1, 2000]         # ppb (CPCB unit): low -1 ppb (EPA 2011, CPCB LDL); high CPCB range 2000 ppb
+    "NH3": [-0.70, 700]       # µg/m³: low -1 ppb (EPA 2011, CPCB LDL); high CPCB range 1000 ppb x 0.70
+    "SO2": [-10.5, 524]       # µg/m³: low EPA -4 ppb; high CPCB range 200 ppb x 2.62
+    "OZONE": [-7.9, 980]      # µg/m³: low EPA -4 ppb; high CPCB range 500 ppb x 1.96
+    "PM2.5": [-10, 2000]      # µg/m³: low NC DEQ / EPA; high CPCB beta-ray range 0-2000
+    "PM10": [-10, 2000]       # µg/m³: low NC DEQ / EPA; high CPCB beta-ray range 0-2000
+    "RH": [0, 100]            # %, CPCB sensor range
+    "AT": [-10, 60]           # °C, CPCB sensor range
+    "WD": [0, 359]            # degrees, CPCB sensor range
+    "SR": [0, 1500]           # W/m², CPCB sensor range
+    "BP": [375.0, 825.1]      # mmHg (CPCB unit) = WMO 500-1100 hPa x 0.750062 (CPCB gives no range)
+  unit_factors:               # used ONLY inside the range check (data value x factor -> CPCB unit); saved data keep source units
+    "BP": 0.750062            # data are hPa (medians ~1004); CPCB protocol says mmHg; 1 hPa = 0.750062 mmHg
+  flat:                       # stuck sensor
+    variables: ["PM2.5", "PM10"]  # PM only: 2023-24 rounding makes other variables repeat naturally
+    min_run_hours: 12         # same value this many hours in a row or more
+  # no spike rule in PROJECT_2 (removed on request); stuck runs are only counted, values kept
+
+# --- availability report (step 2.3) ---
+first_month_min_pct: 50   # a month counts as "real PM2.5 data" if at least this % of its hours have PM2.5
+
+# --- stations (names = raw folder names) ---
+stations:
+  - Ballygunge, WBPCB
+  - Bidhannagar
+  - Fort William
+  - Jadavpur
+  - Rabindra Bharati University
+  - Rabindra Sarobar
+  - Victoria
+
+# --- forecasting targets ---
+targets: ["PM2.5", "PM10"]    # µg/m³; PROJECT_2 forecasts both (PROJECT forecast PM2.5 only)
+horizons: [1, 3, 6, 12, 24]   # hours ahead
+
+# --- reproducibility ---
+seed: 42
+
+# --- splits (fixed in step 3.1, after approval) ---
+splits:                       # option C, approved 2026-10-16 (replaces option B); times are IST hour starts, ends included
+  train_start: "2023-01-01 00:00"   # train = all of 2023 and 2024
+  train_end: "2024-12-31 23:00"
+  val_start: "2025-01-01 00:00"     # validation (early stopping) = Jan-Apr 2025
+  val_end: "2025-04-30 23:00"
+  calib_start: "2025-05-01 00:00"   # calibration = May-Aug 2025
+  calib_end: "2025-08-31 23:00"
+  test_start: "2025-09-01 00:00"    # test (adaptive range) = Sep-Dec 2025
+  test_end: "2025-12-31 23:00"
+
+# --- Worker B / Worker C sizes (fixed in step 3.1, after approval) ---
+# groups: worker_b.group_by (season) and worker_c.group_by (all); option C had one group for both until 2026-10-27
+d: 12                         # embedding size = largest d that passes in EVERY season: 10*d = 120 <= 122 post_monsoon train days (step 3.1, 2026-10-16)
+alpha: 0.10                   # miscoverage / alarm level; needs >= 9 calibration days per group

@@ -1,0 +1,13 @@
+gamma search, run median (calibration check weeks only; aim coverage 90%, tie 0.5%)
+       coverage    width     gap
+gamma                           
+0.000    0.8902  26.1911  0.0098
+0.001    0.8964  26.7158  0.0036
+0.002    0.8987  26.9135  0.0013
+0.005    0.9001  27.0759  0.0001
+0.010    0.9003  27.6727  0.0003
+0.020    0.9000  31.4375  0.0000
+0.050    0.8997  63.6105  0.0003
+
+best per horizon: {1: 0.001, 3: 0.001, 6: 0.002, 12: 0.002, 24: 0.001}
+best gamma overall: 0.001   (config worker_c.gamma now 0.005)

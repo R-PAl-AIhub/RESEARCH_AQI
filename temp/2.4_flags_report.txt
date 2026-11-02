@@ -1,0 +1,35 @@
+rows checked: 184128  (values kept, nothing changed)
+
+stuck rule: same PM value 12+ hours in a row
+
+stuck hours, all stations and years:
+flat PM2.5    1930
+flat PM10      539
+stuck runs: 104
+
+stuck hours per station and year:
+                                  flat PM2.5  flat PM10
+station                     year                       
+Ballygunge                  2023         326         14
+                            2024         433         28
+                            2025           0          0
+Bidhannagar                 2023          15          0
+                            2024           0          0
+                            2025           0          0
+Fort William                2023         215          0
+                            2024         194          0
+                            2025           0          0
+Jadavpur                    2023           0          0
+                            2024           0          0
+                            2025           0          0
+Rabindra Bharati University 2023           0         33
+                            2024           0          0
+                            2025           0          0
+Rabindra Sarobar            2023         346        270
+                            2024         346        194
+                            2025           0          0
+Victoria                    2023           0          0
+                            2024           0          0
+                            2025          55          0
+
+saved to: /mnt/d/RATUL/COMPUTER PROGRAMMING AND CODING/RESEARCH/PROJECT_2/figures  (flat_runs.csv, flag_counts.csv, flag_check.png)

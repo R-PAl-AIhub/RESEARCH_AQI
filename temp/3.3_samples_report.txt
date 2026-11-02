@@ -1,0 +1,27 @@
+53 features per hour (50 + ['miss_PM', 'miss_GAS', 'miss_METEOROLOGICAL']), 48 hours per sample, horizons [1, 3, 6, 12, 24]
+targets ['PM2.5', 'PM10']; y axes (sample, target, horizon)
+
+array shapes:
+  train X (107440, 48, 53)  y (107440, 2, 5)  y_raw (107440, 2, 5)
+  val   X (17549, 48, 53)  y (17549, 2, 5)  y_raw (17549, 2, 5)
+  calib X (15373, 48, 53)  y (15373, 2, 5)  y_raw (15373, 2, 5)
+  test  X (17562, 48, 53)  y (17562, 2, 5)  y_raw (17562, 2, 5)
+
+samples kept per station and split:
+split                                         train   val  calib  test
+station                                                               
+Ballygunge, Kolkata - WBPCB                   15455  2531   1409  2616
+Bidhannagar, Kolkata - WBPCB                  14538  2322   2563  2325
+Fort William, Kolkata - WBPCB                 15450  2750    888  2403
+Jadavpur, Kolkata - WBPCB                     16194  2646   2666  2732
+Rabindra Bharati University, Kolkata - WBPCB  15130  2369   2705  2385
+Rabindra Sarobar, Kolkata - WBPCB             15760  2529   2578  2767
+Victoria, Kolkata - WBPCB                     14913  2402   2564  2334
+
+scaled features, range over all features of the mean and spread per split:
+  train mean +0.000 to +0.000   spread 1.000 to 1.000
+  val   mean -0.552 to +1.160   spread 0.000 to 2.023
+  calib mean -1.165 to +0.729   spread 0.000 to 2.808
+  test  mean -1.021 to +1.472   spread 0.000 to 2.169
+
+saved to: /mnt/d/RATUL/COMPUTER PROGRAMMING AND CODING/RESEARCH/PROJECT_2/artifacts/samples

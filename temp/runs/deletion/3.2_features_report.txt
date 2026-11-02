@@ -1,0 +1,33 @@
+AOD used: no (step 2.8 not done)
+
+50 features:
+PM2.5, PM10, NO, NO2, NOX, NH3, SO2, CO, OZONE, BENZENE, TOLUENE, RH, SR, BP, AT, RF, stuck_pm25, stuck_pm10, PM2.5_lag1, PM2.5_lag3, PM2.5_lag6, PM2.5_lag12, PM2.5_lag24, PM10_lag1, PM10_lag3, PM10_lag6, PM10_lag12, PM10_lag24, PM2.5_mean3h, PM2.5_std3h, PM2.5_mean6h, PM2.5_std6h, PM2.5_mean12h, PM2.5_std12h, PM2.5_mean24h, PM2.5_std24h, PM10_mean3h, PM10_std3h, PM10_mean6h, PM10_std6h, PM10_mean12h, PM10_std12h, PM10_mean24h, PM10_std24h, WD_sin, WD_cos, hour_sin, hour_cos, doy_sin, doy_cos
+
+filled cells and longest filled run per input variable:
+            cells_filled  longest_run_hours
+variable                                   
+PM2.5                  0                  0
+PM10                   0                  0
+NO                     0                  0
+NO2                    0                  0
+NOX                    0                  0
+NH3                    0                  0
+SO2                    0                  0
+CO                     0                  0
+OZONE                  0                  0
+BENZENE                0                  0
+TOLUENE                0                  0
+RH                     0                  0
+WD                     0                  0
+SR                     0                  0
+BP                     0                  0
+AT                     0                  0
+RF                     0                  0
+stuck_pm25             0                  0
+stuck_pm10             0                  0
+
+imputation method: deletion; longest filled run: 0 hours
+target_pm25 missing (unfilled): 9107 of 184128
+target_pm10 missing (unfilled): 9214 of 184128
+
+saved to: /mnt/d/RATUL/COMPUTER PROGRAMMING AND CODING/RESEARCH/PROJECT_2/data/processed/runs/deletion/features.csv  shape (184128, 55)

@@ -1,0 +1,23 @@
+station,year,hours,deleted,deleted %
+Ballygunge,2023,8760,1676,19.1
+Ballygunge,2024,8784,1287,14.7
+Ballygunge,2025,8760,2320,26.5
+Bidhannagar,2023,8760,2234,25.5
+Bidhannagar,2024,8784,1738,19.8
+Bidhannagar,2025,8760,1752,20.0
+Fort William,2023,8760,2359,26.9
+Fort William,2024,8784,2890,32.9
+Fort William,2025,8760,4067,46.4
+Jadavpur,2023,8760,1002,11.4
+Jadavpur,2024,8784,1220,13.9
+Jadavpur,2025,8760,893,10.2
+Rabindra Bharati University,2023,8760,1806,20.6
+Rabindra Bharati University,2024,8784,1492,17.0
+Rabindra Bharati University,2025,8760,1358,15.5
+Rabindra Sarobar,2023,8760,1894,21.6
+Rabindra Sarobar,2024,8784,1644,18.7
+Rabindra Sarobar,2025,8760,2174,24.8
+Victoria,2023,8760,1702,19.4
+Victoria,2024,8784,2021,23.0
+Victoria,2025,8760,2588,29.5
+all stations,all years,184128,40117,21.8

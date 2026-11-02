@@ -1,0 +1,128 @@
+years with PM2.5 and PM10: [2023, 2024, 2025]   hours with PM2.5 and PM10: 174425 of 184128
+
+===== option C: train 2023-01-01 00:00 to 2024-12-31 23:00, val 2025-01-01 00:00 to 2025-04-30 23:00, calib 2025-05-01 00:00 to 2025-08-31 23:00, test 2025-09-01 00:00 to 2025-12-31 23:00 · one group (no seasons) =====
+
+[train] hours with PM2.5 and PM10:
+                             winter  summer_premonsoon  sw_monsoon  post_monsoon   total
+station                                                                                 
+Ballygunge                     4195               4227        5763          2762   16947
+Bidhannagar                    4198               4047        5529          2808   16582
+Fort William                   4034               4282        5686          2867   16869
+Jadavpur                       4278               4319        5634          2894   17125
+Rabindra Bharati University    4144               4253        5606          2869   16872
+Rabindra Sarobar               4263               4200        5652          2872   16987
+Victoria                       4141               4097        5569          2838   16645
+ALL (calendar dates)          29253              29425       39439         19910  118027
+
+[train] distinct days with PM2.5 and PM10:
+                             winter  summer_premonsoon  sw_monsoon  post_monsoon  total
+station                                                                                
+Ballygunge                      180                181         244           119    724
+Bidhannagar                     180                178         240           122    720
+Fort William                    175                182         242           122    721
+Jadavpur                        180                183         240           122    725
+Rabindra Bharati University     179                184         242           122    727
+Rabindra Sarobar                180                181         241           122    724
+Victoria                        177                179         242           122    720
+ALL (calendar dates)            180                184         244           122    730
+
+[val] hours with PM2.5 and PM10:
+                             winter  summer_premonsoon  sw_monsoon  post_monsoon  total
+station                                                                                
+Ballygunge                     1369               1408           0             0   2777
+Bidhannagar                    1357               1362           0             0   2719
+Fort William                   1398               1461           0             0   2859
+Jadavpur                       1402               1439           0             0   2841
+Rabindra Bharati University    1282               1451           0             0   2733
+Rabindra Sarobar               1360               1446           0             0   2806
+Victoria                       1332               1448           0             0   2780
+ALL (calendar dates)           9500              10015           0             0  19515
+
+[val] distinct days with PM2.5 and PM10:
+                             winter  summer_premonsoon  sw_monsoon  post_monsoon  total
+station                                                                                
+Ballygunge                       59                 60           0             0    119
+Bidhannagar                      59                 60           0             0    119
+Fort William                     59                 61           0             0    120
+Jadavpur                         59                 61           0             0    120
+Rabindra Bharati University      58                 61           0             0    119
+Rabindra Sarobar                 59                 61           0             0    120
+Victoria                         59                 61           0             0    120
+ALL (calendar dates)             59                 61           0             0    120
+
+[calib] hours with PM2.5 and PM10:
+                             winter  summer_premonsoon  sw_monsoon  post_monsoon  total
+station                                                                                
+Ballygunge                        0                  0        1604             0   1604
+Bidhannagar                       0                719        2158             0   2877
+Fort William                      0                637         554             0   1191
+Jadavpur                          0                728        2175             0   2903
+Rabindra Bharati University       0                724        2184             0   2908
+Rabindra Sarobar                  0                728        2115             0   2843
+Victoria                          0                710        2160             0   2870
+ALL (calendar dates)              0               4246       12950             0  17196
+
+[calib] distinct days with PM2.5 and PM10:
+                             winter  summer_premonsoon  sw_monsoon  post_monsoon  total
+station                                                                                
+Ballygunge                        0                  0          70             0     70
+Bidhannagar                       0                 31          92             0    123
+Fort William                      0                 28          27             0     55
+Jadavpur                          0                 31          92             0    123
+Rabindra Bharati University       0                 31          92             0    123
+Rabindra Sarobar                  0                 31          91             0    122
+Victoria                          0                 31          92             0    123
+ALL (calendar dates)              0                 31          92             0    123
+
+[test] hours with PM2.5 and PM10:
+                             winter  summer_premonsoon  sw_monsoon  post_monsoon  total
+station                                                                                
+Ballygunge                      739                  0         677          1443   2859
+Bidhannagar                     658                  0         698          1427   2783
+Fort William                    721                  0         556          1422   2699
+Jadavpur                        740                  0         717          1444   2901
+Rabindra Bharati University     731                  0         702          1347   2780
+Rabindra Sarobar                738                  0         719          1452   2909
+Victoria                        721                  0         681          1354   2756
+ALL (calendar dates)           5048                  0        4750          9889  19687
+
+[test] distinct days with PM2.5 and PM10:
+                             winter  summer_premonsoon  sw_monsoon  post_monsoon  total
+station                                                                                
+Ballygunge                       31                  0          30            61    122
+Bidhannagar                      31                  0          30            61    122
+Fort William                     31                  0          25            61    117
+Jadavpur                         31                  0          30            61    122
+Rabindra Bharati University      31                  0          30            60    121
+Rabindra Sarobar                 31                  0          30            61    122
+Victoria                         31                  0          30            61    122
+ALL (calendar dates)             31                  0          30            61    122
+
+summary (all stations):
+ part  hours  days  share_of_hours_%
+train 118027   730              67.7
+  val  19515   120              11.2
+calib  17196   123               9.9
+ test  19687   122              11.3
+
+rule for d on TRAIN (each group >= 10*d distinct days):
+            group  days d=6 (need 60) d=8 (need 80) d=16 (need 160) d=32 (need 320)  largest_d_allowed
+           winter   180          PASS          PASS            PASS            FAIL                 18
+summer_premonsoon   184          PASS          PASS            PASS            FAIL                 18
+       sw_monsoon   244          PASS          PASS            PASS            FAIL                 24
+     post_monsoon   122          PASS          PASS            FAIL            FAIL                 12
+ all (no seasons)   730          PASS          PASS            PASS            PASS                 73
+largest d that passes in EVERY season: 12 (set by post_monsoon)
+
+rule for levels on CALIBRATION (the one group >= 1/level - 1 distinct days):
+worker            group  days  level  need result
+     B all (no seasons)   123   0.02    49   PASS
+     C all (no seasons)   123   0.10     9   PASS
+     C all (no seasons)   123   0.05    19   PASS
+
+risks:
+- late-starting stations: none
+- 2020 lockdown inside training: no (2020 not in training)
+- only one training year: no
+- reporting change, % whole-number PM2.5 per year: 2023: 35.4, 2024: 35.3, 2025: 1.5
+- reporting change, % whole-number PM10 per year: 2023: 31.5, 2024: 31.5, 2025: 1.6

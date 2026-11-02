@@ -1,0 +1,211 @@
+target,horizon,group,method,samples,days,coverage,coverage 2.5%,coverage 97.5%,width,width 2.5%,width 97.5%
+PM2.5,1,"Ballygunge, Kolkata - WBPCB",(a) split conformal,2616,117,0.6781,0.6321,0.725,10.8345,10.8345,10.8345
+PM2.5,1,"Ballygunge, Kolkata - WBPCB",(b) CQR,2616,117,0.9713,0.9632,0.9801,31.4045,28.3793,34.4492
+PM2.5,1,"Ballygunge, Kolkata - WBPCB",(c) CQR + adaptive,2616,117,0.9587,0.9494,0.9689,29.4212,26.4528,32.3911
+PM2.5,1,"Bidhannagar, Kolkata - WBPCB",(a) split conformal,2325,114,0.7071,0.6605,0.7514,10.8345,10.8345,10.8345
+PM2.5,1,"Bidhannagar, Kolkata - WBPCB",(b) CQR,2325,114,0.9256,0.9057,0.9437,25.508,23.1968,27.9475
+PM2.5,1,"Bidhannagar, Kolkata - WBPCB",(c) CQR + adaptive,2325,114,0.8852,0.8544,0.9134,23.4899,21.1771,25.8844
+PM2.5,1,"Fort William, Kolkata - WBPCB",(a) split conformal,2403,108,0.6567,0.5937,0.7198,10.8345,10.8345,10.8345
+PM2.5,1,"Fort William, Kolkata - WBPCB",(b) CQR,2403,108,0.9784,0.9672,0.9873,30.324,27.0338,33.5957
+PM2.5,1,"Fort William, Kolkata - WBPCB",(c) CQR + adaptive,2403,108,0.9705,0.9577,0.9808,28.2309,25.0531,31.4415
+PM2.5,1,"Jadavpur, Kolkata - WBPCB",(a) split conformal,2732,120,0.504,0.442,0.5682,10.8345,10.8345,10.8345
+PM2.5,1,"Jadavpur, Kolkata - WBPCB",(b) CQR,2732,120,0.9634,0.9518,0.9733,41.1313,37.4096,44.8457
+PM2.5,1,"Jadavpur, Kolkata - WBPCB",(c) CQR + adaptive,2732,120,0.9564,0.9427,0.968,39.1648,35.4182,42.852
+PM2.5,1,"Rabindra Bharati University, Kolkata - WBPCB",(a) split conformal,2385,112,0.6646,0.6064,0.719,10.8345,10.8345,10.8345
+PM2.5,1,"Rabindra Bharati University, Kolkata - WBPCB",(b) CQR,2385,112,0.9476,0.9301,0.964,28.8304,25.9197,31.7251
+PM2.5,1,"Rabindra Bharati University, Kolkata - WBPCB",(c) CQR + adaptive,2385,112,0.9124,0.8887,0.9343,26.8749,23.9828,29.7866
+PM2.5,1,"Rabindra Sarobar, Kolkata - WBPCB",(a) split conformal,2767,120,0.7402,0.7041,0.7726,10.8345,10.8345,10.8345
+PM2.5,1,"Rabindra Sarobar, Kolkata - WBPCB",(b) CQR,2767,120,0.9613,0.9511,0.9691,23.69,21.7707,25.6815
+PM2.5,1,"Rabindra Sarobar, Kolkata - WBPCB",(c) CQR + adaptive,2767,120,0.9245,0.9061,0.9408,21.7048,19.7589,23.6555
+PM2.5,1,"Victoria, Kolkata - WBPCB",(a) split conformal,2334,117,0.3753,0.3069,0.4417,10.8345,10.8345,10.8345
+PM2.5,1,"Victoria, Kolkata - WBPCB",(b) CQR,2334,117,0.7789,0.731,0.8245,37.8552,34.5047,41.3132
+PM2.5,1,"Victoria, Kolkata - WBPCB",(c) CQR + adaptive,2334,117,0.7554,0.7072,0.8022,35.8698,32.5415,39.3073
+PM2.5,3,"Ballygunge, Kolkata - WBPCB",(a) split conformal,2616,117,0.6472,0.6044,0.6928,15.5707,15.5707,15.5707
+PM2.5,3,"Ballygunge, Kolkata - WBPCB",(b) CQR,2616,117,0.9274,0.9121,0.9423,37.9417,34.5158,41.3852
+PM2.5,3,"Ballygunge, Kolkata - WBPCB",(c) CQR + adaptive,2616,117,0.9304,0.9168,0.9446,38.299,34.6672,41.843
+PM2.5,3,"Bidhannagar, Kolkata - WBPCB",(a) split conformal,2325,114,0.7062,0.6656,0.7466,15.5707,15.5707,15.5707
+PM2.5,3,"Bidhannagar, Kolkata - WBPCB",(b) CQR,2325,114,0.8667,0.8409,0.8923,29.0882,26.3396,31.9899
+PM2.5,3,"Bidhannagar, Kolkata - WBPCB",(c) CQR + adaptive,2325,114,0.8568,0.8276,0.8849,29.1729,26.186,32.2781
+PM2.5,3,"Fort William, Kolkata - WBPCB",(a) split conformal,2403,108,0.65,0.5912,0.704,15.5707,15.5707,15.5707
+PM2.5,3,"Fort William, Kolkata - WBPCB",(b) CQR,2403,108,0.9338,0.9184,0.9475,37.4535,33.3846,41.6044
+PM2.5,3,"Fort William, Kolkata - WBPCB",(c) CQR + adaptive,2403,108,0.9359,0.9221,0.9487,37.8224,33.5966,42.0707
+PM2.5,3,"Jadavpur, Kolkata - WBPCB",(a) split conformal,2732,120,0.5084,0.4544,0.5649,15.5707,15.5707,15.5707
+PM2.5,3,"Jadavpur, Kolkata - WBPCB",(b) CQR,2732,120,0.9257,0.9064,0.9408,50.9656,47.1221,54.9712
+PM2.5,3,"Jadavpur, Kolkata - WBPCB",(c) CQR + adaptive,2732,120,0.9283,0.9091,0.9434,51.2849,47.3042,55.4081
+PM2.5,3,"Rabindra Bharati University, Kolkata - WBPCB",(a) split conformal,2385,112,0.6717,0.6254,0.7176,15.5707,15.5707,15.5707
+PM2.5,3,"Rabindra Bharati University, Kolkata - WBPCB",(b) CQR,2385,112,0.8855,0.8633,0.9063,31.6507,28.3135,34.8612
+PM2.5,3,"Rabindra Bharati University, Kolkata - WBPCB",(c) CQR + adaptive,2385,112,0.8801,0.8558,0.9022,32.0622,28.5635,35.6179
+PM2.5,3,"Rabindra Sarobar, Kolkata - WBPCB",(a) split conformal,2767,120,0.7626,0.7274,0.7964,15.5707,15.5707,15.5707
+PM2.5,3,"Rabindra Sarobar, Kolkata - WBPCB",(b) CQR,2767,120,0.9378,0.9193,0.9542,29.6529,27.2397,32.1506
+PM2.5,3,"Rabindra Sarobar, Kolkata - WBPCB",(c) CQR + adaptive,2767,120,0.9433,0.927,0.9579,29.9251,27.4048,32.5703
+PM2.5,3,"Victoria, Kolkata - WBPCB",(a) split conformal,2334,117,0.407,0.3438,0.4695,15.5707,15.5707,15.5707
+PM2.5,3,"Victoria, Kolkata - WBPCB",(b) CQR,2334,117,0.8055,0.7716,0.8371,49.871,45.6868,54.1681
+PM2.5,3,"Victoria, Kolkata - WBPCB",(c) CQR + adaptive,2334,117,0.8072,0.7733,0.8382,50.2842,45.8267,54.8125
+PM2.5,6,"Ballygunge, Kolkata - WBPCB",(a) split conformal,2616,117,0.604,0.5552,0.6573,19.517,19.517,19.517
+PM2.5,6,"Ballygunge, Kolkata - WBPCB",(b) CQR,2616,117,0.9285,0.9107,0.9473,50.1913,45.8113,54.5807
+PM2.5,6,"Ballygunge, Kolkata - WBPCB",(c) CQR + adaptive,2616,117,0.9297,0.9116,0.9477,51.0174,46.3566,55.7074
+PM2.5,6,"Bidhannagar, Kolkata - WBPCB",(a) split conformal,2325,114,0.6787,0.6292,0.728,19.517,19.517,19.517
+PM2.5,6,"Bidhannagar, Kolkata - WBPCB",(b) CQR,2325,114,0.892,0.8667,0.9162,40.4473,36.6406,44.3212
+PM2.5,6,"Bidhannagar, Kolkata - WBPCB",(c) CQR + adaptive,2325,114,0.8873,0.8582,0.9125,40.9729,36.9112,45.1606
+PM2.5,6,"Fort William, Kolkata - WBPCB",(a) split conformal,2403,108,0.6142,0.5508,0.6747,19.517,19.517,19.517
+PM2.5,6,"Fort William, Kolkata - WBPCB",(b) CQR,2403,108,0.9351,0.9175,0.9527,48.9463,44.1079,53.7341
+PM2.5,6,"Fort William, Kolkata - WBPCB",(c) CQR + adaptive,2403,108,0.9338,0.916,0.9514,49.8443,44.7066,54.788
+PM2.5,6,"Jadavpur, Kolkata - WBPCB",(a) split conformal,2732,120,0.4638,0.409,0.5194,19.517,19.517,19.517
+PM2.5,6,"Jadavpur, Kolkata - WBPCB",(b) CQR,2732,120,0.8865,0.8626,0.9093,60.0047,55.4044,64.7661
+PM2.5,6,"Jadavpur, Kolkata - WBPCB",(c) CQR + adaptive,2732,120,0.8858,0.8614,0.909,60.7706,55.9699,65.6614
+PM2.5,6,"Rabindra Bharati University, Kolkata - WBPCB",(a) split conformal,2385,112,0.6298,0.5779,0.6777,19.517,19.517,19.517
+PM2.5,6,"Rabindra Bharati University, Kolkata - WBPCB",(b) CQR,2385,112,0.8939,0.8689,0.9149,44.411,40.0764,48.677
+PM2.5,6,"Rabindra Bharati University, Kolkata - WBPCB",(c) CQR + adaptive,2385,112,0.8864,0.861,0.9096,45.3055,40.6522,49.893
+PM2.5,6,"Rabindra Sarobar, Kolkata - WBPCB",(a) split conformal,2767,120,0.7271,0.6848,0.7643,19.517,19.517,19.517
+PM2.5,6,"Rabindra Sarobar, Kolkata - WBPCB",(b) CQR,2767,120,0.936,0.9161,0.9531,38.8741,35.6243,42.1934
+PM2.5,6,"Rabindra Sarobar, Kolkata - WBPCB",(c) CQR + adaptive,2767,120,0.9404,0.9217,0.9559,39.5925,36.1272,43.1102
+PM2.5,6,"Victoria, Kolkata - WBPCB",(a) split conformal,2334,117,0.4165,0.3562,0.4778,19.517,19.517,19.517
+PM2.5,6,"Victoria, Kolkata - WBPCB",(b) CQR,2334,117,0.8033,0.7667,0.8332,59.6624,54.7548,64.8244
+PM2.5,6,"Victoria, Kolkata - WBPCB",(c) CQR + adaptive,2334,117,0.8063,0.7705,0.8356,60.5903,55.4449,66.0221
+PM2.5,12,"Ballygunge, Kolkata - WBPCB",(a) split conformal,2616,117,0.6013,0.5497,0.6566,22.6825,22.6825,22.6825
+PM2.5,12,"Ballygunge, Kolkata - WBPCB",(b) CQR,2616,117,0.9159,0.8934,0.9388,55.0353,50.7349,59.2983
+PM2.5,12,"Ballygunge, Kolkata - WBPCB",(c) CQR + adaptive,2616,117,0.9285,0.9067,0.9492,74.916,60.6937,92.7873
+PM2.5,12,"Bidhannagar, Kolkata - WBPCB",(a) split conformal,2325,114,0.6783,0.6274,0.7264,22.6825,22.6825,22.6825
+PM2.5,12,"Bidhannagar, Kolkata - WBPCB",(b) CQR,2325,114,0.8787,0.843,0.9098,45.615,41.82,49.4009
+PM2.5,12,"Bidhannagar, Kolkata - WBPCB",(c) CQR + adaptive,2325,114,0.8667,0.827,0.8992,62.9139,49.6209,78.3516
+PM2.5,12,"Fort William, Kolkata - WBPCB",(a) split conformal,2403,108,0.6384,0.5819,0.7,22.6825,22.6825,22.6825
+PM2.5,12,"Fort William, Kolkata - WBPCB",(b) CQR,2403,108,0.9322,0.9054,0.955,55.3445,50.7311,59.7224
+PM2.5,12,"Fort William, Kolkata - WBPCB",(c) CQR + adaptive,2403,108,0.9413,0.9167,0.9621,76.0966,61.6059,93.8195
+PM2.5,12,"Jadavpur, Kolkata - WBPCB",(a) split conformal,2732,120,0.4608,0.408,0.5176,22.6825,22.6825,22.6825
+PM2.5,12,"Jadavpur, Kolkata - WBPCB",(b) CQR,2732,120,0.8723,0.8376,0.8998,65.1087,61.1516,69.1841
+PM2.5,12,"Jadavpur, Kolkata - WBPCB",(c) CQR + adaptive,2732,120,0.8931,0.8634,0.9183,83.919,70.1484,100.4453
+PM2.5,12,"Rabindra Bharati University, Kolkata - WBPCB",(a) split conformal,2385,112,0.6273,0.574,0.6789,22.6825,22.6825,22.6825
+PM2.5,12,"Rabindra Bharati University, Kolkata - WBPCB",(b) CQR,2385,112,0.8553,0.8183,0.8868,51.4197,46.8266,55.7122
+PM2.5,12,"Rabindra Bharati University, Kolkata - WBPCB",(c) CQR + adaptive,2385,112,0.8591,0.8218,0.8921,73.2312,57.5755,91.1266
+PM2.5,12,"Rabindra Sarobar, Kolkata - WBPCB",(a) split conformal,2767,120,0.7083,0.6604,0.7539,22.6825,22.6825,22.6825
+PM2.5,12,"Rabindra Sarobar, Kolkata - WBPCB",(b) CQR,2767,120,0.9328,0.9029,0.9557,45.5043,42.2224,48.9485
+PM2.5,12,"Rabindra Sarobar, Kolkata - WBPCB",(c) CQR + adaptive,2767,120,0.9458,0.9196,0.967,64.5108,51.011,80.733
+PM2.5,12,"Victoria, Kolkata - WBPCB",(a) split conformal,2334,117,0.4092,0.3437,0.4742,22.6825,22.6825,22.6825
+PM2.5,12,"Victoria, Kolkata - WBPCB",(b) CQR,2334,117,0.7622,0.7044,0.8124,65.4528,60.9798,69.9983
+PM2.5,12,"Victoria, Kolkata - WBPCB",(c) CQR + adaptive,2334,117,0.8076,0.7614,0.8474,87.126,72.7729,104.8882
+PM2.5,24,"Ballygunge, Kolkata - WBPCB",(a) split conformal,2616,117,0.6269,0.5754,0.6764,25.0397,25.0397,25.0397
+PM2.5,24,"Ballygunge, Kolkata - WBPCB",(b) CQR,2616,117,0.9201,0.8958,0.9444,62.9411,58.0447,67.9637
+PM2.5,24,"Ballygunge, Kolkata - WBPCB",(c) CQR + adaptive,2616,117,0.9281,0.903,0.9526,92.4876,74.5551,113.707
+PM2.5,24,"Bidhannagar, Kolkata - WBPCB",(a) split conformal,2325,114,0.6761,0.623,0.7265,25.0397,25.0397,25.0397
+PM2.5,24,"Bidhannagar, Kolkata - WBPCB",(b) CQR,2325,114,0.8667,0.8255,0.9039,52.5041,48.1315,56.7293
+PM2.5,24,"Bidhannagar, Kolkata - WBPCB",(c) CQR + adaptive,2325,114,0.8692,0.8284,0.9064,83.4477,64.5325,104.681
+PM2.5,24,"Fort William, Kolkata - WBPCB",(a) split conformal,2403,108,0.6072,0.5421,0.668,25.0397,25.0397,25.0397
+PM2.5,24,"Fort William, Kolkata - WBPCB",(b) CQR,2403,108,0.9205,0.8925,0.946,60.8472,55.9828,65.7085
+PM2.5,24,"Fort William, Kolkata - WBPCB",(c) CQR + adaptive,2403,108,0.9297,0.902,0.9547,92.3466,72.4147,115.7961
+PM2.5,24,"Jadavpur, Kolkata - WBPCB",(a) split conformal,2732,120,0.4619,0.4096,0.5178,25.0397,25.0397,25.0397
+PM2.5,24,"Jadavpur, Kolkata - WBPCB",(b) CQR,2732,120,0.8745,0.841,0.9032,71.1631,66.5958,75.9025
+PM2.5,24,"Jadavpur, Kolkata - WBPCB",(c) CQR + adaptive,2732,120,0.892,0.8611,0.9201,99.2115,81.0515,121.6326
+PM2.5,24,"Rabindra Bharati University, Kolkata - WBPCB",(a) split conformal,2385,112,0.6335,0.5726,0.6901,25.0397,25.0397,25.0397
+PM2.5,24,"Rabindra Bharati University, Kolkata - WBPCB",(b) CQR,2385,112,0.8566,0.8133,0.8926,56.975,52.1105,61.6885
+PM2.5,24,"Rabindra Bharati University, Kolkata - WBPCB",(c) CQR + adaptive,2385,112,0.8646,0.8243,0.9009,89.5195,70.3122,112.4311
+PM2.5,24,"Rabindra Sarobar, Kolkata - WBPCB",(a) split conformal,2767,120,0.6971,0.6492,0.7427,25.0397,25.0397,25.0397
+PM2.5,24,"Rabindra Sarobar, Kolkata - WBPCB",(b) CQR,2767,120,0.9342,0.9075,0.9566,52.6938,48.8211,56.6549
+PM2.5,24,"Rabindra Sarobar, Kolkata - WBPCB",(c) CQR + adaptive,2767,120,0.9462,0.9235,0.9663,81.4438,63.3736,102.9131
+PM2.5,24,"Victoria, Kolkata - WBPCB",(a) split conformal,2334,117,0.4379,0.3692,0.5049,25.0397,25.0397,25.0397
+PM2.5,24,"Victoria, Kolkata - WBPCB",(b) CQR,2334,117,0.8033,0.7594,0.8478,71.2264,66.3817,76.392
+PM2.5,24,"Victoria, Kolkata - WBPCB",(c) CQR + adaptive,2334,117,0.8295,0.7897,0.8701,103.3922,84.5921,124.775
+PM10,1,"Ballygunge, Kolkata - WBPCB",(a) split conformal,2616,117,0.5776,0.5349,0.6232,17.7629,17.7629,17.7629
+PM10,1,"Ballygunge, Kolkata - WBPCB",(b) CQR,2616,117,0.8368,0.8022,0.8722,50.6867,45.3048,56.078
+PM10,1,"Ballygunge, Kolkata - WBPCB",(c) CQR + adaptive,2616,117,0.8429,0.8111,0.8767,50.0251,44.9085,55.1113
+PM10,1,"Bidhannagar, Kolkata - WBPCB",(a) split conformal,2325,114,0.6551,0.603,0.7123,17.7629,17.7629,17.7629
+PM10,1,"Bidhannagar, Kolkata - WBPCB",(b) CQR,2325,114,0.9049,0.8817,0.9252,40.6371,36.5205,44.5115
+PM10,1,"Bidhannagar, Kolkata - WBPCB",(c) CQR + adaptive,2325,114,0.9131,0.8924,0.9323,40.4286,36.5759,44.1063
+PM10,1,"Fort William, Kolkata - WBPCB",(a) split conformal,2403,108,0.6671,0.6109,0.72,17.7629,17.7629,17.7629
+PM10,1,"Fort William, Kolkata - WBPCB",(b) CQR,2403,108,0.9576,0.9441,0.9691,47.8882,42.4272,53.4807
+PM10,1,"Fort William, Kolkata - WBPCB",(c) CQR + adaptive,2403,108,0.9638,0.954,0.9728,47.2963,42.2119,52.7132
+PM10,1,"Jadavpur, Kolkata - WBPCB",(a) split conformal,2732,120,0.5231,0.4633,0.5807,17.7629,17.7629,17.7629
+PM10,1,"Jadavpur, Kolkata - WBPCB",(b) CQR,2732,120,0.9327,0.916,0.9472,66.7765,59.9668,73.5253
+PM10,1,"Jadavpur, Kolkata - WBPCB",(c) CQR + adaptive,2732,120,0.933,0.9159,0.9482,66.1146,59.6664,72.7342
+PM10,1,"Rabindra Bharati University, Kolkata - WBPCB",(a) split conformal,2385,112,0.6004,0.5434,0.6578,17.7629,17.7629,17.7629
+PM10,1,"Rabindra Bharati University, Kolkata - WBPCB",(b) CQR,2385,112,0.8717,0.8309,0.9061,48.5821,43.1204,53.9959
+PM10,1,"Rabindra Bharati University, Kolkata - WBPCB",(c) CQR + adaptive,2385,112,0.8776,0.8374,0.9108,47.725,42.5481,52.9378
+PM10,1,"Rabindra Sarobar, Kolkata - WBPCB",(a) split conformal,2767,120,0.7532,0.7128,0.7931,17.7629,17.7629,17.7629
+PM10,1,"Rabindra Sarobar, Kolkata - WBPCB",(b) CQR,2767,120,0.9281,0.9087,0.9473,34.3209,31.0663,37.5734
+PM10,1,"Rabindra Sarobar, Kolkata - WBPCB",(c) CQR + adaptive,2767,120,0.9299,0.9141,0.946,33.6667,30.7966,36.7374
+PM10,1,"Victoria, Kolkata - WBPCB",(a) split conformal,2334,117,0.5557,0.5042,0.6059,17.7629,17.7629,17.7629
+PM10,1,"Victoria, Kolkata - WBPCB",(b) CQR,2334,117,0.9392,0.9208,0.9555,58.5034,52.4274,64.4533
+PM10,1,"Victoria, Kolkata - WBPCB",(c) CQR + adaptive,2334,117,0.9456,0.9286,0.9602,57.657,51.953,63.358
+PM10,3,"Ballygunge, Kolkata - WBPCB",(a) split conformal,2616,117,0.5623,0.5211,0.607,24.7727,24.7727,24.7727
+PM10,3,"Ballygunge, Kolkata - WBPCB",(b) CQR,2616,117,0.8303,0.7983,0.8624,69.48,62.7451,76.211
+PM10,3,"Ballygunge, Kolkata - WBPCB",(c) CQR + adaptive,2616,117,0.841,0.8107,0.8706,70.2886,63.7035,76.8451
+PM10,3,"Bidhannagar, Kolkata - WBPCB",(a) split conformal,2325,114,0.6219,0.5617,0.681,24.7727,24.7727,24.7727
+PM10,3,"Bidhannagar, Kolkata - WBPCB",(b) CQR,2325,114,0.9015,0.878,0.9229,59.4611,54.1468,64.5335
+PM10,3,"Bidhannagar, Kolkata - WBPCB",(c) CQR + adaptive,2325,114,0.9148,0.8953,0.934,60.553,55.3534,65.4796
+PM10,3,"Fort William, Kolkata - WBPCB",(a) split conformal,2403,108,0.6325,0.5807,0.6813,24.7727,24.7727,24.7727
+PM10,3,"Fort William, Kolkata - WBPCB",(b) CQR,2403,108,0.9205,0.9042,0.9352,66.6501,60.1002,73.293
+PM10,3,"Fort William, Kolkata - WBPCB",(c) CQR + adaptive,2403,108,0.9318,0.917,0.946,67.6644,61.0314,73.9361
+PM10,3,"Jadavpur, Kolkata - WBPCB",(a) split conformal,2732,120,0.4769,0.4231,0.5341,24.7727,24.7727,24.7727
+PM10,3,"Jadavpur, Kolkata - WBPCB",(b) CQR,2732,120,0.8953,0.8723,0.9167,85.4854,77.9697,93.1561
+PM10,3,"Jadavpur, Kolkata - WBPCB",(c) CQR + adaptive,2732,120,0.8982,0.8747,0.9196,86.2493,78.8373,93.8943
+PM10,3,"Rabindra Bharati University, Kolkata - WBPCB",(a) split conformal,2385,112,0.6008,0.5447,0.6563,24.7727,24.7727,24.7727
+PM10,3,"Rabindra Bharati University, Kolkata - WBPCB",(b) CQR,2385,112,0.8675,0.8316,0.8995,69.3651,61.8706,76.2593
+PM10,3,"Rabindra Bharati University, Kolkata - WBPCB",(c) CQR + adaptive,2385,112,0.8755,0.8419,0.9065,70.0511,62.6311,76.7475
+PM10,3,"Rabindra Sarobar, Kolkata - WBPCB",(a) split conformal,2767,120,0.7911,0.7564,0.8243,24.7727,24.7727,24.7727
+PM10,3,"Rabindra Sarobar, Kolkata - WBPCB",(b) CQR,2767,120,0.9335,0.915,0.95,50.383,46.0278,54.829
+PM10,3,"Rabindra Sarobar, Kolkata - WBPCB",(c) CQR + adaptive,2767,120,0.9454,0.9299,0.9592,51.1173,46.857,55.5355
+PM10,3,"Victoria, Kolkata - WBPCB",(a) split conformal,2334,117,0.5574,0.5133,0.6047,24.7727,24.7727,24.7727
+PM10,3,"Victoria, Kolkata - WBPCB",(b) CQR,2334,117,0.9293,0.9108,0.9464,76.6654,70.2039,83.5775
+PM10,3,"Victoria, Kolkata - WBPCB",(c) CQR + adaptive,2334,117,0.9366,0.9202,0.9507,77.3678,71.1277,84.0834
+PM10,6,"Ballygunge, Kolkata - WBPCB",(a) split conformal,2616,117,0.539,0.4911,0.5919,31.2423,31.2423,31.2423
+PM10,6,"Ballygunge, Kolkata - WBPCB",(b) CQR,2616,117,0.8463,0.8131,0.8796,91.6985,83.3622,100.0848
+PM10,6,"Ballygunge, Kolkata - WBPCB",(c) CQR + adaptive,2616,117,0.8593,0.8275,0.8886,94.4792,85.9343,103.1584
+PM10,6,"Bidhannagar, Kolkata - WBPCB",(a) split conformal,2325,114,0.6056,0.5484,0.6571,31.2423,31.2423,31.2423
+PM10,6,"Bidhannagar, Kolkata - WBPCB",(b) CQR,2325,114,0.8938,0.8686,0.9163,78.4258,71.3601,85.3879
+PM10,6,"Bidhannagar, Kolkata - WBPCB",(c) CQR + adaptive,2325,114,0.9161,0.8955,0.9356,81.3332,73.7962,88.6976
+PM10,6,"Fort William, Kolkata - WBPCB",(a) split conformal,2403,108,0.5697,0.5124,0.6242,31.2423,31.2423,31.2423
+PM10,6,"Fort William, Kolkata - WBPCB",(b) CQR,2403,108,0.9147,0.8961,0.9319,87.2164,79.3382,94.9425
+PM10,6,"Fort William, Kolkata - WBPCB",(c) CQR + adaptive,2403,108,0.9189,0.9002,0.9369,90.2791,82.0533,98.123
+PM10,6,"Jadavpur, Kolkata - WBPCB",(a) split conformal,2732,120,0.4418,0.39,0.4983,31.2423,31.2423,31.2423
+PM10,6,"Jadavpur, Kolkata - WBPCB",(b) CQR,2732,120,0.8624,0.8328,0.8908,102.438,94.2417,110.9721
+PM10,6,"Jadavpur, Kolkata - WBPCB",(c) CQR + adaptive,2732,120,0.8697,0.8413,0.8962,105.0595,96.3723,113.9503
+PM10,6,"Rabindra Bharati University, Kolkata - WBPCB",(a) split conformal,2385,112,0.5547,0.4914,0.6127,31.2423,31.2423,31.2423
+PM10,6,"Rabindra Bharati University, Kolkata - WBPCB",(b) CQR,2385,112,0.8486,0.8142,0.8858,88.8617,79.8468,97.0536
+PM10,6,"Rabindra Bharati University, Kolkata - WBPCB",(c) CQR + adaptive,2385,112,0.857,0.8217,0.8927,91.5664,82.6174,99.9572
+PM10,6,"Rabindra Sarobar, Kolkata - WBPCB",(a) split conformal,2767,120,0.742,0.7028,0.7812,31.2423,31.2423,31.2423
+PM10,6,"Rabindra Sarobar, Kolkata - WBPCB",(b) CQR,2767,120,0.9508,0.9325,0.9672,68.3179,62.3224,74.4258
+PM10,6,"Rabindra Sarobar, Kolkata - WBPCB",(c) CQR + adaptive,2767,120,0.9617,0.9473,0.9738,70.8891,64.6646,77.1116
+PM10,6,"Victoria, Kolkata - WBPCB",(a) split conformal,2334,117,0.5454,0.4961,0.5948,31.2423,31.2423,31.2423
+PM10,6,"Victoria, Kolkata - WBPCB",(b) CQR,2334,117,0.919,0.8979,0.9386,96.1487,88.4305,104.2532
+PM10,6,"Victoria, Kolkata - WBPCB",(c) CQR + adaptive,2334,117,0.9272,0.9073,0.9439,99.0154,91.5814,107.2371
+PM10,12,"Ballygunge, Kolkata - WBPCB",(a) split conformal,2616,117,0.5409,0.4936,0.5962,37.454,37.454,37.454
+PM10,12,"Ballygunge, Kolkata - WBPCB",(b) CQR,2616,117,0.8341,0.7933,0.8779,105.1773,95.4985,114.9688
+PM10,12,"Ballygunge, Kolkata - WBPCB",(c) CQR + adaptive,2616,117,0.8639,0.8303,0.8983,127.3107,107.992,154.005
+PM10,12,"Bidhannagar, Kolkata - WBPCB",(a) split conformal,2325,114,0.5837,0.5213,0.641,37.454,37.454,37.454
+PM10,12,"Bidhannagar, Kolkata - WBPCB",(b) CQR,2325,114,0.8877,0.8584,0.9134,89.0266,81.3501,96.3565
+PM10,12,"Bidhannagar, Kolkata - WBPCB",(c) CQR + adaptive,2325,114,0.92,0.8976,0.9401,112.9875,92.6581,138.2711
+PM10,12,"Fort William, Kolkata - WBPCB",(a) split conformal,2403,108,0.6101,0.5548,0.6641,37.454,37.454,37.454
+PM10,12,"Fort William, Kolkata - WBPCB",(b) CQR,2403,108,0.9255,0.9007,0.9477,100.518,91.4769,109.2254
+PM10,12,"Fort William, Kolkata - WBPCB",(c) CQR + adaptive,2403,108,0.9318,0.9097,0.9526,123.4791,103.7327,148.0815
+PM10,12,"Jadavpur, Kolkata - WBPCB",(a) split conformal,2732,120,0.451,0.3971,0.5063,37.454,37.454,37.454
+PM10,12,"Jadavpur, Kolkata - WBPCB",(b) CQR,2732,120,0.8305,0.7947,0.861,112.217,102.8285,121.9067
+PM10,12,"Jadavpur, Kolkata - WBPCB",(c) CQR + adaptive,2732,120,0.847,0.8126,0.8765,132.96,113.5631,158.7198
+PM10,12,"Rabindra Bharati University, Kolkata - WBPCB",(a) split conformal,2385,112,0.561,0.4992,0.6194,37.454,37.454,37.454
+PM10,12,"Rabindra Bharati University, Kolkata - WBPCB",(b) CQR,2385,112,0.8453,0.8054,0.8856,107.0696,96.2895,116.9507
+PM10,12,"Rabindra Bharati University, Kolkata - WBPCB",(c) CQR + adaptive,2385,112,0.8721,0.8344,0.9057,131.2578,109.8793,159.4972
+PM10,12,"Rabindra Sarobar, Kolkata - WBPCB",(a) split conformal,2767,120,0.7539,0.7104,0.7964,37.454,37.454,37.454
+PM10,12,"Rabindra Sarobar, Kolkata - WBPCB",(b) CQR,2767,120,0.9433,0.9199,0.964,75.5781,69.2699,82.0684
+PM10,12,"Rabindra Sarobar, Kolkata - WBPCB",(c) CQR + adaptive,2767,120,0.9624,0.9447,0.977,93.3821,77.3008,115.8291
+PM10,12,"Victoria, Kolkata - WBPCB",(a) split conformal,2334,117,0.5458,0.4895,0.5999,37.454,37.454,37.454
+PM10,12,"Victoria, Kolkata - WBPCB",(b) CQR,2334,117,0.8959,0.8632,0.9234,106.6475,98.2068,115.8183
+PM10,12,"Victoria, Kolkata - WBPCB",(c) CQR + adaptive,2334,117,0.913,0.8865,0.9372,130.9369,110.7309,157.1359
+PM10,24,"Ballygunge, Kolkata - WBPCB",(a) split conformal,2616,117,0.5631,0.5119,0.6155,41.1317,41.1317,41.1317
+PM10,24,"Ballygunge, Kolkata - WBPCB",(b) CQR,2616,117,0.8559,0.8167,0.8958,114.4425,104.7171,123.9431
+PM10,24,"Ballygunge, Kolkata - WBPCB",(c) CQR + adaptive,2616,117,0.8731,0.8352,0.9081,179.1849,142.1415,224.0697
+PM10,24,"Bidhannagar, Kolkata - WBPCB",(a) split conformal,2325,114,0.5832,0.5235,0.637,41.1317,41.1317,41.1317
+PM10,24,"Bidhannagar, Kolkata - WBPCB",(b) CQR,2325,114,0.9067,0.8745,0.9349,102.9102,94.5756,110.5396
+PM10,24,"Bidhannagar, Kolkata - WBPCB",(c) CQR + adaptive,2325,114,0.9286,0.9005,0.9523,176.6114,133.0577,222.8236
+PM10,24,"Fort William, Kolkata - WBPCB",(a) split conformal,2403,108,0.5947,0.5358,0.6493,41.1317,41.1317,41.1317
+PM10,24,"Fort William, Kolkata - WBPCB",(b) CQR,2403,108,0.9139,0.8829,0.9418,107.5402,99.1527,116.0994
+PM10,24,"Fort William, Kolkata - WBPCB",(c) CQR + adaptive,2403,108,0.9197,0.8909,0.9476,179.3055,137.3534,229.2451
+PM10,24,"Jadavpur, Kolkata - WBPCB",(a) split conformal,2732,120,0.4447,0.3935,0.5002,41.1317,41.1317,41.1317
+PM10,24,"Jadavpur, Kolkata - WBPCB",(b) CQR,2732,120,0.8543,0.8211,0.8873,124.8592,115.4275,134.3102
+PM10,24,"Jadavpur, Kolkata - WBPCB",(c) CQR + adaptive,2732,120,0.8726,0.8395,0.9042,188.4229,150.086,236.6697
+PM10,24,"Rabindra Bharati University, Kolkata - WBPCB",(a) split conformal,2385,112,0.5279,0.4658,0.5885,41.1317,41.1317,41.1317
+PM10,24,"Rabindra Bharati University, Kolkata - WBPCB",(b) CQR,2385,112,0.8562,0.8111,0.8933,116.1079,105.3459,126.0829
+PM10,24,"Rabindra Bharati University, Kolkata - WBPCB",(c) CQR + adaptive,2385,112,0.873,0.831,0.9085,188.7887,148.3061,237.1977
+PM10,24,"Rabindra Sarobar, Kolkata - WBPCB",(a) split conformal,2767,120,0.7383,0.69,0.7852,41.1317,41.1317,41.1317
+PM10,24,"Rabindra Sarobar, Kolkata - WBPCB",(b) CQR,2767,120,0.9516,0.9336,0.9675,89.5656,82.5195,96.7309
+PM10,24,"Rabindra Sarobar, Kolkata - WBPCB",(c) CQR + adaptive,2767,120,0.9584,0.9402,0.9738,153.3733,116.2871,200.4835
+PM10,24,"Victoria, Kolkata - WBPCB",(a) split conformal,2334,117,0.56,0.5041,0.6111,41.1317,41.1317,41.1317
+PM10,24,"Victoria, Kolkata - WBPCB",(b) CQR,2334,117,0.9135,0.8839,0.9396,114.9375,106.9993,123.4285
+PM10,24,"Victoria, Kolkata - WBPCB",(c) CQR + adaptive,2334,117,0.9289,0.9003,0.9527,185.0832,143.6416,231.186

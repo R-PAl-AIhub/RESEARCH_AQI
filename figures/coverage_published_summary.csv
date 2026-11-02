@@ -1,0 +1,481 @@
+method,model,target,station,coverage,n
+deletion,gru,PM10,"Ballygunge, Kolkata - WBPCB",0.841,1365
+deletion,gru,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9171,1365
+deletion,gru,PM10,"Bidhannagar, Kolkata - WBPCB",0.9,302
+deletion,gru,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8623,302
+deletion,gru,PM10,"Fort William, Kolkata - WBPCB",0.9513,899
+deletion,gru,PM2.5,"Fort William, Kolkata - WBPCB",0.9404,899
+deletion,gru,PM10,"Jadavpur, Kolkata - WBPCB",0.8596,1238
+deletion,gru,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8517,1238
+deletion,gru,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8459,854
+deletion,gru,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8698,854
+deletion,gru,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9531,1006
+deletion,gru,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.8946,1006
+deletion,gru,PM10,"Victoria, Kolkata - WBPCB",0.9112,232
+deletion,gru,PM2.5,"Victoria, Kolkata - WBPCB",0.9172,232
+deletion,gru,PM10,all stations,0.8873,5896
+deletion,gru,PM2.5,all stations,0.8934,5896
+deletion,lstm,PM10,"Ballygunge, Kolkata - WBPCB",0.8369,1365
+deletion,lstm,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9197,1365
+deletion,lstm,PM10,"Bidhannagar, Kolkata - WBPCB",0.8603,302
+deletion,lstm,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8007,302
+deletion,lstm,PM10,"Fort William, Kolkata - WBPCB",0.9488,899
+deletion,lstm,PM2.5,"Fort William, Kolkata - WBPCB",0.935,899
+deletion,lstm,PM10,"Jadavpur, Kolkata - WBPCB",0.8895,1238
+deletion,lstm,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8859,1238
+deletion,lstm,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8389,854
+deletion,lstm,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8272,854
+deletion,lstm,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9338,1006
+deletion,lstm,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.869,1006
+deletion,lstm,PM10,"Victoria, Kolkata - WBPCB",0.8741,232
+deletion,lstm,PM2.5,"Victoria, Kolkata - WBPCB",0.8871,232
+deletion,lstm,PM10,all stations,0.8845,5896
+deletion,lstm,PM2.5,all stations,0.8855,5896
+deletion,cnn,PM10,"Ballygunge, Kolkata - WBPCB",0.8634,1365
+deletion,cnn,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9269,1365
+deletion,cnn,PM10,"Bidhannagar, Kolkata - WBPCB",0.8523,302
+deletion,cnn,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8278,302
+deletion,cnn,PM10,"Fort William, Kolkata - WBPCB",0.9161,899
+deletion,cnn,PM2.5,"Fort William, Kolkata - WBPCB",0.9086,899
+deletion,cnn,PM10,"Jadavpur, Kolkata - WBPCB",0.883,1238
+deletion,cnn,PM2.5,"Jadavpur, Kolkata - WBPCB",0.9058,1238
+deletion,cnn,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.7721,854
+deletion,cnn,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.7829,854
+deletion,cnn,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9292,1006
+deletion,cnn,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.8545,1006
+deletion,cnn,PM10,"Victoria, Kolkata - WBPCB",0.925,232
+deletion,cnn,PM2.5,"Victoria, Kolkata - WBPCB",0.8948,232
+deletion,cnn,PM10,all stations,0.8754,5896
+deletion,cnn,PM2.5,all stations,0.8801,5896
+deletion,cnn_lstm,PM10,"Ballygunge, Kolkata - WBPCB",0.8511,1365
+deletion,cnn_lstm,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9191,1365
+deletion,cnn_lstm,PM10,"Bidhannagar, Kolkata - WBPCB",0.8589,302
+deletion,cnn_lstm,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8424,302
+deletion,cnn_lstm,PM10,"Fort William, Kolkata - WBPCB",0.9299,899
+deletion,cnn_lstm,PM2.5,"Fort William, Kolkata - WBPCB",0.9355,899
+deletion,cnn_lstm,PM10,"Jadavpur, Kolkata - WBPCB",0.8557,1238
+deletion,cnn_lstm,PM2.5,"Jadavpur, Kolkata - WBPCB",0.857,1238
+deletion,cnn_lstm,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8527,854
+deletion,cnn_lstm,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8597,854
+deletion,cnn_lstm,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9376,1006
+deletion,cnn_lstm,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.892,1006
+deletion,cnn_lstm,PM10,"Victoria, Kolkata - WBPCB",0.9345,232
+deletion,cnn_lstm,PM2.5,"Victoria, Kolkata - WBPCB",0.9052,232
+deletion,cnn_lstm,PM10,all stations,0.8828,5896
+deletion,cnn_lstm,PM2.5,all stations,0.8909,5896
+deletion,tft,PM10,"Ballygunge, Kolkata - WBPCB",0.8955,1365
+deletion,tft,PM2.5,"Ballygunge, Kolkata - WBPCB",0.92,1365
+deletion,tft,PM10,"Bidhannagar, Kolkata - WBPCB",0.8874,302
+deletion,tft,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8947,302
+deletion,tft,PM10,"Fort William, Kolkata - WBPCB",0.9379,899
+deletion,tft,PM2.5,"Fort William, Kolkata - WBPCB",0.9526,899
+deletion,tft,PM10,"Jadavpur, Kolkata - WBPCB",0.8415,1238
+deletion,tft,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8097,1238
+deletion,tft,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8506,854
+deletion,tft,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9094,854
+deletion,tft,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9453,1006
+deletion,tft,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9119,1006
+deletion,tft,PM10,"Victoria, Kolkata - WBPCB",0.8,232
+deletion,tft,PM2.5,"Victoria, Kolkata - WBPCB",0.8552,232
+deletion,tft,PM10,all stations,0.8885,5896
+deletion,tft,PM2.5,all stations,0.895,5896
+median,gru,PM10,"Ballygunge, Kolkata - WBPCB",0.8429,2651
+median,gru,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9304,2651
+median,gru,PM10,"Bidhannagar, Kolkata - WBPCB",0.9065,2403
+median,gru,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8818,2403
+median,gru,PM10,"Fort William, Kolkata - WBPCB",0.929,2491
+median,gru,PM2.5,"Fort William, Kolkata - WBPCB",0.9344,2491
+median,gru,PM10,"Jadavpur, Kolkata - WBPCB",0.8587,2732
+median,gru,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8619,2732
+median,gru,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8789,2461
+median,gru,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8979,2461
+median,gru,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9516,2767
+median,gru,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9384,2767
+median,gru,PM10,"Victoria, Kolkata - WBPCB",0.9167,2334
+median,gru,PM2.5,"Victoria, Kolkata - WBPCB",0.7313,2334
+median,gru,PM10,all stations,0.8974,17839
+median,gru,PM2.5,all stations,0.8846,17839
+median,lstm,PM10,"Ballygunge, Kolkata - WBPCB",0.8512,2651
+median,lstm,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9276,2651
+median,lstm,PM10,"Bidhannagar, Kolkata - WBPCB",0.8842,2403
+median,lstm,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8716,2403
+median,lstm,PM10,"Fort William, Kolkata - WBPCB",0.9145,2491
+median,lstm,PM2.5,"Fort William, Kolkata - WBPCB",0.9248,2491
+median,lstm,PM10,"Jadavpur, Kolkata - WBPCB",0.8403,2732
+median,lstm,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8245,2732
+median,lstm,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8779,2461
+median,lstm,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9015,2461
+median,lstm,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9495,2767
+median,lstm,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9401,2767
+median,lstm,PM10,"Victoria, Kolkata - WBPCB",0.8866,2334
+median,lstm,PM2.5,"Victoria, Kolkata - WBPCB",0.7056,2334
+median,lstm,PM10,all stations,0.8864,17839
+median,lstm,PM2.5,all stations,0.8731,17839
+median,cnn,PM10,"Ballygunge, Kolkata - WBPCB",0.8551,2651
+median,cnn,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9193,2651
+median,cnn,PM10,"Bidhannagar, Kolkata - WBPCB",0.8912,2403
+median,cnn,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8884,2403
+median,cnn,PM10,"Fort William, Kolkata - WBPCB",0.9114,2491
+median,cnn,PM2.5,"Fort William, Kolkata - WBPCB",0.9268,2491
+median,cnn,PM10,"Jadavpur, Kolkata - WBPCB",0.8675,2732
+median,cnn,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8832,2732
+median,cnn,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8115,2461
+median,cnn,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8662,2461
+median,cnn,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9454,2767
+median,cnn,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9363,2767
+median,cnn,PM10,"Victoria, Kolkata - WBPCB",0.881,2334
+median,cnn,PM2.5,"Victoria, Kolkata - WBPCB",0.7661,2334
+median,cnn,PM10,all stations,0.8811,17839
+median,cnn,PM2.5,all stations,0.8859,17839
+median,cnn_lstm,PM10,"Ballygunge, Kolkata - WBPCB",0.8714,2651
+median,cnn_lstm,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9258,2651
+median,cnn_lstm,PM10,"Bidhannagar, Kolkata - WBPCB",0.889,2403
+median,cnn_lstm,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8985,2403
+median,cnn_lstm,PM10,"Fort William, Kolkata - WBPCB",0.9187,2491
+median,cnn_lstm,PM2.5,"Fort William, Kolkata - WBPCB",0.9129,2491
+median,cnn_lstm,PM10,"Jadavpur, Kolkata - WBPCB",0.8122,2732
+median,cnn_lstm,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8052,2732
+median,cnn_lstm,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8744,2461
+median,cnn_lstm,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9035,2461
+median,cnn_lstm,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9502,2767
+median,cnn_lstm,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9469,2767
+median,cnn_lstm,PM10,"Victoria, Kolkata - WBPCB",0.8587,2334
+median,cnn_lstm,PM2.5,"Victoria, Kolkata - WBPCB",0.7,2334
+median,cnn_lstm,PM10,all stations,0.8823,17839
+median,cnn_lstm,PM2.5,all stations,0.8725,17839
+median,tft,PM10,"Ballygunge, Kolkata - WBPCB",0.8352,2651
+median,tft,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9181,2651
+median,tft,PM10,"Bidhannagar, Kolkata - WBPCB",0.9112,2403
+median,tft,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8869,2403
+median,tft,PM10,"Fort William, Kolkata - WBPCB",0.9265,2491
+median,tft,PM2.5,"Fort William, Kolkata - WBPCB",0.9497,2491
+median,tft,PM10,"Jadavpur, Kolkata - WBPCB",0.8804,2732
+median,tft,PM2.5,"Jadavpur, Kolkata - WBPCB",0.883,2732
+median,tft,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8525,2461
+median,tft,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8869,2461
+median,tft,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9527,2767
+median,tft,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9193,2767
+median,tft,PM10,"Victoria, Kolkata - WBPCB",0.8783,2334
+median,tft,PM2.5,"Victoria, Kolkata - WBPCB",0.8079,2334
+median,tft,PM10,all stations,0.8914,17839
+median,tft,PM2.5,all stations,0.8944,17839
+ffill,gru,PM10,"Ballygunge, Kolkata - WBPCB",0.84,2651
+ffill,gru,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9297,2651
+ffill,gru,PM10,"Bidhannagar, Kolkata - WBPCB",0.9029,2403
+ffill,gru,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.876,2403
+ffill,gru,PM10,"Fort William, Kolkata - WBPCB",0.926,2491
+ffill,gru,PM2.5,"Fort William, Kolkata - WBPCB",0.9305,2491
+ffill,gru,PM10,"Jadavpur, Kolkata - WBPCB",0.8538,2732
+ffill,gru,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8515,2732
+ffill,gru,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8714,2461
+ffill,gru,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9024,2461
+ffill,gru,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9591,2767
+ffill,gru,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9391,2767
+ffill,gru,PM10,"Victoria, Kolkata - WBPCB",0.916,2334
+ffill,gru,PM2.5,"Victoria, Kolkata - WBPCB",0.7276,2334
+ffill,gru,PM10,all stations,0.8953,17839
+ffill,gru,PM2.5,all stations,0.8818,17839
+ffill,lstm,PM10,"Ballygunge, Kolkata - WBPCB",0.8425,2651
+ffill,lstm,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9255,2651
+ffill,lstm,PM10,"Bidhannagar, Kolkata - WBPCB",0.8866,2403
+ffill,lstm,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8677,2403
+ffill,lstm,PM10,"Fort William, Kolkata - WBPCB",0.9193,2491
+ffill,lstm,PM2.5,"Fort William, Kolkata - WBPCB",0.9224,2491
+ffill,lstm,PM10,"Jadavpur, Kolkata - WBPCB",0.8484,2732
+ffill,lstm,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8365,2732
+ffill,lstm,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8792,2461
+ffill,lstm,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9026,2461
+ffill,lstm,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9585,2767
+ffill,lstm,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9412,2767
+ffill,lstm,PM10,"Victoria, Kolkata - WBPCB",0.8943,2334
+ffill,lstm,PM2.5,"Victoria, Kolkata - WBPCB",0.7035,2334
+ffill,lstm,PM10,all stations,0.8899,17839
+ffill,lstm,PM2.5,all stations,0.8739,17839
+ffill,cnn,PM10,"Ballygunge, Kolkata - WBPCB",0.845,2651
+ffill,cnn,PM2.5,"Ballygunge, Kolkata - WBPCB",0.921,2651
+ffill,cnn,PM10,"Bidhannagar, Kolkata - WBPCB",0.8949,2403
+ffill,cnn,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8858,2403
+ffill,cnn,PM10,"Fort William, Kolkata - WBPCB",0.9183,2491
+ffill,cnn,PM2.5,"Fort William, Kolkata - WBPCB",0.9358,2491
+ffill,cnn,PM10,"Jadavpur, Kolkata - WBPCB",0.8614,2732
+ffill,cnn,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8791,2732
+ffill,cnn,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8238,2461
+ffill,cnn,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8697,2461
+ffill,cnn,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9537,2767
+ffill,cnn,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9347,2767
+ffill,cnn,PM10,"Victoria, Kolkata - WBPCB",0.8879,2334
+ffill,cnn,PM2.5,"Victoria, Kolkata - WBPCB",0.8029,2334
+ffill,cnn,PM10,all stations,0.884,17839
+ffill,cnn,PM2.5,all stations,0.8915,17839
+ffill,cnn_lstm,PM10,"Ballygunge, Kolkata - WBPCB",0.8687,2651
+ffill,cnn_lstm,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9234,2651
+ffill,cnn_lstm,PM10,"Bidhannagar, Kolkata - WBPCB",0.8932,2403
+ffill,cnn_lstm,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8967,2403
+ffill,cnn_lstm,PM10,"Fort William, Kolkata - WBPCB",0.9157,2491
+ffill,cnn_lstm,PM2.5,"Fort William, Kolkata - WBPCB",0.9166,2491
+ffill,cnn_lstm,PM10,"Jadavpur, Kolkata - WBPCB",0.7989,2732
+ffill,cnn_lstm,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8057,2732
+ffill,cnn_lstm,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8725,2461
+ffill,cnn_lstm,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9035,2461
+ffill,cnn_lstm,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9514,2767
+ffill,cnn_lstm,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9503,2767
+ffill,cnn_lstm,PM10,"Victoria, Kolkata - WBPCB",0.8333,2334
+ffill,cnn_lstm,PM2.5,"Victoria, Kolkata - WBPCB",0.6989,2334
+ffill,cnn_lstm,PM10,all stations,0.8766,17839
+ffill,cnn_lstm,PM2.5,all stations,0.8729,17839
+ffill,tft,PM10,"Ballygunge, Kolkata - WBPCB",0.8612,2651
+ffill,tft,PM2.5,"Ballygunge, Kolkata - WBPCB",0.912,2651
+ffill,tft,PM10,"Bidhannagar, Kolkata - WBPCB",0.9044,2403
+ffill,tft,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8891,2403
+ffill,tft,PM10,"Fort William, Kolkata - WBPCB",0.9359,2491
+ffill,tft,PM2.5,"Fort William, Kolkata - WBPCB",0.9444,2491
+ffill,tft,PM10,"Jadavpur, Kolkata - WBPCB",0.85,2732
+ffill,tft,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8631,2732
+ffill,tft,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8742,2461
+ffill,tft,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8984,2461
+ffill,tft,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9544,2767
+ffill,tft,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9069,2767
+ffill,tft,PM10,"Victoria, Kolkata - WBPCB",0.8644,2334
+ffill,tft,PM2.5,"Victoria, Kolkata - WBPCB",0.8211,2334
+ffill,tft,PM10,all stations,0.8924,17839
+ffill,tft,PM2.5,all stations,0.8914,17839
+bfill,gru,PM10,"Ballygunge, Kolkata - WBPCB",0.8387,2651
+bfill,gru,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9286,2651
+bfill,gru,PM10,"Bidhannagar, Kolkata - WBPCB",0.8937,2403
+bfill,gru,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.882,2403
+bfill,gru,PM10,"Fort William, Kolkata - WBPCB",0.9183,2491
+bfill,gru,PM2.5,"Fort William, Kolkata - WBPCB",0.9174,2491
+bfill,gru,PM10,"Jadavpur, Kolkata - WBPCB",0.8369,2732
+bfill,gru,PM2.5,"Jadavpur, Kolkata - WBPCB",0.837,2732
+bfill,gru,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8797,2461
+bfill,gru,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9091,2461
+bfill,gru,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9441,2767
+bfill,gru,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9422,2767
+bfill,gru,PM10,"Victoria, Kolkata - WBPCB",0.9099,2334
+bfill,gru,PM2.5,"Victoria, Kolkata - WBPCB",0.702,2334
+bfill,gru,PM10,all stations,0.8883,17839
+bfill,gru,PM2.5,all stations,0.8765,17839
+bfill,lstm,PM10,"Ballygunge, Kolkata - WBPCB",0.8548,2651
+bfill,lstm,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9326,2651
+bfill,lstm,PM10,"Bidhannagar, Kolkata - WBPCB",0.9034,2403
+bfill,lstm,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8697,2403
+bfill,lstm,PM10,"Fort William, Kolkata - WBPCB",0.9312,2491
+bfill,lstm,PM2.5,"Fort William, Kolkata - WBPCB",0.9448,2491
+bfill,lstm,PM10,"Jadavpur, Kolkata - WBPCB",0.8661,2732
+bfill,lstm,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8889,2732
+bfill,lstm,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8757,2461
+bfill,lstm,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8843,2461
+bfill,lstm,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9532,2767
+bfill,lstm,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9334,2767
+bfill,lstm,PM10,"Victoria, Kolkata - WBPCB",0.9156,2334
+bfill,lstm,PM2.5,"Victoria, Kolkata - WBPCB",0.7811,2334
+bfill,lstm,PM10,all stations,0.8998,17839
+bfill,lstm,PM2.5,all stations,0.8928,17839
+bfill,cnn,PM10,"Ballygunge, Kolkata - WBPCB",0.8525,2651
+bfill,cnn,PM2.5,"Ballygunge, Kolkata - WBPCB",0.927,2651
+bfill,cnn,PM10,"Bidhannagar, Kolkata - WBPCB",0.8894,2403
+bfill,cnn,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8855,2403
+bfill,cnn,PM10,"Fort William, Kolkata - WBPCB",0.9158,2491
+bfill,cnn,PM2.5,"Fort William, Kolkata - WBPCB",0.9354,2491
+bfill,cnn,PM10,"Jadavpur, Kolkata - WBPCB",0.8657,2732
+bfill,cnn,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8793,2732
+bfill,cnn,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8227,2461
+bfill,cnn,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8731,2461
+bfill,cnn,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9548,2767
+bfill,cnn,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9331,2767
+bfill,cnn,PM10,"Victoria, Kolkata - WBPCB",0.8895,2334
+bfill,cnn,PM2.5,"Victoria, Kolkata - WBPCB",0.8033,2334
+bfill,cnn,PM10,all stations,0.8849,17839
+bfill,cnn,PM2.5,all stations,0.8926,17839
+bfill,cnn_lstm,PM10,"Ballygunge, Kolkata - WBPCB",0.8678,2651
+bfill,cnn_lstm,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9261,2651
+bfill,cnn_lstm,PM10,"Bidhannagar, Kolkata - WBPCB",0.8907,2403
+bfill,cnn_lstm,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.894,2403
+bfill,cnn_lstm,PM10,"Fort William, Kolkata - WBPCB",0.9179,2491
+bfill,cnn_lstm,PM2.5,"Fort William, Kolkata - WBPCB",0.9178,2491
+bfill,cnn_lstm,PM10,"Jadavpur, Kolkata - WBPCB",0.8143,2732
+bfill,cnn_lstm,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8197,2732
+bfill,cnn_lstm,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8688,2461
+bfill,cnn_lstm,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9019,2461
+bfill,cnn_lstm,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9443,2767
+bfill,cnn_lstm,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9455,2767
+bfill,cnn_lstm,PM10,"Victoria, Kolkata - WBPCB",0.8646,2334
+bfill,cnn_lstm,PM2.5,"Victoria, Kolkata - WBPCB",0.7321,2334
+bfill,cnn_lstm,PM10,all stations,0.8813,17839
+bfill,cnn_lstm,PM2.5,all stations,0.8786,17839
+bfill,tft,PM10,"Ballygunge, Kolkata - WBPCB",0.8662,2651
+bfill,tft,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9147,2651
+bfill,tft,PM10,"Bidhannagar, Kolkata - WBPCB",0.899,2403
+bfill,tft,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8949,2403
+bfill,tft,PM10,"Fort William, Kolkata - WBPCB",0.9288,2491
+bfill,tft,PM2.5,"Fort William, Kolkata - WBPCB",0.9395,2491
+bfill,tft,PM10,"Jadavpur, Kolkata - WBPCB",0.8511,2732
+bfill,tft,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8696,2732
+bfill,tft,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8878,2461
+bfill,tft,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9042,2461
+bfill,tft,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9508,2767
+bfill,tft,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9135,2767
+bfill,tft,PM10,"Victoria, Kolkata - WBPCB",0.8684,2334
+bfill,tft,PM2.5,"Victoria, Kolkata - WBPCB",0.8254,2334
+bfill,tft,PM10,all stations,0.8934,17839
+bfill,tft,PM2.5,all stations,0.8953,17839
+knn,gru,PM10,"Ballygunge, Kolkata - WBPCB",0.8457,2651
+knn,gru,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9313,2651
+knn,gru,PM10,"Bidhannagar, Kolkata - WBPCB",0.9079,2403
+knn,gru,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8863,2403
+knn,gru,PM10,"Fort William, Kolkata - WBPCB",0.9285,2491
+knn,gru,PM2.5,"Fort William, Kolkata - WBPCB",0.9366,2491
+knn,gru,PM10,"Jadavpur, Kolkata - WBPCB",0.8499,2732
+knn,gru,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8611,2732
+knn,gru,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8792,2461
+knn,gru,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9035,2461
+knn,gru,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9498,2767
+knn,gru,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9368,2767
+knn,gru,PM10,"Victoria, Kolkata - WBPCB",0.9186,2334
+knn,gru,PM2.5,"Victoria, Kolkata - WBPCB",0.7439,2334
+knn,gru,PM10,all stations,0.8966,17839
+knn,gru,PM2.5,all stations,0.8877,17839
+knn,lstm,PM10,"Ballygunge, Kolkata - WBPCB",0.8516,2651
+knn,lstm,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9273,2651
+knn,lstm,PM10,"Bidhannagar, Kolkata - WBPCB",0.8824,2403
+knn,lstm,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8747,2403
+knn,lstm,PM10,"Fort William, Kolkata - WBPCB",0.9162,2491
+knn,lstm,PM2.5,"Fort William, Kolkata - WBPCB",0.9258,2491
+knn,lstm,PM10,"Jadavpur, Kolkata - WBPCB",0.8428,2732
+knn,lstm,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8369,2732
+knn,lstm,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8784,2461
+knn,lstm,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9014,2461
+knn,lstm,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9519,2767
+knn,lstm,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9375,2767
+knn,lstm,PM10,"Victoria, Kolkata - WBPCB",0.8893,2334
+knn,lstm,PM2.5,"Victoria, Kolkata - WBPCB",0.7052,2334
+knn,lstm,PM10,all stations,0.8876,17839
+knn,lstm,PM2.5,all stations,0.8751,17839
+knn,cnn,PM10,"Ballygunge, Kolkata - WBPCB",0.8539,2651
+knn,cnn,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9272,2651
+knn,cnn,PM10,"Bidhannagar, Kolkata - WBPCB",0.8937,2403
+knn,cnn,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.896,2403
+knn,cnn,PM10,"Fort William, Kolkata - WBPCB",0.9162,2491
+knn,cnn,PM2.5,"Fort William, Kolkata - WBPCB",0.9355,2491
+knn,cnn,PM10,"Jadavpur, Kolkata - WBPCB",0.851,2732
+knn,cnn,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8572,2732
+knn,cnn,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8254,2461
+knn,cnn,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8768,2461
+knn,cnn,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9555,2767
+knn,cnn,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.937,2767
+knn,cnn,PM10,"Victoria, Kolkata - WBPCB",0.8858,2334
+knn,cnn,PM2.5,"Victoria, Kolkata - WBPCB",0.794,2334
+knn,cnn,PM10,all stations,0.8835,17839
+knn,cnn,PM2.5,all stations,0.8906,17839
+knn,cnn_lstm,PM10,"Ballygunge, Kolkata - WBPCB",0.8674,2651
+knn,cnn_lstm,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9228,2651
+knn,cnn_lstm,PM10,"Bidhannagar, Kolkata - WBPCB",0.8885,2403
+knn,cnn_lstm,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8981,2403
+knn,cnn_lstm,PM10,"Fort William, Kolkata - WBPCB",0.9221,2491
+knn,cnn_lstm,PM2.5,"Fort William, Kolkata - WBPCB",0.9253,2491
+knn,cnn_lstm,PM10,"Jadavpur, Kolkata - WBPCB",0.8089,2732
+knn,cnn_lstm,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8133,2732
+knn,cnn_lstm,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8762,2461
+knn,cnn_lstm,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9021,2461
+knn,cnn_lstm,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9495,2767
+knn,cnn_lstm,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9486,2767
+knn,cnn_lstm,PM10,"Victoria, Kolkata - WBPCB",0.8639,2334
+knn,cnn_lstm,PM2.5,"Victoria, Kolkata - WBPCB",0.7347,2334
+knn,cnn_lstm,PM10,all stations,0.8824,17839
+knn,cnn_lstm,PM2.5,all stations,0.8796,17839
+knn,tft,PM10,"Ballygunge, Kolkata - WBPCB",0.8589,2651
+knn,tft,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9137,2651
+knn,tft,PM10,"Bidhannagar, Kolkata - WBPCB",0.8993,2403
+knn,tft,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8879,2403
+knn,tft,PM10,"Fort William, Kolkata - WBPCB",0.9346,2491
+knn,tft,PM2.5,"Fort William, Kolkata - WBPCB",0.9481,2491
+knn,tft,PM10,"Jadavpur, Kolkata - WBPCB",0.8616,2732
+knn,tft,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8601,2732
+knn,tft,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8779,2461
+knn,tft,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9007,2461
+knn,tft,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9524,2767
+knn,tft,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9188,2767
+knn,tft,PM10,"Victoria, Kolkata - WBPCB",0.8584,2334
+knn,tft,PM2.5,"Victoria, Kolkata - WBPCB",0.8112,2334
+knn,tft,PM10,all stations,0.8924,17839
+knn,tft,PM2.5,all stations,0.8924,17839
+mice,gru,PM10,"Ballygunge, Kolkata - WBPCB",0.8414,2651
+mice,gru,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9294,2651
+mice,gru,PM10,"Bidhannagar, Kolkata - WBPCB",0.9076,2403
+mice,gru,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8821,2403
+mice,gru,PM10,"Fort William, Kolkata - WBPCB",0.9314,2491
+mice,gru,PM2.5,"Fort William, Kolkata - WBPCB",0.9335,2491
+mice,gru,PM10,"Jadavpur, Kolkata - WBPCB",0.8538,2732
+mice,gru,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8513,2732
+mice,gru,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8741,2461
+mice,gru,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8991,2461
+mice,gru,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9533,2767
+mice,gru,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9402,2767
+mice,gru,PM10,"Victoria, Kolkata - WBPCB",0.9181,2334
+mice,gru,PM2.5,"Victoria, Kolkata - WBPCB",0.7264,2334
+mice,gru,PM10,all stations,0.8967,17839
+mice,gru,PM2.5,all stations,0.8826,17839
+mice,lstm,PM10,"Ballygunge, Kolkata - WBPCB",0.8466,2651
+mice,lstm,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9271,2651
+mice,lstm,PM10,"Bidhannagar, Kolkata - WBPCB",0.884,2403
+mice,lstm,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8703,2403
+mice,lstm,PM10,"Fort William, Kolkata - WBPCB",0.9212,2491
+mice,lstm,PM2.5,"Fort William, Kolkata - WBPCB",0.9269,2491
+mice,lstm,PM10,"Jadavpur, Kolkata - WBPCB",0.8418,2732
+mice,lstm,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8242,2732
+mice,lstm,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8757,2461
+mice,lstm,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9,2461
+mice,lstm,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9531,2767
+mice,lstm,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9394,2767
+mice,lstm,PM10,"Victoria, Kolkata - WBPCB",0.8988,2334
+mice,lstm,PM2.5,"Victoria, Kolkata - WBPCB",0.7123,2334
+mice,lstm,PM10,all stations,0.8887,17839
+mice,lstm,PM2.5,all stations,0.8737,17839
+mice,cnn,PM10,"Ballygunge, Kolkata - WBPCB",0.8482,2651
+mice,cnn,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9197,2651
+mice,cnn,PM10,"Bidhannagar, Kolkata - WBPCB",0.8929,2403
+mice,cnn,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8911,2403
+mice,cnn,PM10,"Fort William, Kolkata - WBPCB",0.9216,2491
+mice,cnn,PM2.5,"Fort William, Kolkata - WBPCB",0.933,2491
+mice,cnn,PM10,"Jadavpur, Kolkata - WBPCB",0.8562,2732
+mice,cnn,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8814,2732
+mice,cnn,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8341,2461
+mice,cnn,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.8727,2461
+mice,cnn,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9553,2767
+mice,cnn,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9385,2767
+mice,cnn,PM10,"Victoria, Kolkata - WBPCB",0.8917,2334
+mice,cnn,PM2.5,"Victoria, Kolkata - WBPCB",0.8025,2334
+mice,cnn,PM10,all stations,0.886,17839
+mice,cnn,PM2.5,all stations,0.8929,17839
+mice,cnn_lstm,PM10,"Ballygunge, Kolkata - WBPCB",0.8689,2651
+mice,cnn_lstm,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9264,2651
+mice,cnn_lstm,PM10,"Bidhannagar, Kolkata - WBPCB",0.8923,2403
+mice,cnn_lstm,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8943,2403
+mice,cnn_lstm,PM10,"Fort William, Kolkata - WBPCB",0.9232,2491
+mice,cnn_lstm,PM2.5,"Fort William, Kolkata - WBPCB",0.9257,2491
+mice,cnn_lstm,PM10,"Jadavpur, Kolkata - WBPCB",0.8005,2732
+mice,cnn_lstm,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8178,2732
+mice,cnn_lstm,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8729,2461
+mice,cnn_lstm,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9032,2461
+mice,cnn_lstm,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9509,2767
+mice,cnn_lstm,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9472,2767
+mice,cnn_lstm,PM10,"Victoria, Kolkata - WBPCB",0.8552,2334
+mice,cnn_lstm,PM2.5,"Victoria, Kolkata - WBPCB",0.7319,2334
+mice,cnn_lstm,PM10,all stations,0.8806,17839
+mice,cnn_lstm,PM2.5,all stations,0.8799,17839
+mice,tft,PM10,"Ballygunge, Kolkata - WBPCB",0.8783,2651
+mice,tft,PM2.5,"Ballygunge, Kolkata - WBPCB",0.9206,2651
+mice,tft,PM10,"Bidhannagar, Kolkata - WBPCB",0.9013,2403
+mice,tft,PM2.5,"Bidhannagar, Kolkata - WBPCB",0.8984,2403
+mice,tft,PM10,"Fort William, Kolkata - WBPCB",0.9338,2491
+mice,tft,PM2.5,"Fort William, Kolkata - WBPCB",0.9477,2491
+mice,tft,PM10,"Jadavpur, Kolkata - WBPCB",0.8469,2732
+mice,tft,PM2.5,"Jadavpur, Kolkata - WBPCB",0.8566,2732
+mice,tft,PM10,"Rabindra Bharati University, Kolkata - WBPCB",0.8763,2461
+mice,tft,PM2.5,"Rabindra Bharati University, Kolkata - WBPCB",0.9069,2461
+mice,tft,PM10,"Rabindra Sarobar, Kolkata - WBPCB",0.9557,2767
+mice,tft,PM2.5,"Rabindra Sarobar, Kolkata - WBPCB",0.9186,2767
+mice,tft,PM10,"Victoria, Kolkata - WBPCB",0.8683,2334
+mice,tft,PM2.5,"Victoria, Kolkata - WBPCB",0.8195,2334
+mice,tft,PM10,all stations,0.8948,17839
+mice,tft,PM2.5,all stations,0.8961,17839

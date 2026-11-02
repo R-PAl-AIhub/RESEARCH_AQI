@@ -1,0 +1,934 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0;font-size:14px}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Kolkata PM Pipeline</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;600;700&display=swap">
+<style>
+  /* Layout: one vertical flow, trunk in the centre, Worker B and Worker C as two lanes that rejoin at the decision */
+  :root {
+    --bg: #f4f6f8; --fg: #17202b; --muted: #5b6676; --line: #c4ccd6; --surface: #ffffff;
+    --y23: #2559c4; --y24: #a5560f; --y25: #7a3bb0;
+    --green: #2c8552; --green-bg: #e3f2e8; --yellow: #9a6d00; --yellow-bg: #fbf1d4; --red: #b8372a; --red-bg: #f8e1de;
+    --new: #0f7a6c; --new-bg: #ddf3ef; --stale: #8a5a00; --stale-bg: #fbefd9; --link: #1f5fbf; --chip: #eef1f5;
+    --sans: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #12171e; --fg: #e4e9ef; --muted: #98a3b2; --line: #3a4553; --surface: #1b222b;
+    --y23: #7ea6f2; --y24: #e3a061; --y25: #c49af0;
+    --green: #6cc58f; --green-bg: #1d3226; --yellow: #e6c25a; --yellow-bg: #362d14; --red: #f08a7e; --red-bg: #3a1f1c;
+    --new: #5fd0bf; --new-bg: #15332f; --stale: #e6b860; --stale-bg: #33280f; --link: #8db8f5; --chip: #252e39;
+    color-scheme: dark } }
+  :root[data-theme="dark"] {
+    --bg: #12171e; --fg: #e4e9ef; --muted: #98a3b2; --line: #3a4553; --surface: #1b222b;
+    --y23: #7ea6f2; --y24: #e3a061; --y25: #c49af0;
+    --green: #6cc58f; --green-bg: #1d3226; --yellow: #e6c25a; --yellow-bg: #362d14; --red: #f08a7e; --red-bg: #3a1f1c;
+    --new: #5fd0bf; --new-bg: #15332f; --stale: #e6b860; --stale-bg: #33280f; --link: #8db8f5; --chip: #252e39;
+    color-scheme: dark }
+
+  body { background: var(--bg); color: var(--fg); font-family: var(--sans); line-height: 1.5; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding-inline: 16px; padding-block: 28px 48px; display: grid; gap: 22px; }
+  header { display: grid; gap: 6px; max-width: 70ch; }
+  h1 { font-size: clamp(1.5rem, 3vw, 2rem); margin: 0; text-wrap: balance; letter-spacing: -0.01em; }
+  .lede { margin: 0; color: var(--muted); }
+  .eyebrow { font-family: var(--mono); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0; }
+
+  .changes { border: 1px solid var(--new); background: var(--new-bg); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; }
+  .changes h2 { margin: 0; font-size: 15px; color: var(--new); }
+  .changes ul { margin: 0; padding-left: 18px; display: grid; gap: 2px; }
+
+  .bar { display: flex; flex-wrap: wrap; gap: 10px 22px; align-items: center; justify-content: space-between; }
+  .years { display: flex; flex-wrap: wrap; gap: 10px 22px; font-size: 13px; }
+  .years span { display: inline-flex; align-items: center; gap: 8px; }
+  .dot { width: 12px; height: 12px; border-radius: 3px; display: inline-block; }
+  .picker { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+  .picker select { font: inherit; padding: 4px 8px; border: 1px solid var(--line); border-radius: 6px; background: var(--surface); color: var(--fg); }
+
+  figure { margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 12px; overflow-x: auto; }
+  figure svg { display: block; width: 100%; min-width: 760px; height: auto; color: var(--muted); }
+  figcaption { font-size: 13px; color: var(--muted); padding: 10px 6px 2px; max-width: 80ch; }
+
+  .box { fill: var(--surface); stroke: var(--line); stroke-width: 1.2; }
+  .box-strong { fill: var(--bg); stroke: var(--fg); stroke-width: 1.2; }
+  .box-new { fill: var(--surface); stroke: var(--new); stroke-width: 2.2; }
+  .t { fill: var(--fg); font-family: var(--sans); font-size: 14px; font-weight: 600; }
+  .s { fill: var(--muted); font-family: var(--sans); font-size: 12px; }
+  .s.chg { fill: var(--new); font-weight: 600; }
+  .lab { fill: var(--muted); font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; }
+  .part { fill: var(--fg); font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.08em; }
+  .edge { fill: none; stroke: currentColor; stroke-width: 1.4; }
+  .edge-d { fill: none; stroke: currentColor; stroke-width: 1.4; stroke-dasharray: 5 4; }
+  .sep { stroke: var(--line); stroke-width: 1; stroke-dasharray: 3 3; }
+  .y23 { fill: var(--y23); font-weight: 600; } .y24 { fill: var(--y24); font-weight: 600; } .y25 { fill: var(--y25); font-weight: 600; }
+  .g-box { fill: var(--green-bg); stroke: var(--green); } .y-box { fill: var(--yellow-bg); stroke: var(--yellow); } .r-box { fill: var(--red-bg); stroke: var(--red); }
+  .g-t { fill: var(--green); } .y-t { fill: var(--yellow); } .r-t { fill: var(--red); }
+  .badge-new { fill: var(--new-bg); stroke: var(--new); } .badget-new { fill: var(--new); font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.05em; }
+  .badge-stale { fill: var(--stale-bg); stroke: var(--stale); } .badget-stale { fill: var(--stale); font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.05em; }
+  .chip { fill: var(--chip); }
+  .chipk { fill: var(--muted); font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.05em; }
+  .chipt { fill: var(--link); font-family: var(--mono); font-size: 11px; }
+  a.f { cursor: pointer; }
+  a.f:hover .chipt, a.f:focus .chipt { text-decoration: underline; }
+  a.f:hover .chip, a.f:focus .chip { stroke: var(--link); stroke-width: 1; }
+
+  .settings { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px 24px; margin: 0; }
+  .settings div { display: grid; gap: 2px; border-top: 1px solid var(--line); padding-top: 8px; min-width: 0; }
+  .settings dt { font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+  .settings dd { margin: 0; font-size: 14px; font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <p class="eyebrow">PROJECT_2 · methodology</p>
+    <h1>Kolkata PM2.5 and PM10 forecast with a reliability layer</h1>
+    <p class="lede">From raw CPCB station files to a forecast that says how sure it is: a range for every hour, a Green / Yellow / Red trust flag, and a final test on the smoggiest hours of 2025.</p>
+  </header>
+
+  <div class="bar">
+    <div class="years" aria-label="Year colours">
+      <span><i class="dot" style="background: var(--y23)"></i>2023–2024 · train: models and shapes are fitted here</span>
+      <span><i class="dot" style="background: var(--muted)"></i>Jan–Apr 2025 · validation: stops training</span>
+      <span><i class="dot" style="background: var(--y24)"></i>May–Aug 2025 · calibration: cut-offs and range widths</span>
+      <span><i class="dot" style="background: var(--y25)"></i>Sep–Dec 2025 · test: Part 7 only</span>
+    </div>
+    <label class="picker" for="method">Imputation
+      <select id="method">
+        <option value="deletion">deletion</option>
+        <option value="median">median</option>
+        <option value="ffill">forward fill</option>
+        <option value="bfill">back fill</option>
+        <option value="knn">KNN</option>
+        <option value="mice">MICE</option>
+      </select>
+    </label>
+    <label class="picker" for="model">Model
+      <select id="model">
+        <option value="gru">GRU</option>
+        <option value="lstm">LSTM</option>
+        <option value="cnn">1D CNN</option>
+        <option value="cnn_lstm">CNN + LSTM</option>
+        <option value="tft">TFT</option>
+      </select>
+    </label>
+  </div>
+
+  <figure>
+<svg viewBox="0 0 1000 3399" role="img" aria-label="Flowchart of the PROJECT_2 pipeline from raw CPCB files to the 2025 evaluation, with bullet notes and file links in every box.">
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0 L10 5 L0 10 z" fill="currentColor"/></marker></defs>
+<text class="part" x="24" y="56">PART 2</text><text class="lab" x="24" y="72">prepare data</text>
+<text class="part" x="24" y="638">PART 3</text><text class="lab" x="24" y="654">split + inputs</text>
+<text class="part" x="24" y="1273">PART 4</text><text class="lab" x="24" y="1289">forecast</text>
+<text class="part" x="24" y="1782">PART 5–6</text><text class="lab" x="24" y="1798">checks</text>
+<text class="part" x="24" y="2882">PART 7</text><text class="lab" x="24" y="2898">decide + test</text>
+<path class="edge" d="M500 137 V163" marker-end="url(#arrow)"/>
+<path class="edge" d="M500 308 V334" marker-end="url(#arrow)"/>
+<path class="edge" d="M500 568 V608" marker-end="url(#arrow)"/>
+<path class="edge" d="M500 738 V764" marker-end="url(#arrow)"/>
+<path class="edge" d="M500 960 V986" marker-end="url(#arrow)"/>
+<path class="edge" d="M500 1199 V1243" marker-end="url(#arrow)"/>
+<path class="edge" d="M500 1470 V1492 H290 V1512" marker-end="url(#arrow)"/>
+<path class="edge" d="M500 1492 H710 V1512" marker-end="url(#arrow)"/>
+<path class="edge" d="M450 1546 H546" marker-end="url(#arrow)"/>
+<text class="lab" x="498" y="1537" text-anchor="middle">only path</text>
+<path class="edge" d="M290 1698 V1718"/><path class="edge" d="M290 1740 V1752" marker-end="url(#arrow)"/>
+<path class="edge" d="M710 1698 V1718"/><path class="edge" d="M710 1740 V1752" marker-end="url(#arrow)"/>
+<path class="edge" d="M290 1972 V1986" marker-end="url(#arrow)"/>
+<path class="edge" d="M290 2182 V2196" marker-end="url(#arrow)"/>
+<path class="edge" d="M290 2399 V2413" marker-end="url(#arrow)"/>
+<path class="edge" d="M290 2541 V2555" marker-end="url(#arrow)"/>
+<path class="edge" d="M720 1848 V1862" marker-end="url(#arrow)"/>
+<path class="edge" d="M720 1941 V1955" marker-end="url(#arrow)"/>
+<path class="edge" d="M290 2806 V2852" marker-end="url(#arrow)"/>
+<text class="lab" x="300" y="2842">colour</text>
+<path class="edge" d="M720 2119 V2852" marker-end="url(#arrow)"/>
+<text class="lab" x="730" y="2842">range</text>
+<path class="edge-d" d="M220 1020 H96 V2230 H116" marker-end="url(#arrow)"/>
+<text class="lab" transform="translate(110 1610) rotate(-90)" text-anchor="middle">latest hour, 32 raw columns</text>
+<path class="edge" d="M500 3048 V3066 H308 V3078" marker-end="url(#arrow)"/>
+<path class="edge" d="M500 3066 V3078" marker-end="url(#arrow)"/>
+<path class="edge" d="M500 3066 H692 V3078" marker-end="url(#arrow)"/>
+<path class="edge" d="M308 3157 V3177 H500"/><path class="edge" d="M692 3157 V3177 H500"/>
+<path class="edge" d="M500 3157 V3193" marker-end="url(#arrow)"/>
+<rect class="box" x="220" y="30" width="560" height="107" rx="6"/>
+<text class="t" x="238" y="53">Raw CPCB hourly files</text>
+<text class="s" x="238" y="76">•</text>
+<text class="s" x="250" y="76">7 Kolkata stations, 2023–2025, 21 Excel files, 19 parameters</text>
+<text class="s" x="238" y="93">•</text>
+<text class="s" x="250" y="93">The Kolkata/ folder is read only and never changed</text>
+<line class="sep" x1="236" x2="764" y1="105" y2="105"/>
+<a class="f" href="../Kolkata/" target="_blank"><rect class="chip" x="236" y="113" width="93" height="18" rx="4"/><text class="chipk" x="243" y="126">DIR</text><text class="chipt" x="264" y="126">Kolkata/</text></a>
+<rect class="box" x="220" y="167" width="560" height="141" rx="6"/>
+<text class="t" x="238" y="190">2.1–2.2 Read every file onto one hourly grid</text>
+<text class="s" x="238" y="213">•</text>
+<text class="s" x="250" y="213">2.1 reads one file as a test (Ballygunge 2025: 7,388 rows)</text>
+<text class="s" x="238" y="230">•</text>
+<text class="s" x="250" y="230">2.2 reads all 21 files: 179,559 raw rows, 0 duplicates</text>
+<text class="s" x="238" y="247">•</text>
+<text class="s" x="250" y="247">Full hourly clock: 26,304 h per station → 184,128 rows</text>
+<text class="s" x="238" y="264">•</text>
+<text class="s" x="250" y="264">row_present = 1 if the hour was in the raw file</text>
+<line class="sep" x1="236" x2="764" y1="276" y2="276"/>
+<a class="f" href="../data/processed/cpcb_hourly.csv" target="_blank"><rect class="chip" x="236" y="284" width="113" height="18" rx="4"/><text class="chipk" x="243" y="297">CSV</text><text class="chipt" x="264" y="297">cpcb_hourly</text></a>
+<rect class="box" x="220" y="338" width="560" height="230" rx="6"/>
+<text class="t" x="238" y="361">2.3–2.5 Quality checks: count and mark, never change</text>
+<text class="s" x="238" y="384">•</text>
+<text class="s" x="250" y="384">2.3 availability: % of hours with a value per station, year, column; hours chart</text>
+<text class="s" x="250" y="401">for all 17 kept columns</text>
+<text class="s" x="238" y="418">•</text>
+<text class="s" x="250" y="418">2.4 stuck PM (same value ≥ 12 h): stuck_pm25 1,930 h, stuck_pm10 539 h</text>
+<text class="s" x="238" y="435">•</text>
+<text class="s" x="250" y="435">Dropped only XYLENE, MP-Xylene</text>
+<text class="s" x="238" y="452">•</text>
+<text class="s" x="250" y="452">Output: cpcb_clean.csv, 184,128 × 21 (row_present removed)</text>
+<line class="sep" x1="236" x2="764" y1="464" y2="464"/>
+<a class="f" href="../figures/availability_targets.png" target="_blank"><rect class="chip" x="236" y="472" width="174" height="18" rx="4"/><text class="chipk" x="243" y="485">PNG</text><text class="chipt" x="264" y="485">availability_targets</text></a>
+<a class="f" href="../figures/availability.csv" target="_blank"><rect class="chip" x="416" y="472" width="120" height="18" rx="4"/><text class="chipk" x="423" y="485">CSV</text><text class="chipt" x="443" y="485">availability</text></a>
+<a class="f" href="../figures/availability_all.png" target="_blank"><rect class="chip" x="541" y="472" width="147" height="18" rx="4"/><text class="chipk" x="548" y="485">PNG</text><text class="chipt" x="569" y="485">availability_all</text></a>
+<a class="f" href="../figures/availability_all_hours.csv" target="_blank"><rect class="chip" x="236" y="496" width="187" height="18" rx="4"/><text class="chipk" x="243" y="509">CSV</text><text class="chipt" x="264" y="509">availability_all_hours</text></a>
+<a class="f" href="../figures/missing_table.png" target="_blank"><rect class="chip" x="429" y="496" width="126" height="18" rx="4"/><text class="chipk" x="436" y="509">PNG</text><text class="chipt" x="457" y="509">missing_table</text></a>
+<a class="f" href="../figures/missing_table.csv" target="_blank"><rect class="chip" x="561" y="496" width="126" height="18" rx="4"/><text class="chipk" x="568" y="509">CSV</text><text class="chipt" x="589" y="509">missing_table</text></a>
+<a class="f" href="../figures/missing_table_station.csv" target="_blank"><rect class="chip" x="236" y="520" width="167" height="18" rx="4"/><text class="chipk" x="243" y="533">CSV</text><text class="chipt" x="264" y="533">missing per station</text></a>
+<a class="f" href="../figures/flag_check.png" target="_blank"><rect class="chip" x="409" y="520" width="106" height="18" rx="4"/><text class="chipk" x="416" y="533">PNG</text><text class="chipt" x="436" y="533">flag_check</text></a>
+<a class="f" href="../figures/flat_runs.csv" target="_blank"><rect class="chip" x="521" y="520" width="99" height="18" rx="4"/><text class="chipk" x="528" y="533">CSV</text><text class="chipt" x="549" y="533">flat_runs</text></a>
+<a class="f" href="../figures/flag_counts.csv" target="_blank"><rect class="chip" x="626" y="520" width="113" height="18" rx="4"/><text class="chipk" x="633" y="533">CSV</text><text class="chipt" x="654" y="533">flag_counts</text></a>
+<a class="f" href="../data/processed/cpcb_clean.csv" target="_blank"><rect class="chip" x="236" y="544" width="106" height="18" rx="4"/><text class="chipk" x="243" y="557">CSV</text><text class="chipt" x="264" y="557">cpcb_clean</text></a>
+<rect class="box" x="220" y="612" width="560" height="126" rx="6"/>
+<text class="t" x="238" y="635">3.1 Split by time (chronological, not random)</text>
+<text class="s" x="238" y="658">•</text>
+<text class="s" x="250" y="658">Train: all of 2023 and 2024 (730 days, 67.7% of hours)</text>
+<text class="s" x="238" y="675">•</text>
+<text class="s" x="250" y="675">Validation: Jan–Apr 2025 (11.2%), used to stop training</text>
+<text class="s" x="238" y="692">•</text>
+<text class="s" x="250" y="692">Calibration: May–Aug 2025 (9.9%), sets range widths and cut-offs</text>
+<text class="s" x="238" y="709">•</text>
+<text class="s" x="250" y="709">Test: Sep–Dec 2025 (11.3%), where the adaptive range runs</text>
+<text class="s" x="238" y="726">•</text>
+<text class="s" x="250" y="726">d = 12: largest that passes in every season (post-monsoon, 122 days)</text>
+<rect class="box" x="220" y="768" width="560" height="192" rx="6"/>
+<text class="t" x="238" y="791">3.2 Build features</text>
+<text class="s" x="238" y="814">•</text>
+<text class="s v" data-k="deletion|gru" x="250" y="814">Deletion: nothing is filled; a window with any empty input cell is dropped</text>
+<text class="s v" data-k="deletion|lstm" x="250" y="814">Deletion: nothing is filled; a window with any empty input cell is dropped</text>
+<text class="s v" data-k="deletion|cnn" x="250" y="814">Deletion: nothing is filled; a window with any empty input cell is dropped</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="250" y="814">Deletion: nothing is filled; a window with any empty input cell is dropped</text>
+<text class="s v" data-k="deletion|tft" x="250" y="814">Deletion: nothing is filled; a window with any empty input cell is dropped</text>
+<text class="s v" data-k="median|gru" x="250" y="814">Median: an empty input cell gets the train median of its column at that station</text>
+<text class="s v" data-k="median|lstm" x="250" y="814">Median: an empty input cell gets the train median of its column at that station</text>
+<text class="s v" data-k="median|cnn" x="250" y="814">Median: an empty input cell gets the train median of its column at that station</text>
+<text class="s v" data-k="median|cnn_lstm" x="250" y="814">Median: an empty input cell gets the train median of its column at that station</text>
+<text class="s v" data-k="median|tft" x="250" y="814">Median: an empty input cell gets the train median of its column at that station</text>
+<text class="s v" data-k="ffill|gru" x="250" y="814">Forward fill: an empty input cell gets the last earlier value of the station (no</text>
+<text class="s v" data-k="ffill|lstm" x="250" y="814">Forward fill: an empty input cell gets the last earlier value of the station (no</text>
+<text class="s v" data-k="ffill|cnn" x="250" y="814">Forward fill: an empty input cell gets the last earlier value of the station (no</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="250" y="814">Forward fill: an empty input cell gets the last earlier value of the station (no</text>
+<text class="s v" data-k="ffill|tft" x="250" y="814">Forward fill: an empty input cell gets the last earlier value of the station (no</text>
+<text class="s v" data-k="bfill|gru" x="250" y="814">Back fill: an empty input cell gets the next later value of the station (no time</text>
+<text class="s v" data-k="bfill|lstm" x="250" y="814">Back fill: an empty input cell gets the next later value of the station (no time</text>
+<text class="s v" data-k="bfill|cnn" x="250" y="814">Back fill: an empty input cell gets the next later value of the station (no time</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="250" y="814">Back fill: an empty input cell gets the next later value of the station (no time</text>
+<text class="s v" data-k="bfill|tft" x="250" y="814">Back fill: an empty input cell gets the next later value of the station (no time</text>
+<text class="s v" data-k="knn|gru" x="250" y="814">KNN: an empty input cell gets the mean of the 5 most similar train hours (same</text>
+<text class="s v" data-k="knn|lstm" x="250" y="814">KNN: an empty input cell gets the mean of the 5 most similar train hours (same</text>
+<text class="s v" data-k="knn|cnn" x="250" y="814">KNN: an empty input cell gets the mean of the 5 most similar train hours (same</text>
+<text class="s v" data-k="knn|cnn_lstm" x="250" y="814">KNN: an empty input cell gets the mean of the 5 most similar train hours (same</text>
+<text class="s v" data-k="knn|tft" x="250" y="814">KNN: an empty input cell gets the mean of the 5 most similar train hours (same</text>
+<text class="s v" data-k="mice|gru" x="250" y="814">MICE: each column is predicted from the other columns, repeated 10 times (fitted</text>
+<text class="s v" data-k="mice|lstm" x="250" y="814">MICE: each column is predicted from the other columns, repeated 10 times (fitted</text>
+<text class="s v" data-k="mice|cnn" x="250" y="814">MICE: each column is predicted from the other columns, repeated 10 times (fitted</text>
+<text class="s v" data-k="mice|cnn_lstm" x="250" y="814">MICE: each column is predicted from the other columns, repeated 10 times (fitted</text>
+<text class="s v" data-k="mice|tft" x="250" y="814">MICE: each column is predicted from the other columns, repeated 10 times (fitted</text>
+<text class="s v" data-k="deletion|gru" x="250" y="831"></text>
+<text class="s v" data-k="deletion|lstm" x="250" y="831"></text>
+<text class="s v" data-k="deletion|cnn" x="250" y="831"></text>
+<text class="s v" data-k="deletion|cnn_lstm" x="250" y="831"></text>
+<text class="s v" data-k="deletion|tft" x="250" y="831"></text>
+<text class="s v" data-k="median|gru" x="250" y="831"></text>
+<text class="s v" data-k="median|lstm" x="250" y="831"></text>
+<text class="s v" data-k="median|cnn" x="250" y="831"></text>
+<text class="s v" data-k="median|cnn_lstm" x="250" y="831"></text>
+<text class="s v" data-k="median|tft" x="250" y="831"></text>
+<text class="s v" data-k="ffill|gru" x="250" y="831">time limit)</text>
+<text class="s v" data-k="ffill|lstm" x="250" y="831">time limit)</text>
+<text class="s v" data-k="ffill|cnn" x="250" y="831">time limit)</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="250" y="831">time limit)</text>
+<text class="s v" data-k="ffill|tft" x="250" y="831">time limit)</text>
+<text class="s v" data-k="bfill|gru" x="250" y="831">limit)</text>
+<text class="s v" data-k="bfill|lstm" x="250" y="831">limit)</text>
+<text class="s v" data-k="bfill|cnn" x="250" y="831">limit)</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="250" y="831">limit)</text>
+<text class="s v" data-k="bfill|tft" x="250" y="831">limit)</text>
+<text class="s v" data-k="knn|gru" x="250" y="831">hour, other columns)</text>
+<text class="s v" data-k="knn|lstm" x="250" y="831">hour, other columns)</text>
+<text class="s v" data-k="knn|cnn" x="250" y="831">hour, other columns)</text>
+<text class="s v" data-k="knn|cnn_lstm" x="250" y="831">hour, other columns)</text>
+<text class="s v" data-k="knn|tft" x="250" y="831">hour, other columns)</text>
+<text class="s v" data-k="mice|gru" x="250" y="831">on train)</text>
+<text class="s v" data-k="mice|lstm" x="250" y="831">on train)</text>
+<text class="s v" data-k="mice|cnn" x="250" y="831">on train)</text>
+<text class="s v" data-k="mice|cnn_lstm" x="250" y="831">on train)</text>
+<text class="s v" data-k="mice|tft" x="250" y="831">on train)</text>
+<text class="s" x="238" y="848">•</text>
+<text class="s" x="250" y="848">PM2.5 and PM10 from 1, 3, 6, 12, 24 h earlier (lags)</text>
+<text class="s" x="238" y="865">•</text>
+<text class="s" x="250" y="865">Rolling mean and rolling std of the past 3 h, 6 h, 12 h and 24 h (PM2.5, PM10)</text>
+<text class="s" x="238" y="882">•</text>
+<text class="s" x="250" y="882">sin/cos of wind direction, hour and day of year · season from the month</text>
+<text class="s" x="238" y="899">•</text>
+<text class="s" x="250" y="899">50 inputs: 16 CPCB + 2 stuck marks + 10 lags + 16 rolling + 6 sin/cos →</text>
+<text class="s" x="250" y="916">features.csv 184,128 × 55</text>
+<line class="sep" x1="236" x2="764" y1="928" y2="928"/>
+<a class="f" data-m="../data/processed/runs/{r}/features.csv" target="_blank"><rect class="chip" x="236" y="936" width="93" height="18" rx="4"/><text class="chipk" x="243" y="949">CSV</text><text class="chipt" x="264" y="949">features</text></a>
+<a class="f" href="../figures/imputation_compare.png" target="_blank"><rect class="chip" x="335" y="936" width="167" height="18" rx="4"/><text class="chipk" x="342" y="949">PNG</text><text class="chipt" x="362" y="949">imputation compared</text></a>
+<a class="f" href="../figures/imputation_compare.csv" target="_blank"><rect class="chip" x="507" y="936" width="160" height="18" rx="4"/><text class="chipk" x="514" y="949">CSV</text><text class="chipt" x="535" y="949">imputation_compare</text></a>
+<rect class="box" x="220" y="990" width="560" height="209" rx="6"/>
+<text class="t" x="238" y="1013">3.3 Model inputs</text>
+<text class="s" x="238" y="1036">•</text>
+<text class="s" x="250" y="1036">Each sample: 48 h × 53 columns (50 inputs + 3 miss flags) → PM2.5, PM10 at +1,</text>
+<text class="s" x="250" y="1053">+3, +6, +12, +24 h</text>
+<text class="s" x="238" y="1070">•</text>
+<text class="s" x="250" y="1070">log(1 + x) for PM and gases, then scaling fitted on train (2023–24) only</text>
+<text class="s" x="238" y="1087">•</text>
+<text class="s v" data-k="deletion|gru" x="250" y="1087">Skipped if ANY input cell is empty or an answer is missing</text>
+<text class="s v" data-k="deletion|lstm" x="250" y="1087">Skipped if ANY input cell is empty or an answer is missing</text>
+<text class="s v" data-k="deletion|cnn" x="250" y="1087">Skipped if ANY input cell is empty or an answer is missing</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="250" y="1087">Skipped if ANY input cell is empty or an answer is missing</text>
+<text class="s v" data-k="deletion|tft" x="250" y="1087">Skipped if ANY input cell is empty or an answer is missing</text>
+<text class="s v" data-k="median|gru" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="median|lstm" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="median|cnn" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="median|cnn_lstm" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="median|tft" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="ffill|gru" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="ffill|lstm" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="ffill|cnn" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="ffill|tft" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="bfill|gru" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="bfill|lstm" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="bfill|cnn" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="bfill|tft" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="knn|gru" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="knn|lstm" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="knn|cnn" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="knn|cnn_lstm" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="knn|tft" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="mice|gru" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="mice|lstm" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="mice|cnn" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="mice|cnn_lstm" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="mice|tft" x="250" y="1087">Inputs are fully filled, so a window is skipped only when a real PM answer is</text>
+<text class="s v" data-k="deletion|gru" x="250" y="1104"></text>
+<text class="s v" data-k="deletion|lstm" x="250" y="1104"></text>
+<text class="s v" data-k="deletion|cnn" x="250" y="1104"></text>
+<text class="s v" data-k="deletion|cnn_lstm" x="250" y="1104"></text>
+<text class="s v" data-k="deletion|tft" x="250" y="1104"></text>
+<text class="s v" data-k="median|gru" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="median|lstm" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="median|cnn" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="median|cnn_lstm" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="median|tft" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="ffill|gru" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="ffill|lstm" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="ffill|cnn" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="ffill|tft" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="bfill|gru" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="bfill|lstm" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="bfill|cnn" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="bfill|tft" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="knn|gru" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="knn|lstm" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="knn|cnn" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="knn|cnn_lstm" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="knn|tft" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="mice|gru" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="mice|lstm" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="mice|cnn" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="mice|cnn_lstm" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s v" data-k="mice|tft" x="250" y="1104">missing (answers are never filled)</text>
+<text class="s" x="238" y="1121">•</text>
+<text class="s" x="250" y="1121">3 flags: miss_PM, miss_GAS (now with CO, BENZENE, TOLUENE), miss_METEOROLOGICAL</text>
+<text class="s" x="250" y="1138">(with RF)</text>
+<text class="s" x="238" y="1155">•</text>
+<text class="s v" data-k="deletion|gru" x="250" y="1155">Samples: train 32,949 · val 4,434 · calib 4,659 · test 5,896</text>
+<text class="s v" data-k="deletion|lstm" x="250" y="1155">Samples: train 32,949 · val 4,434 · calib 4,659 · test 5,896</text>
+<text class="s v" data-k="deletion|cnn" x="250" y="1155">Samples: train 32,949 · val 4,434 · calib 4,659 · test 5,896</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="250" y="1155">Samples: train 32,949 · val 4,434 · calib 4,659 · test 5,896</text>
+<text class="s v" data-k="deletion|tft" x="250" y="1155">Samples: train 32,949 · val 4,434 · calib 4,659 · test 5,896</text>
+<text class="s v" data-k="median|gru" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="median|lstm" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="median|cnn" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="median|cnn_lstm" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="median|tft" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="ffill|gru" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="ffill|lstm" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="ffill|cnn" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="ffill|tft" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="bfill|gru" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="bfill|lstm" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="bfill|cnn" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="bfill|tft" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="knn|gru" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="knn|lstm" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="knn|cnn" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="knn|cnn_lstm" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="knn|tft" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="mice|gru" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="mice|lstm" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="mice|cnn" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="mice|cnn_lstm" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<text class="s v" data-k="mice|tft" x="250" y="1155">Samples: train 109,322 · val 17,798 · calib 15,571 · test 17,839</text>
+<line class="sep" x1="236" x2="764" y1="1167" y2="1167"/>
+<a class="f" data-m="../data/processed/runs/{r}/model_table.csv" target="_blank"><rect class="chip" x="236" y="1175" width="113" height="18" rx="4"/><text class="chipk" x="243" y="1188">CSV</text><text class="chipt" x="264" y="1188">model_table</text></a>
+<a class="f" href="../figures/runs/deletion/deletion_hours.png" target="_blank"><rect class="chip" x="355" y="1175" width="194" height="18" rx="4"/><text class="chipk" x="362" y="1188">PNG</text><text class="chipt" x="382" y="1188">deletion: hours deleted</text></a>
+<a class="f" href="../figures/runs/deletion/deletion_hours.csv" target="_blank"><rect class="chip" x="555" y="1175" width="133" height="18" rx="4"/><text class="chipk" x="562" y="1188">CSV</text><text class="chipt" x="582" y="1188">deletion_hours</text></a>
+<rect class="box-strong" x="220" y="1247" width="560" height="223" rx="6"/>
+<text class="t" x="238" y="1270">5 forecasters, trained on 2023–2024</text>
+<text class="s" x="238" y="1293">•</text>
+<text class="s" x="250" y="1293">GRU · LSTM · 1D CNN · CNN + LSTM · TFT (full Temporal Fusion Transformer)</text>
+<text class="s" x="238" y="1310">•</text>
+<text class="s" x="250" y="1310">Same settings: lr 0.0005, batch 256, ≤ 50 epochs, patience 5, seed 42</text>
+<text class="s" x="238" y="1327">•</text>
+<text class="s" x="250" y="1327">Training stops when the Jan–Apr 2025 validation loss stops improving</text>
+<text class="s" x="238" y="1344">•</text>
+<text class="s" x="250" y="1344">Point (MSE) and quantile (pinball) versions</text>
+<text class="s" x="238" y="1361">•</text>
+<text class="s v" data-k="deletion|gru" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 3.6 / 4.9 / 6.1 / 7.3</text>
+<text class="s v" data-k="deletion|lstm" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.0 / 5.3 / 6.5 / 7.3</text>
+<text class="s v" data-k="deletion|cnn" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 5.3 / 6.3 / 6.9 / 7.7</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 5.5 / 6.3 / 7.0 / 7.9</text>
+<text class="s v" data-k="deletion|tft" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 5.0 / 6.4 / 7.0 / 8.9</text>
+<text class="s v" data-k="median|gru" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.4 / 5.7 / 6.6 / 7.5</text>
+<text class="s v" data-k="median|lstm" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.6 / 5.8 / 6.9 / 7.7</text>
+<text class="s v" data-k="median|cnn" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 5.9 / 6.8 / 7.5 / 8.2</text>
+<text class="s v" data-k="median|cnn_lstm" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.9 / 5.9 / 6.9 / 8.0</text>
+<text class="s v" data-k="median|tft" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 5.6 / 6.5 / 7.0 / 8.4</text>
+<text class="s v" data-k="ffill|gru" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.5 / 5.8 / 6.7 / 7.6</text>
+<text class="s v" data-k="ffill|lstm" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.6 / 5.8 / 6.9 / 7.7</text>
+<text class="s v" data-k="ffill|cnn" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 6.2 / 7.1 / 7.5 / 8.3</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.9 / 5.9 / 6.8 / 8.1</text>
+<text class="s v" data-k="ffill|tft" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 5.4 / 6.3 / 6.9 / 8.3</text>
+<text class="s v" data-k="bfill|gru" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.1 / 5.7 / 6.7 / 7.6</text>
+<text class="s v" data-k="bfill|lstm" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.3 / 5.7 / 6.9 / 7.7</text>
+<text class="s v" data-k="bfill|cnn" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 5.9 / 6.8 / 7.3 / 7.9</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.6 / 5.8 / 6.8 / 7.8</text>
+<text class="s v" data-k="bfill|tft" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 5.2 / 6.3 / 6.9 / 8.4</text>
+<text class="s v" data-k="knn|gru" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.4 / 5.7 / 6.7 / 7.6</text>
+<text class="s v" data-k="knn|lstm" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.6 / 5.8 / 6.9 / 7.7</text>
+<text class="s v" data-k="knn|cnn" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 6.1 / 7.0 / 7.5 / 8.3</text>
+<text class="s v" data-k="knn|cnn_lstm" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 5.0 / 5.9 / 6.9 / 8.0</text>
+<text class="s v" data-k="knn|tft" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 5.6 / 6.5 / 7.0 / 8.4</text>
+<text class="s v" data-k="mice|gru" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.4 / 5.7 / 6.7 / 7.6</text>
+<text class="s v" data-k="mice|lstm" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 4.7 / 5.9 / 7.0 / 7.8</text>
+<text class="s v" data-k="mice|cnn" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 6.4 / 7.5 / 7.7 / 8.4</text>
+<text class="s v" data-k="mice|cnn_lstm" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 5.0 / 5.9 / 6.9 / 8.1</text>
+<text class="s v" data-k="mice|tft" x="250" y="1361">This model, May–Aug 2025 RMSE PM2.5 at +1/+3/+6/+12/+24 h: 5.8 / 6.7 / 7.1 / 8.5</text>
+<text class="s v" data-k="deletion|gru" x="250" y="1378">/ 7.8 µg/m³</text>
+<text class="s v" data-k="deletion|lstm" x="250" y="1378">/ 7.8 µg/m³</text>
+<text class="s v" data-k="deletion|cnn" x="250" y="1378">/ 8.4 µg/m³</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="250" y="1378">/ 8.9 µg/m³</text>
+<text class="s v" data-k="deletion|tft" x="250" y="1378">/ 9.7 µg/m³</text>
+<text class="s v" data-k="median|gru" x="250" y="1378">/ 8.1 µg/m³</text>
+<text class="s v" data-k="median|lstm" x="250" y="1378">/ 8.2 µg/m³</text>
+<text class="s v" data-k="median|cnn" x="250" y="1378">/ 8.9 µg/m³</text>
+<text class="s v" data-k="median|cnn_lstm" x="250" y="1378">/ 8.7 µg/m³</text>
+<text class="s v" data-k="median|tft" x="250" y="1378">/ 9.0 µg/m³</text>
+<text class="s v" data-k="ffill|gru" x="250" y="1378">/ 8.1 µg/m³</text>
+<text class="s v" data-k="ffill|lstm" x="250" y="1378">/ 8.2 µg/m³</text>
+<text class="s v" data-k="ffill|cnn" x="250" y="1378">/ 8.9 µg/m³</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="250" y="1378">/ 8.7 µg/m³</text>
+<text class="s v" data-k="ffill|tft" x="250" y="1378">/ 9.0 µg/m³</text>
+<text class="s v" data-k="bfill|gru" x="250" y="1378">/ 8.0 µg/m³</text>
+<text class="s v" data-k="bfill|lstm" x="250" y="1378">/ 8.2 µg/m³</text>
+<text class="s v" data-k="bfill|cnn" x="250" y="1378">/ 8.5 µg/m³</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="250" y="1378">/ 8.5 µg/m³</text>
+<text class="s v" data-k="bfill|tft" x="250" y="1378">/ 8.8 µg/m³</text>
+<text class="s v" data-k="knn|gru" x="250" y="1378">/ 8.1 µg/m³</text>
+<text class="s v" data-k="knn|lstm" x="250" y="1378">/ 8.2 µg/m³</text>
+<text class="s v" data-k="knn|cnn" x="250" y="1378">/ 8.8 µg/m³</text>
+<text class="s v" data-k="knn|cnn_lstm" x="250" y="1378">/ 8.6 µg/m³</text>
+<text class="s v" data-k="knn|tft" x="250" y="1378">/ 9.0 µg/m³</text>
+<text class="s v" data-k="mice|gru" x="250" y="1378">/ 8.1 µg/m³</text>
+<text class="s v" data-k="mice|lstm" x="250" y="1378">/ 8.4 µg/m³</text>
+<text class="s v" data-k="mice|cnn" x="250" y="1378">/ 8.9 µg/m³</text>
+<text class="s v" data-k="mice|cnn_lstm" x="250" y="1378">/ 8.8 µg/m³</text>
+<text class="s v" data-k="mice|tft" x="250" y="1378">/ 9.0 µg/m³</text>
+<line class="sep" x1="236" x2="764" y1="1390" y2="1390"/>
+<a class="f" data-m="../figures/runs/{r}/forecast_errors.png" target="_blank"><rect class="chip" x="236" y="1398" width="79" height="18" rx="4"/><text class="chipk" x="243" y="1411">PNG</text><text class="chipt" x="264" y="1411">errors</text></a>
+<a class="f" data-m="../figures/runs/{r}/forecast_loss.png" target="_blank"><rect class="chip" x="321" y="1398" width="66" height="18" rx="4"/><text class="chipk" x="328" y="1411">PNG</text><text class="chipt" x="349" y="1411">loss</text></a>
+<a class="f" data-m="../figures/runs/{r}/forecast_coverage.png" target="_blank"><rect class="chip" x="393" y="1398" width="93" height="18" rx="4"/><text class="chipk" x="400" y="1411">PNG</text><text class="chipt" x="420" y="1411">coverage</text></a>
+<a class="f" data-m="../figures/runs/{r}/forecast_errors.csv" target="_blank"><rect class="chip" x="491" y="1398" width="140" height="18" rx="4"/><text class="chipk" x="498" y="1411">CSV</text><text class="chipt" x="519" y="1411">forecast_errors</text></a>
+<a class="f" data-m="../figures/runs/{r}/forecast_quantile.csv" target="_blank"><rect class="chip" x="236" y="1422" width="153" height="18" rx="4"/><text class="chipk" x="243" y="1435">CSV</text><text class="chipt" x="264" y="1435">forecast_quantile</text></a>
+<a class="f" data-m="../figures/runs/{r}/forecast_summaries.txt" target="_blank"><rect class="chip" x="395" y="1422" width="140" height="18" rx="4"/><text class="chipk" x="402" y="1435">TXT</text><text class="chipt" x="423" y="1435">model summaries</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/forecast_errors_station_year_pm25.png" target="_blank"><rect class="chip" x="541" y="1422" width="180" height="18" rx="4"/><text class="chipk" x="548" y="1435">PNG</text><text class="chipt" x="569" y="1435">station × split PM2.5</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/errors_station_year.csv" target="_blank"><rect class="chip" x="236" y="1446" width="187" height="18" rx="4"/><text class="chipk" x="243" y="1459">CSV</text><text class="chipt" x="264" y="1459">errors station × split</text></a>
+<rect class="box" x="130" y="1516" width="320" height="182" rx="6"/>
+<text class="t" x="148" y="1539">12-number embedding (d = 12)</text>
+<text class="s" x="148" y="1562">•</text>
+<text class="s" x="160" y="1562">The model&#x27;s summary of the 48 hours</text>
+<text class="s" x="148" y="1579">•</text>
+<text class="s" x="160" y="1579">The forecast is made only from these 12</text>
+<text class="s" x="160" y="1596">numbers</text>
+<text class="s" x="148" y="1613">•</text>
+<text class="s" x="160" y="1613">The embedding CSV (calibration) is</text>
+<text class="s" x="160" y="1630">provided by the quantile model</text>
+<line class="sep" x1="146" x2="434" y1="1642" y2="1642"/>
+<a class="f" data-m="../artifacts/runs/{r}/forecasters/{m}/quantile/calibration.csv" target="_blank"><rect class="chip" x="146" y="1650" width="302" height="18" rx="4"/><text class="chipk" x="153" y="1663">CSV</text><text class="chipt" x="174" y="1663">embedding (calibration, quantile model)</text></a>
+<rect class="box" x="550" y="1516" width="320" height="182" rx="6"/>
+<text class="t" x="568" y="1539">Forecast + low / median / high</text>
+<text class="s" x="568" y="1562">•</text>
+<text class="s" x="580" y="1562">One forecast and a 90% low–high band</text>
+<text class="s" x="568" y="1579">•</text>
+<text class="s" x="580" y="1579">2 targets × 5 horizons (+1, +3, +6, +12,</text>
+<text class="s" x="580" y="1596">+24 h)</text>
+<text class="s" x="568" y="1613">•</text>
+<text class="s" x="580" y="1613">The point forecast CSV is derived from the</text>
+<text class="s" x="580" y="1630">point model</text>
+<line class="sep" x1="566" x2="854" y1="1642" y2="1642"/>
+<a class="f" data-m="../figures/runs/{r}/forecast_band_pm25.png" target="_blank"><rect class="chip" x="566" y="1650" width="106" height="18" rx="4"/><text class="chipk" x="573" y="1663">PNG</text><text class="chipt" x="594" y="1663">band PM2.5</text></a>
+<a class="f" data-m="../figures/runs/{r}/forecast_band_pm10.png" target="_blank"><rect class="chip" x="678" y="1650" width="99" height="18" rx="4"/><text class="chipk" x="685" y="1663">PNG</text><text class="chipt" x="706" y="1663">band PM10</text></a>
+<a class="f" data-m="../artifacts/runs/{r}/forecasters/{m}/point/calib_pred.csv" target="_blank"><rect class="chip" x="566" y="1674" width="228" height="18" rx="4"/><text class="chipk" x="573" y="1687">CSV</text><text class="chipt" x="594" y="1687">point forecast (point model)</text></a>
+<text class="part" x="290" y="1734" text-anchor="middle">WORKER B · IS THIS HOUR UNUSUAL?</text>
+<text class="part" x="720" y="1734" text-anchor="middle">WORKER C · HOW WIDE IS THE RANGE?</text>
+<rect class="box" x="120" y="1756" width="340" height="216" rx="6"/>
+<text class="t" x="138" y="1779">5.2 Distance to the normal shape</text>
+<text class="s" x="138" y="1802">•</text>
+<text class="s" x="150" y="1802">Mahalanobis distance of the 12-number</text>
+<text class="s" x="150" y="1819">embedding</text>
+<text class="s" x="138" y="1836">•</text>
+<text class="s" x="150" y="1836">One shape for all hours (one group, no</text>
+<text class="s" x="150" y="1853">seasons)</text>
+<text class="s" x="138" y="1870">•</text>
+<text class="s" x="150" y="1870">Fitted on train 2023–24 (MCD 75% +</text>
+<text class="s" x="150" y="1887">Ledoit-Wolf)</text>
+<text class="s" x="138" y="1904">•</text>
+<text class="s v" data-k="deletion|gru" x="150" y="1904">This model: condition number 186 (limit 1000)</text>
+<text class="s v" data-k="deletion|lstm" x="150" y="1904">This model: condition number 196 (limit 1000)</text>
+<text class="s v" data-k="deletion|cnn" x="150" y="1904">This model: condition number 186 (limit 1000)</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="150" y="1904">This model: condition number 185 (limit 1000)</text>
+<text class="s v" data-k="deletion|tft" x="150" y="1904">This model: condition number 186 (limit 1000)</text>
+<text class="s v" data-k="median|gru" x="150" y="1904">This model: condition number 182 (limit 1000)</text>
+<text class="s v" data-k="median|lstm" x="150" y="1904">This model: condition number 186 (limit 1000)</text>
+<text class="s v" data-k="median|cnn" x="150" y="1904">This model: condition number 186 (limit 1000)</text>
+<text class="s v" data-k="median|cnn_lstm" x="150" y="1904">This model: condition number 171 (limit 1000)</text>
+<text class="s v" data-k="median|tft" x="150" y="1904">This model: condition number 181 (limit 1000)</text>
+<text class="s v" data-k="ffill|gru" x="150" y="1904">This model: condition number 183 (limit 1000)</text>
+<text class="s v" data-k="ffill|lstm" x="150" y="1904">This model: condition number 187 (limit 1000)</text>
+<text class="s v" data-k="ffill|cnn" x="150" y="1904">This model: condition number 191 (limit 1000)</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="150" y="1904">This model: condition number 173 (limit 1000)</text>
+<text class="s v" data-k="ffill|tft" x="150" y="1904">This model: condition number 180 (limit 1000)</text>
+<text class="s v" data-k="bfill|gru" x="150" y="1904">This model: condition number 180 (limit 1000)</text>
+<text class="s v" data-k="bfill|lstm" x="150" y="1904">This model: condition number 186 (limit 1000)</text>
+<text class="s v" data-k="bfill|cnn" x="150" y="1904">This model: condition number 180 (limit 1000)</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="150" y="1904">This model: condition number 171 (limit 1000)</text>
+<text class="s v" data-k="bfill|tft" x="150" y="1904">This model: condition number 181 (limit 1000)</text>
+<text class="s v" data-k="knn|gru" x="150" y="1904">This model: condition number 182 (limit 1000)</text>
+<text class="s v" data-k="knn|lstm" x="150" y="1904">This model: condition number 186 (limit 1000)</text>
+<text class="s v" data-k="knn|cnn" x="150" y="1904">This model: condition number 184 (limit 1000)</text>
+<text class="s v" data-k="knn|cnn_lstm" x="150" y="1904">This model: condition number 175 (limit 1000)</text>
+<text class="s v" data-k="knn|tft" x="150" y="1904">This model: condition number 181 (limit 1000)</text>
+<text class="s v" data-k="mice|gru" x="150" y="1904">This model: condition number 177 (limit 1000)</text>
+<text class="s v" data-k="mice|lstm" x="150" y="1904">This model: condition number 183 (limit 1000)</text>
+<text class="s v" data-k="mice|cnn" x="150" y="1904">This model: condition number 182 (limit 1000)</text>
+<text class="s v" data-k="mice|cnn_lstm" x="150" y="1904">This model: condition number 172 (limit 1000)</text>
+<text class="s v" data-k="mice|tft" x="150" y="1904">This model: condition number 184 (limit 1000)</text>
+<line class="sep" x1="136" x2="444" y1="1916" y2="1916"/>
+<a class="f" data-m="../figures/runs/{r}/worker_b_5.2_distance.png" target="_blank"><rect class="chip" x="136" y="1924" width="106" height="18" rx="4"/><text class="chipk" x="143" y="1937">PNG</text><text class="chipt" x="164" y="1937">all models</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/worker_b_5.2_distance_station_year.png" target="_blank"><rect class="chip" x="248" y="1924" width="140" height="18" rx="4"/><text class="chipk" x="255" y="1937">PNG</text><text class="chipt" x="276" y="1937">station × split</text></a>
+<a class="f" data-m="../artifacts/runs/{r}/forecasters/{m}/worker_b/distances.csv" target="_blank"><rect class="chip" x="136" y="1948" width="99" height="18" rx="4"/><text class="chipk" x="143" y="1961">CSV</text><text class="chipt" x="164" y="1961">distances</text></a>
+<rect class="box" x="120" y="1990" width="340" height="192" rx="6"/>
+<text class="t" x="138" y="2013">5.3 Rank → s_embed</text>
+<text class="s" x="138" y="2036">•</text>
+<text class="s" x="150" y="2036">Each May–Aug 2025 hour: its 12-number</text>
+<text class="s" x="150" y="2053">embedding gets a distance from the train</text>
+<text class="s" x="150" y="2070">shape</text>
+<text class="s" x="138" y="2087">•</text>
+<text class="s" x="150" y="2087">p = share of all train hours (2023–24) at</text>
+<text class="s" x="150" y="2104">least this far out</text>
+<text class="s" x="138" y="2121">•</text>
+<text class="s" x="150" y="2121">s_embed = 1 − p, saved with the 12 numbers</text>
+<text class="s" x="150" y="2138">and the distance</text>
+<line class="sep" x1="136" x2="444" y1="2150" y2="2150"/>
+<a class="f" data-m="../artifacts/runs/{r}/forecasters/{m}/worker_b/s_embed.csv" target="_blank"><rect class="chip" x="136" y="2158" width="167" height="18" rx="4"/><text class="chipk" x="143" y="2171">CSV</text><text class="chipt" x="164" y="2171">s_embed (per model)</text></a>
+<rect class="box" x="120" y="2200" width="340" height="199" rx="6"/>
+<text class="t" x="138" y="2223">5.6 Raw safety net → s_raw</text>
+<text class="s" x="138" y="2246">•</text>
+<text class="s" x="150" y="2246">Same test on the raw columns of the latest</text>
+<text class="s" x="150" y="2263">hour</text>
+<text class="s" x="138" y="2280">•</text>
+<text class="s" x="150" y="2280">Leaves out miss_ flags, BP and stuck columns</text>
+<text class="s" x="138" y="2297">•</text>
+<text class="s" x="150" y="2297">fused score = max(s_raw, s_embed)</text>
+<text class="s" x="138" y="2314">•</text>
+<text class="s v" data-k="deletion|gru" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="deletion|lstm" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="deletion|cnn" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="deletion|tft" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="median|gru" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="median|lstm" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="median|cnn" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="median|cnn_lstm" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="median|tft" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="ffill|gru" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="ffill|lstm" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="ffill|cnn" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="ffill|tft" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="bfill|gru" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="bfill|lstm" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="bfill|cnn" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="bfill|tft" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="knn|gru" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="knn|lstm" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="knn|cnn" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="knn|cnn_lstm" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="knn|tft" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="mice|gru" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="mice|lstm" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="mice|cnn" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="mice|cnn_lstm" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="mice|tft" x="150" y="2314">s_raw and s_embed of this model loosely</text>
+<text class="s v" data-k="deletion|gru" x="150" y="2331">linked (r 0.18)</text>
+<text class="s v" data-k="deletion|lstm" x="150" y="2331">linked (r 0.24)</text>
+<text class="s v" data-k="deletion|cnn" x="150" y="2331">linked (r 0.06)</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="150" y="2331">linked (r 0.34)</text>
+<text class="s v" data-k="deletion|tft" x="150" y="2331">linked (r -0.15)</text>
+<text class="s v" data-k="median|gru" x="150" y="2331">linked (r 0.33)</text>
+<text class="s v" data-k="median|lstm" x="150" y="2331">linked (r 0.42)</text>
+<text class="s v" data-k="median|cnn" x="150" y="2331">linked (r 0.23)</text>
+<text class="s v" data-k="median|cnn_lstm" x="150" y="2331">linked (r 0.42)</text>
+<text class="s v" data-k="median|tft" x="150" y="2331">linked (r 0.13)</text>
+<text class="s v" data-k="ffill|gru" x="150" y="2331">linked (r 0.34)</text>
+<text class="s v" data-k="ffill|lstm" x="150" y="2331">linked (r 0.36)</text>
+<text class="s v" data-k="ffill|cnn" x="150" y="2331">linked (r 0.18)</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="150" y="2331">linked (r 0.36)</text>
+<text class="s v" data-k="ffill|tft" x="150" y="2331">linked (r 0.12)</text>
+<text class="s v" data-k="bfill|gru" x="150" y="2331">linked (r 0.35)</text>
+<text class="s v" data-k="bfill|lstm" x="150" y="2331">linked (r 0.36)</text>
+<text class="s v" data-k="bfill|cnn" x="150" y="2331">linked (r 0.36)</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="150" y="2331">linked (r 0.39)</text>
+<text class="s v" data-k="bfill|tft" x="150" y="2331">linked (r 0.16)</text>
+<text class="s v" data-k="knn|gru" x="150" y="2331">linked (r 0.34)</text>
+<text class="s v" data-k="knn|lstm" x="150" y="2331">linked (r 0.37)</text>
+<text class="s v" data-k="knn|cnn" x="150" y="2331">linked (r 0.29)</text>
+<text class="s v" data-k="knn|cnn_lstm" x="150" y="2331">linked (r 0.41)</text>
+<text class="s v" data-k="knn|tft" x="150" y="2331">linked (r 0.14)</text>
+<text class="s v" data-k="mice|gru" x="150" y="2331">linked (r 0.39)</text>
+<text class="s v" data-k="mice|lstm" x="150" y="2331">linked (r 0.43)</text>
+<text class="s v" data-k="mice|cnn" x="150" y="2331">linked (r 0.24)</text>
+<text class="s v" data-k="mice|cnn_lstm" x="150" y="2331">linked (r 0.43)</text>
+<text class="s v" data-k="mice|tft" x="150" y="2331">linked (r 0.17)</text>
+<line class="sep" x1="136" x2="444" y1="2343" y2="2343"/>
+<a class="f" data-m="../figures/runs/{r}/worker_b_5.6_raw_vs_embed.png" target="_blank"><rect class="chip" x="136" y="2351" width="106" height="18" rx="4"/><text class="chipk" x="143" y="2364">PNG</text><text class="chipt" x="164" y="2364">all models</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/worker_b_5.6_raw_vs_embed.png" target="_blank"><rect class="chip" x="248" y="2351" width="106" height="18" rx="4"/><text class="chipk" x="255" y="2364">PNG</text><text class="chipt" x="276" y="2364">this model</text></a>
+<a class="f" data-m="../artifacts/runs/{r}/forecasters/{m}/worker_b/raw_check.csv" target="_blank"><rect class="chip" x="136" y="2375" width="99" height="18" rx="4"/><text class="chipk" x="143" y="2388">CSV</text><text class="chipt" x="164" y="2388">raw_check</text></a>
+<rect class="box" x="120" y="2417" width="340" height="124" rx="6"/>
+<text class="t" x="138" y="2440">5.5 Smooth over time</text>
+<text class="s" x="138" y="2463">•</text>
+<text class="s" x="150" y="2463">β 0.3 / 0.4 / 0.5 / 0.7 / 0.8 for +1 / +3 /</text>
+<text class="s" x="150" y="2480">+6 / +12 / +24 h</text>
+<text class="s" x="138" y="2497">•</text>
+<text class="s" x="150" y="2497">Starts fresh after a gap of more than 6 h</text>
+<line class="sep" x1="136" x2="444" y1="2509" y2="2509"/>
+<a class="f" data-m="../figures/runs/{r}/worker_b_5.5_smooth_toy.png" target="_blank"><rect class="chip" x="136" y="2517" width="106" height="18" rx="4"/><text class="chipk" x="143" y="2530">PNG</text><text class="chipt" x="164" y="2530">smooth toy</text></a>
+<rect class="box" x="120" y="2559" width="340" height="247" rx="6"/>
+<text class="t" x="138" y="2582">5.6b Final score s → colour</text>
+<text class="s" x="138" y="2605">•</text>
+<text class="s" x="150" y="2605">Label comes straight from the smoothed score</text>
+<text class="s" x="150" y="2622">(no second ranking)</text>
+<text class="s" x="138" y="2639">•</text>
+<text class="s" x="150" y="2639">Smoothed score ≤ 0.80 Green · ≤ 0.98 Yellow ·</text>
+<text class="s" x="150" y="2656">above Red</text>
+<text class="s" x="138" y="2673">•</text>
+<text class="s v" data-k="deletion|gru" x="150" y="2673">Check weeks: Red 0.0–0.1%; calibration Green</text>
+<text class="s v" data-k="deletion|lstm" x="150" y="2673">Check weeks: Red 0.0–0.8%; calibration Green</text>
+<text class="s v" data-k="deletion|cnn" x="150" y="2673">Check weeks: Red 0.0–0.1%; calibration Green</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="150" y="2673">Check weeks: Red 0.2–0.3%; calibration Green</text>
+<text class="s v" data-k="deletion|tft" x="150" y="2673">Check weeks: Red 0.0–0.1%; calibration Green</text>
+<text class="s v" data-k="median|gru" x="150" y="2673">Check weeks: Red 0.4–1.0%; calibration Green</text>
+<text class="s v" data-k="median|lstm" x="150" y="2673">Check weeks: Red 0.9–1.5%; calibration Green</text>
+<text class="s v" data-k="median|cnn" x="150" y="2673">Check weeks: Red 0.1–0.5%; calibration Green</text>
+<text class="s v" data-k="median|cnn_lstm" x="150" y="2673">Check weeks: Red 0.6–1.1%; calibration Green</text>
+<text class="s v" data-k="median|tft" x="150" y="2673">Check weeks: Red 0.0–0.4%; calibration Green</text>
+<text class="s v" data-k="ffill|gru" x="150" y="2673">Check weeks: Red 1.7–2.1%; calibration Green</text>
+<text class="s v" data-k="ffill|lstm" x="150" y="2673">Check weeks: Red 1.0–1.5%; calibration Green</text>
+<text class="s v" data-k="ffill|cnn" x="150" y="2673">Check weeks: Red 0.4–0.9%; calibration Green</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="150" y="2673">Check weeks: Red 0.2–0.8%; calibration Green</text>
+<text class="s v" data-k="ffill|tft" x="150" y="2673">Check weeks: Red 0.0–0.4%; calibration Green</text>
+<text class="s v" data-k="bfill|gru" x="150" y="2673">Check weeks: Red 1.8–2.2%; calibration Green</text>
+<text class="s v" data-k="bfill|lstm" x="150" y="2673">Check weeks: Red 0.7–1.2%; calibration Green</text>
+<text class="s v" data-k="bfill|cnn" x="150" y="2673">Check weeks: Red 0.1–0.7%; calibration Green</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="150" y="2673">Check weeks: Red 0.2–0.7%; calibration Green</text>
+<text class="s v" data-k="bfill|tft" x="150" y="2673">Check weeks: Red 0.0–0.4%; calibration Green</text>
+<text class="s v" data-k="knn|gru" x="150" y="2673">Check weeks: Red 1.3–1.7%; calibration Green</text>
+<text class="s v" data-k="knn|lstm" x="150" y="2673">Check weeks: Red 1.7–2.1%; calibration Green</text>
+<text class="s v" data-k="knn|cnn" x="150" y="2673">Check weeks: Red 0.0–0.6%; calibration Green</text>
+<text class="s v" data-k="knn|cnn_lstm" x="150" y="2673">Check weeks: Red 0.6–1.1%; calibration Green</text>
+<text class="s v" data-k="knn|tft" x="150" y="2673">Check weeks: Red 0.0–0.4%; calibration Green</text>
+<text class="s v" data-k="mice|gru" x="150" y="2673">Check weeks: Red 1.0–1.7%; calibration Green</text>
+<text class="s v" data-k="mice|lstm" x="150" y="2673">Check weeks: Red 2.6–3.1%; calibration Green</text>
+<text class="s v" data-k="mice|cnn" x="150" y="2673">Check weeks: Red 0.1–0.7%; calibration Green</text>
+<text class="s v" data-k="mice|cnn_lstm" x="150" y="2673">Check weeks: Red 0.5–1.1%; calibration Green</text>
+<text class="s v" data-k="mice|tft" x="150" y="2673">Check weeks: Red 0.0–0.4%; calibration Green</text>
+<text class="s v" data-k="deletion|gru" x="150" y="2690">83%</text>
+<text class="s v" data-k="deletion|lstm" x="150" y="2690">80%</text>
+<text class="s v" data-k="deletion|cnn" x="150" y="2690">75%</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="150" y="2690">76%</text>
+<text class="s v" data-k="deletion|tft" x="150" y="2690">83%</text>
+<text class="s v" data-k="median|gru" x="150" y="2690">82%</text>
+<text class="s v" data-k="median|lstm" x="150" y="2690">81%</text>
+<text class="s v" data-k="median|cnn" x="150" y="2690">79%</text>
+<text class="s v" data-k="median|cnn_lstm" x="150" y="2690">79%</text>
+<text class="s v" data-k="median|tft" x="150" y="2690">81%</text>
+<text class="s v" data-k="ffill|gru" x="150" y="2690">82%</text>
+<text class="s v" data-k="ffill|lstm" x="150" y="2690">80%</text>
+<text class="s v" data-k="ffill|cnn" x="150" y="2690">79%</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="150" y="2690">80%</text>
+<text class="s v" data-k="ffill|tft" x="150" y="2690">82%</text>
+<text class="s v" data-k="bfill|gru" x="150" y="2690">82%</text>
+<text class="s v" data-k="bfill|lstm" x="150" y="2690">81%</text>
+<text class="s v" data-k="bfill|cnn" x="150" y="2690">81%</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="150" y="2690">80%</text>
+<text class="s v" data-k="bfill|tft" x="150" y="2690">82%</text>
+<text class="s v" data-k="knn|gru" x="150" y="2690">82%</text>
+<text class="s v" data-k="knn|lstm" x="150" y="2690">81%</text>
+<text class="s v" data-k="knn|cnn" x="150" y="2690">80%</text>
+<text class="s v" data-k="knn|cnn_lstm" x="150" y="2690">80%</text>
+<text class="s v" data-k="knn|tft" x="150" y="2690">83%</text>
+<text class="s v" data-k="mice|gru" x="150" y="2690">82%</text>
+<text class="s v" data-k="mice|lstm" x="150" y="2690">81%</text>
+<text class="s v" data-k="mice|cnn" x="150" y="2690">76%</text>
+<text class="s v" data-k="mice|cnn_lstm" x="150" y="2690">80%</text>
+<text class="s v" data-k="mice|tft" x="150" y="2690">82%</text>
+<line class="sep" x1="136" x2="444" y1="2702" y2="2702"/>
+<a class="f" data-m="../figures/runs/{r}/worker_b_5.6b_label_shares.png" target="_blank"><rect class="chip" x="136" y="2710" width="120" height="18" rx="4"/><text class="chipk" x="143" y="2723">PNG</text><text class="chipt" x="164" y="2723">label shares</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/worker_b_5.6b_timeline.png" target="_blank"><rect class="chip" x="262" y="2710" width="93" height="18" rx="4"/><text class="chipk" x="269" y="2723">PNG</text><text class="chipt" x="289" y="2723">timeline</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/worker_b_5.6b_labels_station_year.png" target="_blank"><rect class="chip" x="136" y="2734" width="207" height="18" rx="4"/><text class="chipk" x="143" y="2747">PNG</text><text class="chipt" x="164" y="2747">calib vs test per station</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/worker_b_5.6b_scores_calibration.png" target="_blank"><rect class="chip" x="136" y="2758" width="160" height="18" rx="4"/><text class="chipk" x="143" y="2771">PNG</text><text class="chipt" x="164" y="2771">scores calibration</text></a>
+<a class="f" data-m="../artifacts/runs/{r}/forecasters/{m}/worker_b/worker_b_calibration.csv" target="_blank"><rect class="chip" x="136" y="2782" width="174" height="18" rx="4"/><text class="chipk" x="143" y="2795">CSV</text><text class="chipt" x="164" y="2795">worker_b_calibration</text></a>
+<rect class="box" x="550" y="1756" width="340" height="92" rx="6"/>
+<text class="t" x="568" y="1779">6.1 Split conformal</text>
+<text class="s" x="568" y="1802">•</text>
+<text class="s" x="580" y="1802">One fixed width covers 90% of calibration</text>
+<text class="s" x="580" y="1819">errors (May–Aug 2025)</text>
+<text class="s" x="568" y="1836">•</text>
+<text class="s" x="580" y="1836">The same width on calm and smoggy hours</text>
+<rect class="box" x="550" y="1866" width="340" height="75" rx="6"/>
+<text class="t" x="568" y="1889">6.2 CQR</text>
+<text class="s" x="568" y="1912">•</text>
+<text class="s" x="580" y="1912">Starts from the model&#x27;s own low–high band</text>
+<text class="s" x="568" y="1929">•</text>
+<text class="s" x="580" y="1929">Widened by one correction Q from calibration</text>
+<rect class="box" x="550" y="1959" width="340" height="160" rx="6"/>
+<text class="t" x="568" y="1982">6.3 Adaptive update</text>
+<text class="s" x="568" y="2005">•</text>
+<text class="s" x="580" y="2005">Widens after misses, narrows after hits</text>
+<text class="s" x="580" y="2022">(gamma 0.005)</text>
+<text class="s" x="568" y="2039">•</text>
+<text class="s" x="580" y="2039">Uses an outcome only once it is known (t + h)</text>
+<text class="s" x="568" y="2056">•</text>
+<text class="s" x="580" y="2056">Runs live through the test months (Sep–Dec</text>
+<text class="s" x="580" y="2073">2025)</text>
+<text class="s" x="568" y="2090">•</text>
+<text class="s" x="580" y="2090">No files of its own: its ranges are scored in</text>
+<text class="s" x="580" y="2107">7.2</text>
+<rect class="box-strong" x="220" y="2856" width="560" height="192" rx="6"/>
+<text class="t" x="238" y="2879">7.1 Decision for every test hour (Sep–Dec 2025)</text>
+<text class="s" x="238" y="2902">•</text>
+<text class="s" x="250" y="2902">The Worker B colour picks which range is published</text>
+<text class="s" x="238" y="2919">•</text>
+<text class="s" x="250" y="2919">Saved in decisions_test.csv</text>
+<text class="s" x="238" y="2936">•</text>
+<text class="s" x="250" y="2936">base_ = normal 90% range · yellow_ = wider 95% range (both stored for every</text>
+<text class="s" x="250" y="2953">hour)</text>
+<text class="s" x="238" y="2970">•</text>
+<text class="s" x="250" y="2970">lower_ / upper_ = the range actually used: base if Green, yellow if Yellow,</text>
+<text class="s" x="250" y="2987">empty if Red</text>
+<text class="s" x="238" y="3004">•</text>
+<text class="s v" data-k="deletion|gru" x="250" y="3004">Red share of test hours, this model: 2.7%</text>
+<text class="s v" data-k="deletion|lstm" x="250" y="3004">Red share of test hours, this model: 2.3%</text>
+<text class="s v" data-k="deletion|cnn" x="250" y="3004">Red share of test hours, this model: 3.1%</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="250" y="3004">Red share of test hours, this model: 2.4%</text>
+<text class="s v" data-k="deletion|tft" x="250" y="3004">Red share of test hours, this model: 0.1%</text>
+<text class="s v" data-k="median|gru" x="250" y="3004">Red share of test hours, this model: 2.6%</text>
+<text class="s v" data-k="median|lstm" x="250" y="3004">Red share of test hours, this model: 2.4%</text>
+<text class="s v" data-k="median|cnn" x="250" y="3004">Red share of test hours, this model: 1.4%</text>
+<text class="s v" data-k="median|cnn_lstm" x="250" y="3004">Red share of test hours, this model: 2.2%</text>
+<text class="s v" data-k="median|tft" x="250" y="3004">Red share of test hours, this model: 2.0%</text>
+<text class="s v" data-k="ffill|gru" x="250" y="3004">Red share of test hours, this model: 2.2%</text>
+<text class="s v" data-k="ffill|lstm" x="250" y="3004">Red share of test hours, this model: 1.9%</text>
+<text class="s v" data-k="ffill|cnn" x="250" y="3004">Red share of test hours, this model: 1.3%</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="250" y="3004">Red share of test hours, this model: 2.3%</text>
+<text class="s v" data-k="ffill|tft" x="250" y="3004">Red share of test hours, this model: 2.4%</text>
+<text class="s v" data-k="bfill|gru" x="250" y="3004">Red share of test hours, this model: 2.4%</text>
+<text class="s v" data-k="bfill|lstm" x="250" y="3004">Red share of test hours, this model: 1.5%</text>
+<text class="s v" data-k="bfill|cnn" x="250" y="3004">Red share of test hours, this model: 2.1%</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="250" y="3004">Red share of test hours, this model: 2.5%</text>
+<text class="s v" data-k="bfill|tft" x="250" y="3004">Red share of test hours, this model: 2.5%</text>
+<text class="s v" data-k="knn|gru" x="250" y="3004">Red share of test hours, this model: 2.8%</text>
+<text class="s v" data-k="knn|lstm" x="250" y="3004">Red share of test hours, this model: 2.3%</text>
+<text class="s v" data-k="knn|cnn" x="250" y="3004">Red share of test hours, this model: 1.5%</text>
+<text class="s v" data-k="knn|cnn_lstm" x="250" y="3004">Red share of test hours, this model: 2.0%</text>
+<text class="s v" data-k="knn|tft" x="250" y="3004">Red share of test hours, this model: 2.3%</text>
+<text class="s v" data-k="mice|gru" x="250" y="3004">Red share of test hours, this model: 2.7%</text>
+<text class="s v" data-k="mice|lstm" x="250" y="3004">Red share of test hours, this model: 1.9%</text>
+<text class="s v" data-k="mice|cnn" x="250" y="3004">Red share of test hours, this model: 1.7%</text>
+<text class="s v" data-k="mice|cnn_lstm" x="250" y="3004">Red share of test hours, this model: 2.2%</text>
+<text class="s v" data-k="mice|tft" x="250" y="3004">Red share of test hours, this model: 2.1%</text>
+<line class="sep" x1="236" x2="764" y1="3016" y2="3016"/>
+<a class="f" data-m="../artifacts/runs/{r}/forecasters/{m}/decisions_test.csv" target="_blank"><rect class="chip" x="236" y="3024" width="133" height="18" rx="4"/><text class="chipk" x="243" y="3037">CSV</text><text class="chipt" x="264" y="3037">decisions_test</text></a>
+<a class="f" data-m="../artifacts/runs/{r}/forecasters/{m}/worker_b/worker_b_test.csv" target="_blank"><rect class="chip" x="375" y="3024" width="126" height="18" rx="4"/><text class="chipk" x="382" y="3037">CSV</text><text class="chipt" x="403" y="3037">worker_b_test</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/worker_b_5.6b_scores_test.png" target="_blank"><rect class="chip" x="507" y="3024" width="113" height="18" rx="4"/><text class="chipk" x="514" y="3037">PNG</text><text class="chipt" x="535" y="3037">scores test</text></a>
+<rect class="g-box" x="220" y="3082" width="176" height="75" rx="6" stroke-width="1.4"/>
+<text class="t g-t" x="238" y="3105">Green</text>
+<text class="s" x="238" y="3128">•</text>
+<text class="s" x="250" y="3128">Publish the 90%</text>
+<text class="s" x="250" y="3145">range</text>
+<rect class="y-box" x="412" y="3082" width="176" height="75" rx="6" stroke-width="1.4"/>
+<text class="t y-t" x="430" y="3105">Yellow</text>
+<text class="s" x="430" y="3128">•</text>
+<text class="s" x="442" y="3128">Publish a wider 95%</text>
+<text class="s" x="442" y="3145">range</text>
+<rect class="r-box" x="604" y="3082" width="176" height="75" rx="6" stroke-width="1.4"/>
+<text class="t r-t" x="622" y="3105">Red</text>
+<text class="s" x="622" y="3128">•</text>
+<text class="s" x="634" y="3128">Abstain · alert</text>
+<text class="s" x="634" y="3145">only</text>
+<rect class="box-strong" x="220" y="3197" width="560" height="182" rx="6"/>
+<text class="t" x="238" y="3220">7.2 Evaluation on the test months (Sep–Dec 2025)</text>
+<text class="s" x="238" y="3243">•</text>
+<text class="s" x="250" y="3243">3 methods on normal hours vs the smoggiest 5% of test hours</text>
+<text class="s" x="238" y="3260">•</text>
+<text class="s" x="250" y="3260">1,000 day-block bootstraps for the 95% sure-band</text>
+<text class="s" x="238" y="3277">•</text>
+<text class="s" x="250" y="3277">Coverage also per season and per station</text>
+<text class="s" x="238" y="3294">•</text>
+<text class="s v" data-k="deletion|gru" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 90%–93%, split conformal 64%–71%</text>
+<text class="s v" data-k="deletion|lstm" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 90%–91%, split conformal 62%–69%</text>
+<text class="s v" data-k="deletion|cnn" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 90%–90%, split conformal 63%–67%</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–93%, split conformal 67%–70%</text>
+<text class="s v" data-k="deletion|tft" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 62%–70%</text>
+<text class="s v" data-k="median|gru" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 61%–65%</text>
+<text class="s v" data-k="median|lstm" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 60%–66%</text>
+<text class="s v" data-k="median|cnn" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 63%–65%</text>
+<text class="s v" data-k="median|cnn_lstm" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 62%–68%</text>
+<text class="s v" data-k="median|tft" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 61%–69%</text>
+<text class="s v" data-k="ffill|gru" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 61%–65%</text>
+<text class="s v" data-k="ffill|lstm" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 61%–64%</text>
+<text class="s v" data-k="ffill|cnn" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 64%–68%</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 62%–69%</text>
+<text class="s v" data-k="ffill|tft" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 61%–66%</text>
+<text class="s v" data-k="bfill|gru" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 61%–65%</text>
+<text class="s v" data-k="bfill|lstm" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 60%–65%</text>
+<text class="s v" data-k="bfill|cnn" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 63%–67%</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 61%–67%</text>
+<text class="s v" data-k="bfill|tft" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 62%–70%</text>
+<text class="s v" data-k="knn|gru" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 62%–65%</text>
+<text class="s v" data-k="knn|lstm" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 60%–64%</text>
+<text class="s v" data-k="knn|cnn" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 63%–68%</text>
+<text class="s v" data-k="knn|cnn_lstm" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 62%–68%</text>
+<text class="s v" data-k="knn|tft" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 62%–69%</text>
+<text class="s v" data-k="mice|gru" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 61%–65%</text>
+<text class="s v" data-k="mice|lstm" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 60%–66%</text>
+<text class="s v" data-k="mice|cnn" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 65%–68%</text>
+<text class="s v" data-k="mice|cnn_lstm" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 62%–67%</text>
+<text class="s v" data-k="mice|tft" x="250" y="3294">PM2.5 normal hours: CQR + adaptive 91%–92%, split conformal 63%–72%</text>
+<text class="s" x="238" y="3311">•</text>
+<text class="s v" data-k="deletion|gru" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 54%–80%, split conformal 0%–6% (aim 90%)</text>
+<text class="s v" data-k="deletion|lstm" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 60%–85%, split conformal 0%–3% (aim 90%)</text>
+<text class="s v" data-k="deletion|cnn" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 65%–87%, split conformal 1%–9% (aim 90%)</text>
+<text class="s v" data-k="deletion|cnn_lstm" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 52%–70%, split conformal 0%–1% (aim 90%)</text>
+<text class="s v" data-k="deletion|tft" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 55%–87%, split conformal 0%–2% (aim 90%)</text>
+<text class="s v" data-k="median|gru" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 51%–58%, split conformal 0%–1% (aim 90%)</text>
+<text class="s v" data-k="median|lstm" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 55%–59%, split conformal 0%–2% (aim 90%)</text>
+<text class="s v" data-k="median|cnn" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 53%–74%, split conformal 0%–8% (aim 90%)</text>
+<text class="s v" data-k="median|cnn_lstm" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 46%–55%, split conformal 0%–2% (aim 90%)</text>
+<text class="s v" data-k="median|tft" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 49%–75%, split conformal 0%–4% (aim 90%)</text>
+<text class="s v" data-k="ffill|gru" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 50%–56%, split conformal 0%–1% (aim 90%)</text>
+<text class="s v" data-k="ffill|lstm" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 54%–57%, split conformal 0%–1% (aim 90%)</text>
+<text class="s v" data-k="ffill|cnn" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 47%–69%, split conformal 0%–2% (aim 90%)</text>
+<text class="s v" data-k="ffill|cnn_lstm" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 45%–55%, split conformal 0%–3% (aim 90%)</text>
+<text class="s v" data-k="ffill|tft" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 49%–77%, split conformal 0%–4% (aim 90%)</text>
+<text class="s v" data-k="bfill|gru" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 51%–56%, split conformal 0%–1% (aim 90%)</text>
+<text class="s v" data-k="bfill|lstm" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 53%–58%, split conformal 0%–1% (aim 90%)</text>
+<text class="s v" data-k="bfill|cnn" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 49%–68%, split conformal 0%–6% (aim 90%)</text>
+<text class="s v" data-k="bfill|cnn_lstm" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 48%–51%, split conformal 0%–2% (aim 90%)</text>
+<text class="s v" data-k="bfill|tft" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 51%–75%, split conformal 0%–6% (aim 90%)</text>
+<text class="s v" data-k="knn|gru" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 50%–57%, split conformal 0%–1% (aim 90%)</text>
+<text class="s v" data-k="knn|lstm" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 55%–59%, split conformal 0%–1% (aim 90%)</text>
+<text class="s v" data-k="knn|cnn" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 51%–70%, split conformal 0%–5% (aim 90%)</text>
+<text class="s v" data-k="knn|cnn_lstm" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 46%–59%, split conformal 0%–2% (aim 90%)</text>
+<text class="s v" data-k="knn|tft" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 49%–73%, split conformal 0%–5% (aim 90%)</text>
+<text class="s v" data-k="mice|gru" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 51%–54%, split conformal 0%–1% (aim 90%)</text>
+<text class="s v" data-k="mice|lstm" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 52%–59%, split conformal 0%–2% (aim 90%)</text>
+<text class="s v" data-k="mice|cnn" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 50%–72%, split conformal 1%–10% (aim 90%)</text>
+<text class="s v" data-k="mice|cnn_lstm" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 46%–55%, split conformal 0%–2% (aim 90%)</text>
+<text class="s v" data-k="mice|tft" x="250" y="3311">PM2.5 smoggiest 5%: CQR + adaptive 49%–75%, split conformal 0%–6% (aim 90%)</text>
+<line class="sep" x1="236" x2="764" y1="3323" y2="3323"/>
+<a class="f" data-m="../figures/runs/{r}/stratified_compare_pm25.png" target="_blank"><rect class="chip" x="236" y="3331" width="126" height="18" rx="4"/><text class="chipk" x="243" y="3344">PNG</text><text class="chipt" x="264" y="3344">compare PM2.5</text></a>
+<a class="f" data-m="../figures/runs/{r}/stratified_compare_pm10.png" target="_blank"><rect class="chip" x="368" y="3331" width="120" height="18" rx="4"/><text class="chipk" x="375" y="3344">PNG</text><text class="chipt" x="396" y="3344">compare PM10</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/stratified_coverage_pm25.png" target="_blank"><rect class="chip" x="494" y="3331" width="133" height="18" rx="4"/><text class="chipk" x="501" y="3344">PNG</text><text class="chipt" x="522" y="3344">coverage PM2.5</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/stratified_station_pm25.png" target="_blank"><rect class="chip" x="236" y="3355" width="133" height="18" rx="4"/><text class="chipk" x="243" y="3368">PNG</text><text class="chipt" x="264" y="3368">stations PM2.5</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/stratified_table1.csv" target="_blank"><rect class="chip" x="375" y="3355" width="79" height="18" rx="4"/><text class="chipk" x="382" y="3368">CSV</text><text class="chipt" x="403" y="3368">table1</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/stratified_table2.csv" target="_blank"><rect class="chip" x="460" y="3355" width="79" height="18" rx="4"/><text class="chipk" x="467" y="3368">CSV</text><text class="chipt" x="488" y="3368">table2</text></a>
+<a class="f" data-m="../figures/runs/{r}/{m}/stratified_table3.csv" target="_blank"><rect class="chip" x="545" y="3355" width="79" height="18" rx="4"/><text class="chipk" x="552" y="3368">CSV</text><text class="chipt" x="573" y="3368">table3</text></a>
+</svg>
+    <figcaption>Solid arrows carry each sample forward; the dashed arrow is the raw-input path that lets Worker B judge an hour without the model. The forecast is computed only from the 12-number embedding, which is why Worker B can read the embedding to judge the forecast. Neither worker sees the PM values it is forecasting. Click a chip in any box to open that chart or file; the two pickers switch the links and the numbers to one imputation method and one model. Links open the local files, so open this page from the PROJECT_2/flowchart folder.</figcaption>
+  </figure>
+
+  <dl class="settings">
+    <div><dt>Targets</dt><dd>PM2.5 and PM10, µg/m³</dd></div>
+    <div><dt>Horizons</dt><dd>+1, +3, +6, +12, +24 h</dd></div>
+    <div><dt>Input window</dt><dd>48 h × 53 columns</dd></div>
+    <div><dt>Split</dt><dd>train 2023–24 · val Jan–Apr · calib May–Aug · test Sep–Dec 2025</dd></div>
+    <div><dt>Groups</dt><dd>one group for Worker B and C · seasons kept as labels</dd></div>
+    <div><dt>Range aim</dt><dd>90% (α = 0.10), Yellow 95%</dd></div>
+    <div><dt>Red share aim</dt><dd>2% (s &gt; 0.98)</dd></div>
+    <div><dt>Embedding</dt><dd>d = 12 (smallest season: post-monsoon, 122 train days)</dd></div>
+    <div><dt>Smoggy hours</dt><dd>top 5% of test values per target and horizon</dd></div>
+  </dl>
+</div>
+
+<script>
+/* What: points every per-run link at the picked imputation method ({r}) and model ({m}),
+         and shows only the bullet text of that method x model.
+   How:  a link with data-m holds a path with {r} and/or {m}; a bullet line with
+         data-k="method|model" is shown only when it matches both pickers. */
+(function () {
+  var model = document.getElementById("model"), method = document.getElementById("method");
+  function apply() {
+    document.querySelectorAll("a[data-m]").forEach(function (a) {
+      a.setAttribute("href", a.getAttribute("data-m").replace("{r}", method.value).replace("{m}", model.value));
+    });
+    var key = method.value + "|" + model.value;
+    document.querySelectorAll("text.v").forEach(function (el) {
+      el.style.display = el.getAttribute("data-k") === key ? "" : "none";
+    });
+  }
+  try {
+    var m = localStorage.getItem("pm-model"); if (m) model.value = m;
+    var r = localStorage.getItem("pm-method"); if (r) method.value = r;
+  } catch (e) {}
+  [model, method].forEach(function (el) {
+    el.addEventListener("change", function () {
+      try { localStorage.setItem("pm-model", model.value); localStorage.setItem("pm-method", method.value); } catch (e) {}
+      apply();
+    });
+  });
+  apply();
+})();
+</script>
+</body>
+</html>

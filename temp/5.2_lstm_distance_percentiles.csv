@@ -1,0 +1,9 @@
+split,season,p50,p90,p99
+calibration,summer_premonsoon,2.42,4.3,10.49
+calibration,sw_monsoon,2.38,3.56,5.69
+train,post_monsoon,3.36,5.36,8.2
+train,summer_premonsoon,2.61,3.68,5.79
+train,sw_monsoon,2.44,3.7,7.26
+train,winter,3.11,4.5,7.17
+validation,summer_premonsoon,2.56,3.73,9.01
+validation,winter,2.95,4.29,5.67

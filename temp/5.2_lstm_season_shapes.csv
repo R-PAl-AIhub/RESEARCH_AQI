@@ -1,0 +1,2 @@
+group,n_points,n_kept,cond_before,shrinkage,cond_after
+all,107440.0,80580.0,6213.317,0.05,188.354

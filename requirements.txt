@@ -1,0 +1,23 @@
+# AQI Reliability Layer — pinned environment
+# Target: WSL2 Ubuntu + Python 3.12 (TensorFlow has no wheels for Python 3.14).
+#
+# GPU workaround (TensorFlow 2.21.0 packaging bug):
+#   libtensorflow_framework.so.2 does not search nvidia/cusolver/lib, so TF fails
+#   to dlopen libcusolver.so.11 and silently disables the GPU. After creating the
+#   venv, run once:
+#     echo 'export LD_LIBRARY_PATH="$VIRTUAL_ENV/lib/python3.12/site-packages/nvidia/cusolver/lib${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}"' >> ~/tensorflow-gpu/.venv/bin/activate
+#   Then always `source ~/tensorflow-gpu/.venv/bin/activate` before running anything.
+
+tensorflow[and-cuda]==2.21.0
+numpy==2.5.3
+pandas==3.0.6
+scikit-learn==1.9.1
+scipy==1.18.1
+openpyxl==3.1.5
+pyarrow==25.0.1
+matplotlib==3.11.2
+pyyaml==6.0.3
+pytest==9.1.1
+xarray==2026.9.0
+netCDF4==1.7.4
+cdsapi==0.7.7

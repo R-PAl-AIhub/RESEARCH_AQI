@@ -1,0 +1,211 @@
+station,period,target,horizon,rmse,mae,samples
+Ballygunge,train,PM2.5,1,13.54,7.83,15612
+Ballygunge,train,PM2.5,3,14.97,9.05,15612
+Ballygunge,train,PM2.5,6,17.09,10.18,15612
+Ballygunge,train,PM2.5,12,18.98,11.38,15612
+Ballygunge,train,PM2.5,24,20.07,12.31,15612
+Ballygunge,train,PM10,1,26.1,14.54,15612
+Ballygunge,train,PM10,3,26.25,16.07,15612
+Ballygunge,train,PM10,6,30.52,18.36,15612
+Ballygunge,train,PM10,12,33.22,20.49,15612
+Ballygunge,train,PM10,24,35.42,22.31,15612
+Bidhannagar,train,PM2.5,1,12.63,7.13,14977
+Bidhannagar,train,PM2.5,3,14.23,8.33,14977
+Bidhannagar,train,PM2.5,6,15.56,9.47,14977
+Bidhannagar,train,PM2.5,12,17.19,10.74,14977
+Bidhannagar,train,PM2.5,24,18.58,11.7,14977
+Bidhannagar,train,PM10,1,23.22,12.54,14977
+Bidhannagar,train,PM10,3,25.23,14.05,14977
+Bidhannagar,train,PM10,6,26.52,16.08,14977
+Bidhannagar,train,PM10,12,28.76,18.05,14977
+Bidhannagar,train,PM10,24,31.05,19.67,14977
+Fort William,train,PM2.5,1,12.2,6.83,15810
+Fort William,train,PM2.5,3,13.92,8.11,15810
+Fort William,train,PM2.5,6,15.72,9.21,15810
+Fort William,train,PM2.5,12,17.16,10.46,15810
+Fort William,train,PM2.5,24,18.84,11.56,15810
+Fort William,train,PM10,1,21.92,13.19,15810
+Fort William,train,PM10,3,23.97,14.9,15810
+Fort William,train,PM10,6,26.65,16.71,15810
+Fort William,train,PM10,12,29.08,18.67,15810
+Fort William,train,PM10,24,31.33,20.39,15810
+Jadavpur,train,PM2.5,1,12.12,7.33,16324
+Jadavpur,train,PM2.5,3,13.68,8.41,16324
+Jadavpur,train,PM2.5,6,14.98,9.36,16324
+Jadavpur,train,PM2.5,12,16.55,10.53,16324
+Jadavpur,train,PM2.5,24,17.48,11.45,16324
+Jadavpur,train,PM10,1,24.25,14.03,16324
+Jadavpur,train,PM10,3,25.96,15.4,16324
+Jadavpur,train,PM10,6,28.43,17.31,16324
+Jadavpur,train,PM10,12,30.87,19.28,16324
+Jadavpur,train,PM10,24,32.99,20.95,16324
+Rabindra Bharati University,train,PM2.5,1,11.11,6.51,15474
+Rabindra Bharati University,train,PM2.5,3,13.25,7.81,15474
+Rabindra Bharati University,train,PM2.5,6,15.18,8.98,15474
+Rabindra Bharati University,train,PM2.5,12,16.07,10.05,15474
+Rabindra Bharati University,train,PM2.5,24,17.03,10.67,15474
+Rabindra Bharati University,train,PM10,1,30.38,14.6,15474
+Rabindra Bharati University,train,PM10,3,33.28,16.67,15474
+Rabindra Bharati University,train,PM10,6,35.67,18.75,15474
+Rabindra Bharati University,train,PM10,12,36.95,20.2,15474
+Rabindra Bharati University,train,PM10,24,37.53,21.53,15474
+Rabindra Sarobar,train,PM2.5,1,8.28,5.32,15975
+Rabindra Sarobar,train,PM2.5,3,10.01,6.32,15975
+Rabindra Sarobar,train,PM2.5,6,11.79,7.4,15975
+Rabindra Sarobar,train,PM2.5,12,13.19,8.37,15975
+Rabindra Sarobar,train,PM2.5,24,14.14,9.07,15975
+Rabindra Sarobar,train,PM10,1,14.48,9.08,15975
+Rabindra Sarobar,train,PM10,3,16.07,10.16,15975
+Rabindra Sarobar,train,PM10,6,18.18,11.72,15975
+Rabindra Sarobar,train,PM10,12,19.88,12.96,15975
+Rabindra Sarobar,train,PM10,24,21.63,14.39,15975
+Victoria,train,PM2.5,1,14.01,7.25,15150
+Victoria,train,PM2.5,3,13.23,8.08,15150
+Victoria,train,PM2.5,6,17.26,9.45,15150
+Victoria,train,PM2.5,12,16.97,10.66,15150
+Victoria,train,PM2.5,24,20.07,11.81,15150
+Victoria,train,PM10,1,23.52,13.72,15150
+Victoria,train,PM10,3,24.73,15.02,15150
+Victoria,train,PM10,6,27.86,17.21,15150
+Victoria,train,PM10,12,29.92,18.91,15150
+Victoria,train,PM10,24,33.25,20.94,15150
+Ballygunge,validation,PM2.5,1,15.38,10.34,2560
+Ballygunge,validation,PM2.5,3,17.69,11.92,2560
+Ballygunge,validation,PM2.5,6,20.0,14.01,2560
+Ballygunge,validation,PM2.5,12,21.65,15.75,2560
+Ballygunge,validation,PM2.5,24,22.48,16.31,2560
+Ballygunge,validation,PM10,1,28.17,18.76,2560
+Ballygunge,validation,PM10,3,32.2,22.1,2560
+Ballygunge,validation,PM10,6,35.66,25.53,2560
+Ballygunge,validation,PM10,12,38.81,28.3,2560
+Ballygunge,validation,PM10,24,40.31,29.77,2560
+Bidhannagar,validation,PM2.5,1,11.61,8.82,2411
+Bidhannagar,validation,PM2.5,3,14.69,11.02,2411
+Bidhannagar,validation,PM2.5,6,16.0,12.12,2411
+Bidhannagar,validation,PM2.5,12,17.48,13.16,2411
+Bidhannagar,validation,PM2.5,24,16.99,12.88,2411
+Bidhannagar,validation,PM10,1,16.96,12.7,2411
+Bidhannagar,validation,PM10,3,20.27,15.41,2411
+Bidhannagar,validation,PM10,6,21.63,16.74,2411
+Bidhannagar,validation,PM10,12,24.37,19.07,2411
+Bidhannagar,validation,PM10,24,26.7,20.97,2411
+Fort William,validation,PM2.5,1,9.75,6.76,2750
+Fort William,validation,PM2.5,3,12.16,8.45,2750
+Fort William,validation,PM2.5,6,13.9,9.93,2750
+Fort William,validation,PM2.5,12,14.92,10.97,2750
+Fort William,validation,PM2.5,24,15.64,11.83,2750
+Fort William,validation,PM10,1,21.77,14.54,2750
+Fort William,validation,PM10,3,24.95,17.24,2750
+Fort William,validation,PM10,6,28.78,20.44,2750
+Fort William,validation,PM10,12,31.41,22.46,2750
+Fort William,validation,PM10,24,32.64,24.06,2750
+Jadavpur,validation,PM2.5,1,15.37,10.21,2646
+Jadavpur,validation,PM2.5,3,17.57,11.65,2646
+Jadavpur,validation,PM2.5,6,19.12,13.25,2646
+Jadavpur,validation,PM2.5,12,20.06,14.42,2646
+Jadavpur,validation,PM2.5,24,21.59,15.96,2646
+Jadavpur,validation,PM10,1,30.42,20.06,2646
+Jadavpur,validation,PM10,3,34.25,22.69,2646
+Jadavpur,validation,PM10,6,36.94,25.29,2646
+Jadavpur,validation,PM10,12,39.21,27.79,2646
+Jadavpur,validation,PM10,24,41.62,30.04,2646
+Rabindra Bharati University,validation,PM2.5,1,14.47,8.85,2456
+Rabindra Bharati University,validation,PM2.5,3,16.36,10.25,2456
+Rabindra Bharati University,validation,PM2.5,6,18.17,11.77,2456
+Rabindra Bharati University,validation,PM2.5,12,18.62,12.82,2456
+Rabindra Bharati University,validation,PM2.5,24,20.51,14.18,2456
+Rabindra Bharati University,validation,PM10,1,31.47,17.57,2456
+Rabindra Bharati University,validation,PM10,3,35.5,21.09,2456
+Rabindra Bharati University,validation,PM10,6,37.35,23.19,2456
+Rabindra Bharati University,validation,PM10,12,36.84,24.14,2456
+Rabindra Bharati University,validation,PM10,24,39.78,27.39,2456
+Rabindra Sarobar,validation,PM2.5,1,8.41,6.33,2573
+Rabindra Sarobar,validation,PM2.5,3,9.79,7.32,2573
+Rabindra Sarobar,validation,PM2.5,6,11.22,8.58,2573
+Rabindra Sarobar,validation,PM2.5,12,12.57,9.67,2573
+Rabindra Sarobar,validation,PM2.5,24,12.94,9.91,2573
+Rabindra Sarobar,validation,PM10,1,17.89,12.61,2573
+Rabindra Sarobar,validation,PM10,3,19.46,14.42,2573
+Rabindra Sarobar,validation,PM10,6,21.53,15.8,2573
+Rabindra Sarobar,validation,PM10,12,23.25,17.08,2573
+Rabindra Sarobar,validation,PM10,24,25.01,18.67,2573
+Victoria,validation,PM2.5,1,12.69,9.45,2402
+Victoria,validation,PM2.5,3,15.39,11.51,2402
+Victoria,validation,PM2.5,6,17.17,12.94,2402
+Victoria,validation,PM2.5,12,18.27,13.82,2402
+Victoria,validation,PM2.5,24,19.67,14.98,2402
+Victoria,validation,PM10,1,47.9,21.89,2402
+Victoria,validation,PM10,3,47.85,24.12,2402
+Victoria,validation,PM10,6,47.75,26.6,2402
+Victoria,validation,PM10,12,55.1,29.16,2402
+Victoria,validation,PM10,24,52.1,30.3,2402
+Ballygunge,calibration,PM2.5,1,4.72,3.68,1446
+Ballygunge,calibration,PM2.5,3,5.6,4.44,1446
+Ballygunge,calibration,PM2.5,6,5.88,4.55,1446
+Ballygunge,calibration,PM2.5,12,6.62,4.98,1446
+Ballygunge,calibration,PM2.5,24,6.11,4.65,1446
+Ballygunge,calibration,PM10,1,8.61,6.54,1446
+Ballygunge,calibration,PM10,3,9.03,7.13,1446
+Ballygunge,calibration,PM10,6,10.06,7.89,1446
+Ballygunge,calibration,PM10,12,11.15,8.78,1446
+Ballygunge,calibration,PM10,24,11.6,9.16,1446
+Bidhannagar,calibration,PM2.5,1,6.4,4.73,2563
+Bidhannagar,calibration,PM2.5,3,6.65,4.93,2563
+Bidhannagar,calibration,PM2.5,6,7.07,5.24,2563
+Bidhannagar,calibration,PM2.5,12,7.69,5.68,2563
+Bidhannagar,calibration,PM2.5,24,8.23,5.98,2563
+Bidhannagar,calibration,PM10,1,15.58,9.01,2563
+Bidhannagar,calibration,PM10,3,13.42,8.58,2563
+Bidhannagar,calibration,PM10,6,15.64,9.85,2563
+Bidhannagar,calibration,PM10,12,15.9,10.75,2563
+Bidhannagar,calibration,PM10,24,16.17,11.39,2563
+Fort William,calibration,PM2.5,1,9.89,5.02,988
+Fort William,calibration,PM2.5,3,10.87,5.67,988
+Fort William,calibration,PM2.5,6,11.24,5.83,988
+Fort William,calibration,PM2.5,12,11.15,5.96,988
+Fort William,calibration,PM2.5,24,9.14,5.85,988
+Fort William,calibration,PM10,1,27.83,8.2,988
+Fort William,calibration,PM10,3,28.9,9.21,988
+Fort William,calibration,PM10,6,26.4,9.68,988
+Fort William,calibration,PM10,12,23.64,10.12,988
+Fort William,calibration,PM10,24,15.47,9.95,988
+Jadavpur,calibration,PM2.5,1,6.39,4.73,2684
+Jadavpur,calibration,PM2.5,3,7.77,6.03,2684
+Jadavpur,calibration,PM2.5,6,8.79,6.8,2684
+Jadavpur,calibration,PM2.5,12,9.42,7.24,2684
+Jadavpur,calibration,PM2.5,24,10.05,7.58,2684
+Jadavpur,calibration,PM10,1,12.32,8.83,2684
+Jadavpur,calibration,PM10,3,12.23,8.92,2684
+Jadavpur,calibration,PM10,6,14.27,10.5,2684
+Jadavpur,calibration,PM10,12,16.35,12.09,2684
+Jadavpur,calibration,PM10,24,17.67,13.05,2684
+Rabindra Bharati University,calibration,PM2.5,1,6.36,4.01,2705
+Rabindra Bharati University,calibration,PM2.5,3,7.1,4.7,2705
+Rabindra Bharati University,calibration,PM2.5,6,7.77,5.22,2705
+Rabindra Bharati University,calibration,PM2.5,12,8.55,5.93,2705
+Rabindra Bharati University,calibration,PM2.5,24,8.97,6.25,2705
+Rabindra Bharati University,calibration,PM10,1,12.33,6.68,2705
+Rabindra Bharati University,calibration,PM10,3,12.82,7.34,2705
+Rabindra Bharati University,calibration,PM10,6,14.3,8.7,2705
+Rabindra Bharati University,calibration,PM10,12,15.59,10.03,2705
+Rabindra Bharati University,calibration,PM10,24,16.43,10.89,2705
+Rabindra Sarobar,calibration,PM2.5,1,3.99,2.86,2621
+Rabindra Sarobar,calibration,PM2.5,3,4.24,3.11,2621
+Rabindra Sarobar,calibration,PM2.5,6,4.66,3.47,2621
+Rabindra Sarobar,calibration,PM2.5,12,5.18,3.96,2621
+Rabindra Sarobar,calibration,PM2.5,24,5.68,4.28,2621
+Rabindra Sarobar,calibration,PM10,1,7.25,4.82,2621
+Rabindra Sarobar,calibration,PM10,3,7.72,5.31,2621
+Rabindra Sarobar,calibration,PM10,6,8.21,5.87,2621
+Rabindra Sarobar,calibration,PM10,12,8.98,6.33,2621
+Rabindra Sarobar,calibration,PM10,24,9.78,7.06,2621
+Victoria,calibration,PM2.5,1,7.12,5.05,2564
+Victoria,calibration,PM2.5,3,7.49,5.47,2564
+Victoria,calibration,PM2.5,6,8.14,5.87,2564
+Victoria,calibration,PM2.5,12,8.57,6.27,2564
+Victoria,calibration,PM2.5,24,9.11,6.69,2564
+Victoria,calibration,PM10,1,9.35,6.82,2564
+Victoria,calibration,PM10,3,9.92,7.27,2564
+Victoria,calibration,PM10,6,11.04,8.16,2564
+Victoria,calibration,PM10,12,11.94,8.89,2564
+Victoria,calibration,PM10,24,12.73,9.57,2564

@@ -1,0 +1,4 @@
+,worker,group,days,level,need,result
+0,B,all (no seasons),123,0.02,49,PASS
+1,C,all (no seasons),123,0.1,9,PASS
+2,C,all (no seasons),123,0.05,19,PASS

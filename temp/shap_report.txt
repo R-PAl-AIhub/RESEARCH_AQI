@@ -1,0 +1,55 @@
+wrapped model vs saved median forecast: largest difference 0.0320 µg/m³
+SHAP additivity (sum of SHAP vs forecast - average forecast): median gap 2.09 µg/m³, mean |forecast - average| 31.75 µg/m³
+
+top 5 inputs per target and horizon (mean |SHAP| in µg/m³):
+target  horizon  rank             input  mean_abs_shap  mean_shap
+  PM10        1     1              PM10           5.43      -5.12
+  PM10        1     2     PM10 3 h mean           4.60      -4.48
+  PM10        1     3     PM10 6 h mean           4.14      -4.04
+  PM10        1     4   PM10 1 h before           3.74      -3.63
+  PM10        1     5    PM10 12 h mean           3.49      -3.43
+  PM10        3     1              PM10           4.63      -4.28
+  PM10        3     2     PM10 6 h mean           4.24      -4.16
+  PM10        3     3     PM10 3 h mean           3.94      -3.80
+  PM10        3     4   PM10 6 h before           3.87      -3.80
+  PM10        3     5   PM10 1 h before           3.55      -3.41
+  PM10        6     1   PM10 6 h before           3.76      -3.71
+  PM10        6     2              PM10           3.68      -3.45
+  PM10        6     3     PM10 6 h mean           3.39      -3.33
+  PM10        6     4     PM10 3 h mean           3.10      -3.02
+  PM10        6     5    PM10 24 h mean           2.90      -2.86
+  PM10       12     1   PM10 6 h before           3.76      -3.69
+  PM10       12     2              PM10           3.66      -3.49
+  PM10       12     3    PM10 24 h mean           3.17      -3.14
+  PM10       12     4 day of year (cos)           3.08      -3.08
+  PM10       12     5     PM10 6 h mean           3.07      -3.00
+  PM10       24     1 day of year (cos)           5.86      -5.86
+  PM10       24     2   PM10 6 h before           3.46      -3.42
+  PM10       24     3   air temperature           3.04      -3.04
+  PM10       24     4  PM10 12 h before           3.04      -3.03
+  PM10       24     5     PM10 6 h mean           3.01      -2.93
+ PM2.5        1     1             PM2.5           2.63      -2.28
+ PM2.5        1     2    PM2.5 3 h mean           2.25      -2.04
+ PM2.5        1     3    PM2.5 6 h mean           1.98      -1.89
+ PM2.5        1     4  PM2.5 1 h before           1.75      -1.57
+ PM2.5        1     5  PM2.5 3 h before           1.66      -1.58
+ PM2.5        3     1             PM2.5           2.29      -2.05
+ PM2.5        3     2    PM2.5 3 h mean           1.97      -1.81
+ PM2.5        3     3    PM2.5 6 h mean           1.87      -1.78
+ PM2.5        3     4  PM2.5 1 h before           1.61      -1.46
+ PM2.5        3     5   PM2.5 12 h mean           1.61      -1.55
+ PM2.5        6     1             PM2.5           2.25      -2.04
+ PM2.5        6     2    PM2.5 3 h mean           1.95      -1.81
+ PM2.5        6     3    PM2.5 6 h mean           1.89      -1.81
+ PM2.5        6     4  PM2.5 3 h before           1.72      -1.66
+ PM2.5        6     5  PM2.5 6 h before           1.61      -1.55
+ PM2.5       12     1    PM2.5 6 h mean           1.91      -1.84
+ PM2.5       12     2 day of year (cos)           1.87      -1.87
+ PM2.5       12     3  PM2.5 3 h before           1.80      -1.73
+ PM2.5       12     4    PM2.5 3 h mean           1.79      -1.70
+ PM2.5       12     5  PM2.5 6 h before           1.76      -1.68
+ PM2.5       24     1 day of year (cos)           3.25      -3.25
+ PM2.5       24     2 PM2.5 24 h before           1.92      -1.85
+ PM2.5       24     3   air temperature           1.81      -1.81
+ PM2.5       24     4  PM2.5 3 h before           1.71      -1.64
+ PM2.5       24     5  PM2.5 6 h before           1.56      -1.52

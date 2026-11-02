@@ -1,0 +1,6 @@
+group,days,d=6 (need 60),d=8 (need 80),d=16 (need 160),d=32 (need 320),largest_d_allowed
+winter,180,PASS,PASS,PASS,FAIL,18
+summer_premonsoon,184,PASS,PASS,PASS,FAIL,18
+sw_monsoon,244,PASS,PASS,PASS,FAIL,24
+post_monsoon,122,PASS,PASS,FAIL,FAIL,12
+all (no seasons),730,PASS,PASS,PASS,PASS,73

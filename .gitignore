@@ -1,0 +1,33 @@
+# --- data and fitted artifacts (never commit) ---
+data/*
+!data/stations.csv
+artifacts/
+*.xlsx
+!Kolkata/**/*.xlsx
+# temp/ (step reports) IS committed for the website (2026-11-02)
+
+# --- local tool settings and office lock files ---
+.claude/
+~$*
+*.nc
+*.hdf
+*.parquet
+
+# --- environments and caches ---
+.venv/
+venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ipynb_checkpoints/
+
+# --- secrets / API keys ---
+.env
+.env.*
+.cdsapirc
+*.key
+*.pem
+secrets.*
+credentials*
+*api_key*
+*apikey*

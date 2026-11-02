@@ -1,0 +1,97 @@
+groups = ['winter', 'summer_premonsoon', 'sw_monsoon', 'post_monsoon'] (worker_b.group_by: season); plain mean + covariance of train, condition limit 100000
+check 1 (toy): (-2,+2) -> 2.17 (expect 2.17)   (+2,+2) -> 5.16 (expect 5.16)   PASS
+
+===== gru =====
+                   n_points  condition
+group                                 
+winter              26755.0    635.310
+summer_premonsoon   27263.0   1198.381
+sw_monsoon          36620.0   1263.170
+post_monsoon        18684.0   1399.886
+distance to the own season's shape, percentiles per split and season:
+                                p50   p90   p99
+split       season                             
+calibration summer_premonsoon  3.38  5.21  8.04
+            sw_monsoon         2.94  4.14  5.59
+train       post_monsoon       3.20  4.52  6.34
+            summer_premonsoon  3.19  4.45  6.30
+            sw_monsoon         3.03  4.63  7.50
+            winter             3.01  4.44  8.56
+validation  summer_premonsoon  3.23  4.65  7.40
+            winter             3.26  4.88  7.40
+
+===== lstm =====
+                   n_points  condition
+group                                 
+winter              26755.0    693.922
+summer_premonsoon   27263.0   1432.482
+sw_monsoon          36620.0   1662.250
+post_monsoon        18684.0   1806.974
+distance to the own season's shape, percentiles per split and season:
+                                p50   p90   p99
+split       season                             
+calibration summer_premonsoon  3.10  5.04  8.68
+            sw_monsoon         2.78  4.17  6.73
+train       post_monsoon       3.05  4.69  7.06
+            summer_premonsoon  3.10  4.55  6.94
+            sw_monsoon         2.93  4.75  8.00
+            winter             2.95  4.36  9.60
+validation  summer_premonsoon  3.01  4.34  6.98
+            winter             3.08  4.60  6.98
+
+===== cnn =====
+                   n_points  condition
+group                                 
+winter              26755.0    373.155
+summer_premonsoon   27263.0    848.559
+sw_monsoon          36620.0   1004.518
+post_monsoon        18684.0   1035.859
+distance to the own season's shape, percentiles per split and season:
+                                p50   p90   p99
+split       season                             
+calibration summer_premonsoon  3.20  4.92  7.78
+            sw_monsoon         3.21  4.49  5.78
+train       post_monsoon       3.16  4.53  6.45
+            summer_premonsoon  3.25  4.38  5.96
+            sw_monsoon         3.14  4.64  6.55
+            winter             3.13  4.51  7.14
+validation  summer_premonsoon  3.09  4.24  5.94
+            winter             3.21  4.67  6.25
+
+===== cnn_lstm =====
+                   n_points  condition
+group                                 
+winter              26755.0    793.513
+summer_premonsoon   27263.0   1056.729
+sw_monsoon          36620.0    951.196
+post_monsoon        18684.0   1272.795
+distance to the own season's shape, percentiles per split and season:
+                                p50   p90   p99
+split       season                             
+calibration summer_premonsoon  3.30  4.39  8.42
+            sw_monsoon         2.92  4.05  6.00
+train       post_monsoon       3.12  4.52  6.89
+            summer_premonsoon  3.15  4.42  6.57
+            sw_monsoon         3.06  4.64  6.80
+            winter             3.10  4.38  7.50
+validation  summer_premonsoon  3.12  4.31  6.62
+            winter             3.19  4.64  7.48
+
+===== tft =====
+                   n_points  condition
+group                                 
+winter              26755.0   1668.928
+summer_premonsoon   27263.0   2429.140
+sw_monsoon          36620.0   1464.491
+post_monsoon        18684.0   2410.596
+distance to the own season's shape, percentiles per split and season:
+                                p50   p90   p99
+split       season                             
+calibration summer_premonsoon  3.37  4.61  6.27
+            sw_monsoon         3.10  4.44  5.69
+train       post_monsoon       3.21  4.43  6.39
+            summer_premonsoon  3.25  4.38  5.96
+            sw_monsoon         3.11  4.59  7.16
+            winter             3.09  4.36  7.17
+validation  summer_premonsoon  3.20  4.23  5.83
+            winter             3.19  4.48  6.34

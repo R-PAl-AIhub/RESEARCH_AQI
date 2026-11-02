@@ -1,0 +1,12 @@
+calibration RMSE per method (mean over models, targets and horizons):
+own_samples_rmse = on each run's own samples; common_samples_rmse = on the samples every run kept
+          own_samples_rmse  common_samples_rmse  calib_samples  common_samples  uses_future  test_red
+method                                                                                               
+bfill                9.778                8.410          15571            4659         True     0.032
+deletion             8.938                8.938           4659            4659        False     0.046
+ffill                9.902                8.397          15571            4659        False     0.032
+knn                  9.909                8.494          15571            4659        False     0.039
+median               9.868                8.454          15571            4659        False     0.034
+mice                 9.926                8.488          15571            4659        False     0.036
+
+best method (common calibration samples; methods using future values excluded): ffill

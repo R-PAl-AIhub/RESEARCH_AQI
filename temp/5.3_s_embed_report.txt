@@ -1,0 +1,5 @@
+gru: 15373 calibration hours ranked against 107440 train hours; s_embed mean 0.321, share above 0.98: 0.001
+lstm: 15373 calibration hours ranked against 107440 train hours; s_embed mean 0.371, share above 0.98: 0.022
+cnn: 15373 calibration hours ranked against 107440 train hours; s_embed mean 0.393, share above 0.98: 0.001
+cnn_lstm: 15373 calibration hours ranked against 107440 train hours; s_embed mean 0.370, share above 0.98: 0.006
+tft: 15373 calibration hours ranked against 107440 train hours; s_embed mean 0.534, share above 0.98: 0.019

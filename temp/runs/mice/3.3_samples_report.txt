@@ -1,0 +1,28 @@
+imputation method: mice; window dropped if more than 10% of its input cells are empty
+50 features per hour (no miss_ flags), 48 hours per sample, horizons [1, 3, 6, 12, 24]
+targets ['PM2.5', 'PM10']; y axes (sample, target, horizon)
+
+array shapes:
+  train X (109322, 48, 50)  y (109322, 2, 5)  y_raw (109322, 2, 5)
+  val   X (17798, 48, 50)  y (17798, 2, 5)  y_raw (17798, 2, 5)
+  calib X (15571, 48, 50)  y (15571, 2, 5)  y_raw (15571, 2, 5)
+  test  X (17839, 48, 50)  y (17839, 2, 5)  y_raw (17839, 2, 5)
+
+samples kept per station and split:
+split                                         train   val  calib  test
+station                                                               
+Ballygunge, Kolkata - WBPCB                   15612  2560   1446  2651
+Bidhannagar, Kolkata - WBPCB                  14977  2411   2563  2403
+Fort William, Kolkata - WBPCB                 15810  2750    988  2491
+Jadavpur, Kolkata - WBPCB                     16324  2646   2684  2732
+Rabindra Bharati University, Kolkata - WBPCB  15474  2456   2705  2461
+Rabindra Sarobar, Kolkata - WBPCB             15975  2573   2621  2767
+Victoria, Kolkata - WBPCB                     15150  2402   2564  2334
+
+scaled features, range over all features of the mean and spread per split:
+  train mean +0.000 to +0.000   spread 1.000 to 1.000
+  val   mean -0.549 to +1.154   spread 0.000 to 2.034
+  calib mean -1.165 to +0.659   spread 0.000 to 2.714
+  test  mean -1.021 to +1.452   spread 0.000 to 1.848
+
+saved to: /mnt/d/RATUL/COMPUTER PROGRAMMING AND CODING/RESEARCH/PROJECT_2/artifacts/runs/mice/samples

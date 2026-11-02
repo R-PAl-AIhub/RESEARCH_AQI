@@ -1,0 +1,274 @@
+station,year,variable,in_range,out_of_range,pct_in_range
+Ballygunge,2023,NO,8362,0,100.0
+Ballygunge,2023,NO2,8382,0,100.0
+Ballygunge,2023,NOX,8384,0,100.0
+Ballygunge,2023,NH3,8386,0,100.0
+Ballygunge,2023,SO2,8399,0,100.0
+Ballygunge,2023,OZONE,8488,0,100.0
+Ballygunge,2023,PM2.5,8409,0,100.0
+Ballygunge,2023,PM10,8320,0,100.0
+Ballygunge,2023,RH,8527,0,100.0
+Ballygunge,2023,AT,8527,0,100.0
+Ballygunge,2023,WD,8527,0,100.0
+Ballygunge,2023,SR,8526,0,100.0
+Ballygunge,2023,BP,8527,0,100.0
+Ballygunge,2024,NO,8599,0,100.0
+Ballygunge,2024,NO2,8653,0,100.0
+Ballygunge,2024,NOX,8648,0,100.0
+Ballygunge,2024,NH3,8652,0,100.0
+Ballygunge,2024,SO2,8676,0,100.0
+Ballygunge,2024,OZONE,8709,0,100.0
+Ballygunge,2024,PM2.5,8660,0,100.0
+Ballygunge,2024,PM10,8633,0,100.0
+Ballygunge,2024,RH,8717,0,100.0
+Ballygunge,2024,AT,8783,0,100.0
+Ballygunge,2024,WD,8761,0,100.0
+Ballygunge,2024,SR,8784,0,100.0
+Ballygunge,2024,BP,8784,0,100.0
+Ballygunge,2025,NO,7247,0,100.0
+Ballygunge,2025,NO2,7314,0,100.0
+Ballygunge,2025,NOX,7308,0,100.0
+Ballygunge,2025,NH3,7322,0,100.0
+Ballygunge,2025,SO2,7315,0,100.0
+Ballygunge,2025,OZONE,7335,0,100.0
+Ballygunge,2025,PM2.5,7248,0,100.0
+Ballygunge,2025,PM10,7241,0,100.0
+Ballygunge,2025,RH,7332,0,100.0
+Ballygunge,2025,AT,7388,0,100.0
+Ballygunge,2025,WD,7388,0,100.0
+Ballygunge,2025,SR,7388,0,100.0
+Ballygunge,2025,BP,7388,0,100.0
+Bidhannagar,2023,NO,8210,0,100.0
+Bidhannagar,2023,NO2,8212,0,100.0
+Bidhannagar,2023,NOX,8210,0,100.0
+Bidhannagar,2023,NH3,8194,0,100.0
+Bidhannagar,2023,SO2,8394,0,100.0
+Bidhannagar,2023,OZONE,8181,0,100.0
+Bidhannagar,2023,PM2.5,8301,0,100.0
+Bidhannagar,2023,PM10,8267,0,100.0
+Bidhannagar,2023,RH,8442,0,100.0
+Bidhannagar,2023,AT,8442,0,100.0
+Bidhannagar,2023,WD,8442,0,100.0
+Bidhannagar,2023,SR,8414,0,100.0
+Bidhannagar,2023,BP,8442,0,100.0
+Bidhannagar,2024,NO,8450,0,100.0
+Bidhannagar,2024,NO2,8457,0,100.0
+Bidhannagar,2024,NOX,8486,0,100.0
+Bidhannagar,2024,NH3,8463,0,100.0
+Bidhannagar,2024,SO2,8467,0,100.0
+Bidhannagar,2024,OZONE,8514,0,100.0
+Bidhannagar,2024,PM2.5,8353,0,100.0
+Bidhannagar,2024,PM10,8388,0,100.0
+Bidhannagar,2024,RH,8525,0,100.0
+Bidhannagar,2024,AT,8565,0,100.0
+Bidhannagar,2024,WD,8565,0,100.0
+Bidhannagar,2024,SR,8565,0,100.0
+Bidhannagar,2024,BP,8565,0,100.0
+Bidhannagar,2025,NO,8467,0,100.0
+Bidhannagar,2025,NO2,8406,0,100.0
+Bidhannagar,2025,NOX,8491,0,100.0
+Bidhannagar,2025,NH3,8469,0,100.0
+Bidhannagar,2025,SO2,8425,0,100.0
+Bidhannagar,2025,OZONE,8517,0,100.0
+Bidhannagar,2025,PM2.5,8401,0,100.0
+Bidhannagar,2025,PM10,8379,0,100.0
+Bidhannagar,2025,RH,8572,0,100.0
+Bidhannagar,2025,AT,8581,0,100.0
+Bidhannagar,2025,WD,8581,0,100.0
+Bidhannagar,2025,SR,8540,0,100.0
+Bidhannagar,2025,BP,8578,0,100.0
+Fort William,2023,NO,8042,0,100.0
+Fort William,2023,NO2,8040,0,100.0
+Fort William,2023,NOX,8043,0,100.0
+Fort William,2023,NH3,8043,0,100.0
+Fort William,2023,SO2,8475,0,100.0
+Fort William,2023,OZONE,8475,0,100.0
+Fort William,2023,PM2.5,8398,0,100.0
+Fort William,2023,PM10,8348,0,100.0
+Fort William,2023,RH,8284,0,100.0
+Fort William,2023,AT,8502,0,100.0
+Fort William,2023,WD,8378,0,100.0
+Fort William,2023,SR,8502,0,100.0
+Fort William,2023,BP,8502,0,100.0
+Fort William,2024,NO,8590,0,100.0
+Fort William,2024,NO2,8614,0,100.0
+Fort William,2024,NOX,8611,0,100.0
+Fort William,2024,NH3,8614,0,100.0
+Fort William,2024,SO2,8680,0,100.0
+Fort William,2024,OZONE,8701,0,100.0
+Fort William,2024,PM2.5,8530,0,100.0
+Fort William,2024,PM10,8560,0,100.0
+Fort William,2024,RH,8748,0,100.0
+Fort William,2024,AT,8747,0,100.0
+Fort William,2024,WD,8749,0,100.0
+Fort William,2024,SR,7023,2,99.972
+Fort William,2024,BP,8749,0,100.0
+Fort William,2025,NO,6958,0,100.0
+Fort William,2025,NO2,6975,0,100.0
+Fort William,2025,NOX,6974,0,100.0
+Fort William,2025,NH3,6972,0,100.0
+Fort William,2025,SO2,7569,0,100.0
+Fort William,2025,OZONE,6451,0,100.0
+Fort William,2025,PM2.5,6840,0,100.0
+Fort William,2025,PM10,6759,0,100.0
+Fort William,2025,RH,8243,0,100.0
+Fort William,2025,AT,8249,0,100.0
+Fort William,2025,WD,8243,0,100.0
+Fort William,2025,SR,8201,0,100.0
+Fort William,2025,BP,8245,0,100.0
+Jadavpur,2023,NO,8510,0,100.0
+Jadavpur,2023,NO2,8472,0,100.0
+Jadavpur,2023,NOX,8547,0,100.0
+Jadavpur,2023,NH3,8480,0,100.0
+Jadavpur,2023,SO2,8560,0,100.0
+Jadavpur,2023,OZONE,8427,0,100.0
+Jadavpur,2023,PM2.5,8553,0,100.0
+Jadavpur,2023,PM10,8539,0,100.0
+Jadavpur,2023,RH,8598,0,100.0
+Jadavpur,2023,AT,8598,0,100.0
+Jadavpur,2023,WD,8598,0,100.0
+Jadavpur,2023,SR,8598,0,100.0
+Jadavpur,2023,BP,8598,0,100.0
+Jadavpur,2024,NO,8537,0,100.0
+Jadavpur,2024,NO2,8577,0,100.0
+Jadavpur,2024,NOX,8613,0,100.0
+Jadavpur,2024,NH3,8567,0,100.0
+Jadavpur,2024,SO2,8694,0,100.0
+Jadavpur,2024,OZONE,8629,0,100.0
+Jadavpur,2024,PM2.5,8594,0,100.0
+Jadavpur,2024,PM10,8596,0,100.0
+Jadavpur,2024,RH,8724,0,100.0
+Jadavpur,2024,AT,8724,0,100.0
+Jadavpur,2024,WD,8724,0,100.0
+Jadavpur,2024,SR,8724,0,100.0
+Jadavpur,2024,BP,8567,0,100.0
+Jadavpur,2025,NO,8520,0,100.0
+Jadavpur,2025,NO2,8505,0,100.0
+Jadavpur,2025,NOX,8515,0,100.0
+Jadavpur,2025,NH3,8537,0,100.0
+Jadavpur,2025,SO2,8678,0,100.0
+Jadavpur,2025,OZONE,8679,0,100.0
+Jadavpur,2025,PM2.5,8649,0,100.0
+Jadavpur,2025,PM10,8650,0,100.0
+Jadavpur,2025,RH,8731,0,100.0
+Jadavpur,2025,AT,8731,0,100.0
+Jadavpur,2025,WD,8731,0,100.0
+Jadavpur,2025,SR,8731,0,100.0
+Jadavpur,2025,BP,8731,0,100.0
+Rabindra Bharati University,2023,NO,8046,0,100.0
+Rabindra Bharati University,2023,NO2,8054,0,100.0
+Rabindra Bharati University,2023,NOX,8050,0,100.0
+Rabindra Bharati University,2023,NH3,8053,0,100.0
+Rabindra Bharati University,2023,SO2,8440,56,99.341
+Rabindra Bharati University,2023,OZONE,8502,0,100.0
+Rabindra Bharati University,2023,PM2.5,8375,0,100.0
+Rabindra Bharati University,2023,PM10,8403,0,100.0
+Rabindra Bharati University,2023,RH,8513,27,99.684
+Rabindra Bharati University,2023,AT,8540,0,100.0
+Rabindra Bharati University,2023,WD,8540,0,100.0
+Rabindra Bharati University,2023,SR,8476,64,99.251
+Rabindra Bharati University,2023,BP,8515,0,100.0
+Rabindra Bharati University,2024,NO,8241,97,98.837
+Rabindra Bharati University,2024,NO2,8330,12,99.856
+Rabindra Bharati University,2024,NOX,8284,57,99.317
+Rabindra Bharati University,2024,NH3,8211,121,98.548
+Rabindra Bharati University,2024,SO2,8595,0,100.0
+Rabindra Bharati University,2024,OZONE,8447,0,100.0
+Rabindra Bharati University,2024,PM2.5,8522,0,100.0
+Rabindra Bharati University,2024,PM10,8528,0,100.0
+Rabindra Bharati University,2024,RH,8649,0,100.0
+Rabindra Bharati University,2024,AT,8649,0,100.0
+Rabindra Bharati University,2024,WD,8648,0,100.0
+Rabindra Bharati University,2024,SR,8647,2,99.977
+Rabindra Bharati University,2024,BP,8648,0,100.0
+Rabindra Bharati University,2025,NO,8523,0,100.0
+Rabindra Bharati University,2025,NO2,8523,0,100.0
+Rabindra Bharati University,2025,NOX,8525,0,100.0
+Rabindra Bharati University,2025,NH3,8507,0,100.0
+Rabindra Bharati University,2025,SO2,8541,0,100.0
+Rabindra Bharati University,2025,OZONE,8469,0,100.0
+Rabindra Bharati University,2025,PM2.5,8421,0,100.0
+Rabindra Bharati University,2025,PM10,8481,0,100.0
+Rabindra Bharati University,2025,RH,8625,0,100.0
+Rabindra Bharati University,2025,AT,8625,0,100.0
+Rabindra Bharati University,2025,WD,8625,0,100.0
+Rabindra Bharati University,2025,SR,8625,0,100.0
+Rabindra Bharati University,2025,BP,8625,0,100.0
+Rabindra Sarobar,2023,NO,8250,0,100.0
+Rabindra Sarobar,2023,NO2,8246,0,100.0
+Rabindra Sarobar,2023,NOX,8252,0,100.0
+Rabindra Sarobar,2023,NH3,8250,0,100.0
+Rabindra Sarobar,2023,SO2,8416,0,100.0
+Rabindra Sarobar,2023,OZONE,8398,0,100.0
+Rabindra Sarobar,2023,PM2.5,8356,0,100.0
+Rabindra Sarobar,2023,PM10,8390,0,100.0
+Rabindra Sarobar,2023,RH,8453,0,100.0
+Rabindra Sarobar,2023,AT,8453,0,100.0
+Rabindra Sarobar,2023,WD,8456,0,100.0
+Rabindra Sarobar,2023,SR,8453,0,100.0
+Rabindra Sarobar,2023,BP,8453,0,100.0
+Rabindra Sarobar,2024,NO,8491,0,100.0
+Rabindra Sarobar,2024,NO2,8579,0,100.0
+Rabindra Sarobar,2024,NOX,8552,0,100.0
+Rabindra Sarobar,2024,NH3,8540,0,100.0
+Rabindra Sarobar,2024,SO2,8712,0,100.0
+Rabindra Sarobar,2024,OZONE,8746,0,100.0
+Rabindra Sarobar,2024,PM2.5,8637,0,100.0
+Rabindra Sarobar,2024,PM10,8662,0,100.0
+Rabindra Sarobar,2024,RH,8360,0,100.0
+Rabindra Sarobar,2024,AT,8387,0,100.0
+Rabindra Sarobar,2024,WD,8776,0,100.0
+Rabindra Sarobar,2024,SR,8776,0,100.0
+Rabindra Sarobar,2024,BP,8776,0,100.0
+Rabindra Sarobar,2025,NO,8262,0,100.0
+Rabindra Sarobar,2025,NO2,8409,0,100.0
+Rabindra Sarobar,2025,NOX,8325,0,100.0
+Rabindra Sarobar,2025,NH3,8377,0,100.0
+Rabindra Sarobar,2025,SO2,8512,0,100.0
+Rabindra Sarobar,2025,OZONE,8636,0,100.0
+Rabindra Sarobar,2025,PM2.5,8559,0,100.0
+Rabindra Sarobar,2025,PM10,8586,0,100.0
+Rabindra Sarobar,2025,RH,8588,0,100.0
+Rabindra Sarobar,2025,AT,8655,0,100.0
+Rabindra Sarobar,2025,WD,8265,0,100.0
+Rabindra Sarobar,2025,SR,8755,0,100.0
+Rabindra Sarobar,2025,BP,8755,0,100.0
+Victoria,2023,NO,8429,0,100.0
+Victoria,2023,NO2,8424,0,100.0
+Victoria,2023,NOX,8435,0,100.0
+Victoria,2023,NH3,8426,0,100.0
+Victoria,2023,SO2,8553,0,100.0
+Victoria,2023,OZONE,8501,0,100.0
+Victoria,2023,PM2.5,8431,0,100.0
+Victoria,2023,PM10,8381,0,100.0
+Victoria,2023,RH,8614,0,100.0
+Victoria,2023,AT,8614,0,100.0
+Victoria,2023,WD,8609,0,100.0
+Victoria,2023,SR,8614,0,100.0
+Victoria,2023,BP,8614,0,100.0
+Victoria,2024,NO,8368,0,100.0
+Victoria,2024,NO2,8267,0,100.0
+Victoria,2024,NOX,8374,0,100.0
+Victoria,2024,NH3,8370,0,100.0
+Victoria,2024,SO2,8474,0,100.0
+Victoria,2024,OZONE,8469,0,100.0
+Victoria,2024,PM2.5,8330,0,100.0
+Victoria,2024,PM10,8374,0,100.0
+Victoria,2024,RH,8238,0,100.0
+Victoria,2024,AT,8238,0,100.0
+Victoria,2024,WD,8531,0,100.0
+Victoria,2024,SR,8451,0,100.0
+Victoria,2024,BP,8531,0,100.0
+Victoria,2025,NO,8731,0,100.0
+Victoria,2025,NO2,8731,0,100.0
+Victoria,2025,NOX,8731,0,100.0
+Victoria,2025,NH3,8724,0,100.0
+Victoria,2025,SO2,8568,0,100.0
+Victoria,2025,OZONE,8506,0,100.0
+Victoria,2025,PM2.5,8454,0,100.0
+Victoria,2025,PM10,8429,0,100.0
+Victoria,2025,RH,8740,0,100.0
+Victoria,2025,AT,8740,0,100.0
+Victoria,2025,WD,8451,0,100.0
+Victoria,2025,SR,8381,0,100.0
+Victoria,2025,BP,8740,0,100.0

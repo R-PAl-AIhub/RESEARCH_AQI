@@ -1,0 +1,5 @@
+part,hours,days,share_of_hours_%
+train,118027,730,67.7
+val,19515,120,11.2
+calib,17196,123,9.9
+test,19687,122,11.3

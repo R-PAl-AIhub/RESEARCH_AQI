@@ -1,0 +1,40 @@
+rows: 184128
+
+readings per variable (all stations, all years):
+          in_range  out_of_range  pct_in_range
+variable                                      
+AT          178738             0       100.000
+BP          179333             0       100.000
+NH3         174157           121        99.931
+NO          173833            97        99.944
+NO2         174170            12        99.993
+NOX         174358            57        99.967
+OZONE       175780             0       100.000
+PM10        174914             0       100.000
+PM2.5       175021             0       100.000
+RH          178223            27        99.985
+SO2         177143            56        99.968
+SR          177174            68        99.962
+WD          178588             0       100.000
+
+readings outside range: 438  (counted only, values kept)
+unit conversions used for the check only (not saved): {'BP': 0.750062}
+
+stuck marks added (1 = same value 12+ h): stuck_pm25 = 1 on 1930 h, stuck_pm10 = 1 on 539 h
+hours marked 1 per station:
+                             stuck_pm25  stuck_pm10
+station                                            
+Ballygunge                          759          42
+Bidhannagar                          15           0
+Fort William                        409           0
+Jadavpur                              0           0
+Rabindra Bharati University           0          33
+Rabindra Sarobar                    692         464
+Victoria                             55           0
+every source value kept (all 184128 rows): True
+dropped columns (config clean.drop_columns): ['XYLENE', 'MP-Xylene', 'row_present']
+kept columns: ['station', 'time', 'PM2.5', 'PM10', 'NO', 'NO2', 'NOX', 'NH3', 'SO2', 'CO', 'OZONE', 'BENZENE', 'TOLUENE', 'RH', 'WD', 'SR', 'BP', 'AT', 'RF', 'stuck_pm25', 'stuck_pm10']
+
+saved to: /mnt/d/RATUL/COMPUTER PROGRAMMING AND CODING/RESEARCH/PROJECT_2/data/processed/cpcb_clean.csv
+counts:   /mnt/d/RATUL/COMPUTER PROGRAMMING AND CODING/RESEARCH/PROJECT_2/figures/range_counts.csv
+plot:     /mnt/d/RATUL/COMPUTER PROGRAMMING AND CODING/RESEARCH/PROJECT_2/figures/range_check.png

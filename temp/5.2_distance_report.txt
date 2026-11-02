@@ -1,0 +1,82 @@
+groups = ['all'] (group_by: all); support 0.75, condition limit 1000
+check 1 (toy): (-2,+2) -> 2.17 (expect 2.17)   (+2,+2) -> 5.16 (expect 5.16)   PASS
+
+===== gru =====
+       n_points   n_kept  cond_before  shrinkage  cond_after
+group                                                       
+all    107440.0  80580.0     2999.552       0.05     183.473
+distance to the group shape, percentiles per split and season (season = label only):
+                                p50   p90   p99
+split       season                             
+calibration summer_premonsoon  2.31  3.29  4.54
+            sw_monsoon         2.33  3.09  4.02
+train       post_monsoon       3.25  4.67  6.10
+            summer_premonsoon  2.59  3.50  4.73
+            sw_monsoon         2.43  3.37  4.84
+            winter             3.16  4.47  5.72
+validation  summer_premonsoon  2.36  3.28  4.42
+            winter             2.89  4.31  5.75
+
+===== lstm =====
+       n_points   n_kept  cond_before  shrinkage  cond_after
+group                                                       
+all    107440.0  80580.0     6213.317       0.05     188.354
+distance to the group shape, percentiles per split and season (season = label only):
+                                p50   p90    p99
+split       season                              
+calibration summer_premonsoon  2.42  4.30  10.49
+            sw_monsoon         2.38  3.56   5.69
+train       post_monsoon       3.36  5.36   8.20
+            summer_premonsoon  2.61  3.68   5.79
+            sw_monsoon         2.44  3.70   7.26
+            winter             3.11  4.50   7.17
+validation  summer_premonsoon  2.56  3.73   9.01
+            winter             2.95  4.29   5.67
+
+===== cnn =====
+       n_points   n_kept  cond_before  shrinkage  cond_after
+group                                                       
+all    107440.0  80580.0     2231.288       0.05     184.969
+distance to the group shape, percentiles per split and season (season = label only):
+                                p50   p90   p99
+split       season                             
+calibration summer_premonsoon  2.45  3.36  4.83
+            sw_monsoon         2.48  3.22  3.94
+train       post_monsoon       3.05  4.71  6.17
+            summer_premonsoon  2.60  3.55  4.75
+            sw_monsoon         2.38  3.33  4.94
+            winter             3.11  4.70  6.09
+validation  summer_premonsoon  2.20  3.06  4.11
+            winter             2.96  4.65  5.97
+
+===== cnn_lstm =====
+       n_points   n_kept  cond_before  shrinkage  cond_after
+group                                                       
+all    107440.0  80580.0      3699.68       0.05     177.247
+distance to the group shape, percentiles per split and season (season = label only):
+                                p50   p90   p99
+split       season                             
+calibration summer_premonsoon  2.52  3.41  4.92
+            sw_monsoon         2.45  3.47  5.59
+train       post_monsoon       3.35  5.22  7.57
+            summer_premonsoon  2.67  3.84  6.03
+            sw_monsoon         2.50  3.90  6.22
+            winter             3.07  4.45  6.92
+validation  summer_premonsoon  2.60  3.92  5.57
+            winter             2.99  4.43  6.44
+
+===== tft =====
+       n_points   n_kept  cond_before  shrinkage  cond_after
+group                                                       
+all    107440.0  80580.0     3568.895       0.05     181.011
+distance to the group shape, percentiles per split and season (season = label only):
+                                p50   p90   p99
+split       season                             
+calibration summer_premonsoon  2.70  3.87  5.64
+            sw_monsoon         2.89  4.37  6.65
+train       post_monsoon       2.90  4.29  6.20
+            summer_premonsoon  2.59  3.71  5.60
+            sw_monsoon         2.74  5.00  7.51
+            winter             2.88  4.02  5.71
+validation  summer_premonsoon  2.54  3.68  4.97
+            winter             2.79  4.19  5.79

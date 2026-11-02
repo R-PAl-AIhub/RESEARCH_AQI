@@ -1,0 +1,13 @@
+gamma search, every run (deletion, median, ffill, knn, mice), mean over the 5 models (calibration check weeks only; aim coverage 90%, tie 0.5%)
+       coverage    width     gap
+gamma                           
+0.000    0.8925  26.1272  0.0075
+0.001    0.8990  26.7324  0.0010
+0.002    0.9011  26.9903  0.0011
+0.005    0.9023  27.3205  0.0023
+0.010    0.9023  28.1322  0.0023
+0.020    0.9017  31.4516  0.0017
+0.050    0.9010  58.3865  0.0010
+
+best per horizon: {1: 0.001, 3: 0.001, 6: 0.001, 12: 0.001, 24: 0.0}
+best gamma overall: 0.001   (config worker_c.gamma now 0.005)

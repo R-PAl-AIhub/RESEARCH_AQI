@@ -1,0 +1,13 @@
+gamma search, run bfill (calibration check weeks only; aim coverage 90%, tie 0.5%)
+       coverage    width     gap
+gamma                           
+0.000    0.8912  26.1775  0.0088
+0.001    0.8970  26.6573  0.0030
+0.002    0.8990  26.8393  0.0010
+0.005    0.9004  27.0231  0.0004
+0.010    0.9005  27.4690  0.0005
+0.020    0.8998  31.1115  0.0002
+0.050    0.8998  66.3283  0.0002
+
+best per horizon: {1: 0.001, 3: 0.0, 6: 0.001, 12: 0.002, 24: 0.001}
+best gamma overall: 0.001   (config worker_c.gamma now 0.005)

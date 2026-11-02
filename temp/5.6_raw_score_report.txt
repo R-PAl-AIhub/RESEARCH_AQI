@@ -1,0 +1,18 @@
+raw features: 47 of 53   dropped: ['BP', 'stuck_pm25', 'stuck_pm10', 'miss_PM', 'miss_GAS', 'miss_METEOROLOGICAL']
+
+raw covariance per group ['all'] (support 0.75, limit 1000):
+       n_points   n_kept   cond_before  shrinkage  cond_after
+group                                                        
+all    107440.0  80580.0  1.431481e+18       0.05     467.196
+
+calibration: reference = odd weeks 7990, check = even weeks 7383
+share of check-week samples and correlation of s_raw with s_embed:
+          pearson  spearman  s_raw larger  s_embed larger  s_embed > 0.98  s_raw > 0.98  fused > 0.98
+model                                                                                                
+gru         0.335     0.312         0.741           0.259           0.002         0.019         0.021
+lstm        0.331     0.330         0.669           0.331           0.031         0.019         0.050
+cnn         0.251     0.240         0.634           0.366           0.001         0.019         0.020
+cnn_lstm    0.374     0.325         0.667           0.333           0.005         0.019         0.024
+tft         0.329     0.334         0.436           0.564           0.016         0.019         0.035
+
+saved: /mnt/d/RATUL/COMPUTER PROGRAMMING AND CODING/RESEARCH/PROJECT_2/artifacts/forecasters/raw_shapes.npz
