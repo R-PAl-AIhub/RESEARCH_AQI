@@ -86,3 +86,5 @@ eval | 2026-11-02 | src/eval/all_runs_charts.py: R², RMSE (4 splits) and test c
 charts | 2026-11-02 | modern_charts now loops every run x model: 134 charts in figures/runs/<run>/(<model>/)
 shap | 2026-11-02 | shap_explain loops every run x model (TFT: direct expected gradients, checked vs shap lib); original input names; full run pending
 flow | 2026-11-02 | index.html/index_2: result bullets in 3.2, 4, 7.1, 7.2; chips now follow run/model pickers; all-runs heatmaps linked
+github | 2026-11-02 | pushed website set to github.com/R-PAl-AIhub/RESEARCH_AQI (1,719 files, 273 MB): figures, RECENT_PLOTS (211) + gallery, landing index.html
+github | 2026-11-02 | SHAP for all 30 run x model pairs added; RECENT_PLOTS + gallery refreshed and pushed
