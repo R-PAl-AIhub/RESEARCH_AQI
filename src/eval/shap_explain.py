@@ -377,7 +377,7 @@ def share_all_chart(all_table, cfg, path):
     fig.text(0.01, 0.955, "Cell = % of the total SHAP effect from that input group (both targets, "
                           f"{cfg['shap']['explain']} calibration windows each). Rows add up to 100%. TFT: the 48-hour "
                           "window only (its calendar and station inputs are not explained).", fontsize=9, color=SECONDARY)
-    fig.subplots_adjust(top=0.84, wspace=0.45, left=0.12, right=0.98)
+    fig.subplots_adjust(top=0.78, wspace=0.45, left=0.12, right=0.98)
     save(fig, path)
 
 
