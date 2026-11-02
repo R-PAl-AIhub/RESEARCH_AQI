@@ -965,5 +965,21 @@
   apply();
 })();
 </script>
+<script>
+/* What: on the website (http/https) every CSV link opens in the table viewer ../csv.html instead of downloading.
+   How:  runs after the pickers set the links (and again after each picker change); on the author's computer
+         (file://) the links stay direct, because browsers block a page from reading local files. */
+(function () {
+  if (!/^https?:$/.test(location.protocol)) return;
+  function viewer() {
+    document.querySelectorAll("a.f").forEach(function (a) {
+      var h = a.getAttribute("href") || "";
+      if (/\.csv$/i.test(h)) a.setAttribute("href", "../csv.html?file=" + encodeURIComponent(h.replace(/^\.\.\//, "")));
+    });
+  }
+  ["model", "method"].forEach(function (id) { document.getElementById(id).addEventListener("change", viewer); });
+  viewer();
+})();
+</script>
 </body>
 </html>

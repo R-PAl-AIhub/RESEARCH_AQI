@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>CSV viewer</title>
+<style>
+:root{--bg:#fcfcfb;--panel:#ffffff;--ink:#0b0b0b;--muted:#52514e;--line:#e1e0d9;--head:#f3f2ee;--accent:#2a78d6}
+@media (prefers-color-scheme:dark){:root{--bg:#1a1a19;--panel:#222220;--ink:#f0efec;--muted:#c3c2b7;--line:#2c2c2a;--head:#2a2a28;--accent:#3987e5}}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.45 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{padding:16px;border-bottom:1px solid var(--line)}
+h1{font-size:18px;margin:0 0 4px;word-break:break-all}
+.meta{color:var(--muted);font-size:13px}
+.bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:12px 16px}
+input{flex:1;min-width:200px;padding:7px 10px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--ink);font:inherit}
+a.btn,button{padding:7px 12px;border:1px solid var(--line);border-radius:6px;background:var(--panel);color:var(--accent);font:inherit;text-decoration:none;cursor:pointer}
+.wrap{overflow:auto;margin:0 16px 16px;border:1px solid var(--line);border-radius:8px;max-height:calc(100vh - 170px);background:var(--panel)}
+table{border-collapse:collapse;width:max-content;min-width:100%}
+th,td{padding:6px 10px;border-bottom:1px solid var(--line);white-space:nowrap;text-align:left}
+th{position:sticky;top:0;background:var(--head);cursor:pointer;user-select:none;font-weight:600}
+th .dir{color:var(--muted);font-size:11px;margin-left:4px}
+td.num{text-align:right;font-variant-numeric:tabular-nums}
+tr:hover td{background:color-mix(in srgb,var(--accent) 8%,transparent)}
+.msg{padding:24px 16px;color:var(--muted)}
+#more{margin:0 16px 24px}
+</style>
+</head>
+<body>
+<header>
+  <h1 id="title">CSV viewer</h1>
+  <div class="meta" id="meta">Loading…</div>
+</header>
+<div class="bar">
+  <input id="q" type="search" placeholder="Filter rows (type any text)…" aria-label="Filter rows">
+  <a class="btn" id="raw" href="#">Download CSV</a>
+  <a class="btn" href="javascript:history.back()">Back</a>
+  <a class="btn" href="index.html">Home</a>
+</div>
+<div class="wrap" id="wrap"></div>
+<button id="more" hidden>Show 1,000 more rows</button>
+<script>
+/* What: shows a CSV of this website as a sortable, searchable table (?file=<path from the site root>).
+   How:  fetch + an RFC 4180 parser (quoted fields, commas and line breaks inside quotes); 1,000 rows at a time. */
+(function () {
+  var STEP = 1000, file = new URLSearchParams(location.search).get("file") || "";
+  var title = document.getElementById("title"), meta = document.getElementById("meta"), wrap = document.getElementById("wrap");
+  var more = document.getElementById("more"), q = document.getElementById("q");
+  function fail(text) { meta.textContent = ""; wrap.innerHTML = ""; var p = document.createElement("div"); p.className = "msg"; p.textContent = text; wrap.appendChild(p); }
+  if (!file || /^[a-z]+:|^\/|\.\.|\\/i.test(file) || !/\.csv$/i.test(file)) { fail("No valid CSV file given."); return; }
+  title.textContent = file.split("/").pop();
+  document.getElementById("raw").href = file;
+  document.title = title.textContent + " · CSV viewer";
+  function parse(text) {
+    var rows = [], row = [], field = "", i = 0, inQ = false, c;
+    if (text.charCodeAt(0) === 0xFEFF) text = text.slice(1);
+    for (; i < text.length; i++) {
+      c = text[i];
+      if (inQ) {
+        if (c === '"') { if (text[i + 1] === '"') { field += '"'; i++; } else inQ = false; }
+        else field += c;
+      } else if (c === '"') inQ = true;
+      else if (c === ",") { row.push(field); field = ""; }
+      else if (c === "\n" || c === "\r") {
+        if (c === "\r" && text[i + 1] === "\n") i++;
+        row.push(field); field = ""; rows.push(row); row = [];
+      } else field += c;
+    }
+    if (field !== "" || row.length) { row.push(field); rows.push(row); }
+    return rows;
+  }
+  var head = [], body = [], view = [], shown = 0, sortCol = -1, sortDir = 1;
+  var isNum = function (v) { return v !== "" && !isNaN(+v); };
+  function render(reset) {
+    if (reset) { shown = 0; wrap.innerHTML = ""; }
+    var table = wrap.querySelector("table");
+    if (!table) {
+      table = document.createElement("table");
+      var tr = document.createElement("tr");
+      head.forEach(function (h, j) {
+        var th = document.createElement("th"); th.textContent = h;
+        var s = document.createElement("span"); s.className = "dir"; s.textContent = j === sortCol ? (sortDir > 0 ? "▲" : "▼") : "";
+        th.appendChild(s);
+        th.addEventListener("click", function () { sortDir = sortCol === j ? -sortDir : 1; sortCol = j; sortRows(); render(true); });
+        tr.appendChild(th);
+      });
+      var thead = document.createElement("thead"); thead.appendChild(tr); table.appendChild(thead);
+      table.appendChild(document.createElement("tbody")); wrap.appendChild(table);
+    }
+    var frag = document.createDocumentFragment();
+    view.slice(shown, shown + STEP).forEach(function (r) {
+      var tr = document.createElement("tr");
+      head.forEach(function (_, j) {
+        var td = document.createElement("td"), v = r[j] === undefined ? "" : r[j];
+        td.textContent = v; if (isNum(v)) td.className = "num"; tr.appendChild(td);
+      });
+      frag.appendChild(tr);
+    });
+    table.tBodies[0].appendChild(frag);
+    shown = Math.min(view.length, shown + STEP);
+    meta.textContent = view.length.toLocaleString() + " of " + body.length.toLocaleString() + " rows · " + head.length +
+      " columns · showing " + shown.toLocaleString() + (sortCol >= 0 ? " · sorted by " + head[sortCol] : "");
+    more.hidden = shown >= view.length;
+  }
+  function sortRows() {
+    if (sortCol < 0) return;
+    var j = sortCol;
+    view.sort(function (a, b) {
+      var x = a[j] || "", y = b[j] || "";
+      return (isNum(x) && isNum(y) ? (+x - +y) : x.localeCompare(y, undefined, { numeric: true })) * sortDir;
+    });
+  }
+  function filter() {
+    var t = q.value.trim().toLowerCase();
+    view = t ? body.filter(function (r) { return r.join("\u0001").toLowerCase().indexOf(t) >= 0; }) : body.slice();
+    sortRows(); render(true);
+  }
+  more.addEventListener("click", function () { render(false); });
+  var timer; q.addEventListener("input", function () { clearTimeout(timer); timer = setTimeout(filter, 200); });
+  var RAW = "https://raw.githubusercontent.com/R-PAl-AIhub/RESEARCH_AQI/data/", MAX_ROWS = 50000, cut = false;
+  function load() {          // the CSV on the website, else its gzip copy on the repo's data branch (large files)
+    return fetch(file).then(function (r) {
+      if (r.ok) return r.text();
+      if (r.status !== 404) throw new Error("Could not load the file (" + r.status + ").");
+      meta.textContent = "Loading the compressed copy from the data branch…";
+      return fetch(RAW + file + ".gz").then(function (g) {
+        if (!g.ok) throw new Error("This file is not online: it is kept only on the author's computer.");
+        if (!("DecompressionStream" in window)) throw new Error("This browser cannot unpack the file; use Download.");
+        document.getElementById("raw").href = RAW + file + ".gz";
+        document.getElementById("raw").textContent = "Download CSV (.gz)";
+        return new Response(g.body.pipeThrough(new DecompressionStream("gzip"))).text();
+      });
+    });
+  }
+  load().then(function (text) {
+    var rows = parse(text).filter(function (r) { return r.length > 1 || r[0] !== ""; });
+    if (!rows.length) { fail("The file is empty."); return; }
+    head = rows[0]; body = rows.slice(1);
+    if (body.length > MAX_ROWS) { cut = body.length; body = body.slice(0, MAX_ROWS); }
+    view = body.slice(); render(true);
+    if (cut) meta.textContent += " · first " + MAX_ROWS.toLocaleString() + " of " + cut.toLocaleString() +
+      " rows loaded (use Download for all)";
+  }).catch(function (e) { fail(e.message); });
+})();
+</script>
+</body>
+</html>
